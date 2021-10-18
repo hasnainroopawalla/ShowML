@@ -1,6 +1,10 @@
 name: Python packaging
 
-on: push
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -20,9 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           pip install -r requirements.txt
-      # - name: Update Environment Variable for Tests
-      #   run: |
-      #     echo "PYTHONPATH=/home/runner/work/senseair_ecoroute/senseair_ecoroute/src" >> $GITHUB_ENV
       - name: Run Tests
         run: |
           pytest
