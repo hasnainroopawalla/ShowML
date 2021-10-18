@@ -28,6 +28,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    keywords="python, machinelearning",
+    keywords="python, machinelearning, ai",
     python_requires=">=3.6",
 )
