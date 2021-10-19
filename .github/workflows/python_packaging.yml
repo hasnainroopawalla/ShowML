@@ -1,4 +1,4 @@
-name: Python Packaging and Publish to TestPyPi
+name: Python Packaging
 
 on:
   push:
@@ -27,11 +27,11 @@ jobs:
       - name: Run Tests
         run: |
           pytest
-      - name: Build and publish to TestPyPi
-        env:
-            TWINE_USERNAME: __token__
-            TWINE_PASSWORD: ${{ secrets.TWINE_TEST_TOKEN }}
-            TWINE_REPOSITORY: testpypi
-        run: |
-          python setup.py sdist bdist_wheel
-          python -m twine upload dist/*
+#       - name: Build and publish to TestPyPi
+#         env:
+#             TWINE_USERNAME: __token__
+#             TWINE_PASSWORD: ${{ secrets.TWINE_TEST_TOKEN }}
+#             TWINE_REPOSITORY: testpypi
+#         run: |
+#           python setup.py sdist bdist_wheel
+#           python -m twine upload dist/*
