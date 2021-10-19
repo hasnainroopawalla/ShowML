@@ -8,7 +8,7 @@ with open(os.path.join(repository_dir, "README.md")) as fh:
 
 setup(
     name="showml",
-    version="0.1.1",
+    version="0.1.2",
     packages=find_packages(exclude="tests"),
     description="A Python package of Machine Learning Algorithms implemented from scratch",
     long_description=long_description,
