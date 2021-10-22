@@ -1,6 +1,9 @@
+
 import pandas as pd
-from showml.regression.reg import LinearRegression
 from showml.preprocessing.standard import normalize
+from showml.optimizers.gradient import BatchGradientDescent
+from showml.optimizers.loss_functions import MeanSquareError
+from showml.supervised.regression import LinearRegression
 
 
 def load_auto():
@@ -25,23 +28,19 @@ def load_auto():
         ]
     ].values
     # X_train = Auto[['horsepower']].values
-    Y_train = Auto[["mpg"]].values
-    return X_train, Y_train
+    y_train = Auto[["mpg"]].values
+    return X_train, y_train
 
 
-def main():
-    X_train, Y_train = load_auto()
-    X_train = normalize(X_train)
+X_train, y_train = load_auto()
+X_train = normalize(X_train)
+y_train = y_train[:, 0]
 
-    model = LinearRegression()
-    cost = model.fit(X_train, Y_train)
-
-    print("Lowest Cost:", cost[-1])
-    # print('Trained Weights:', theta)
-
-    model.plot_cost(cost)
-    # model.varying_learning_rate_plot(X_train,Y_train)
-    # model.plot_linear_regression_model(X_train,Y_train)
+optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.005)
+model = LinearRegression(optimizer=optimizer, num_epochs=1000)
+model.fit(X_train, y_train)
 
 
-main()
+model.plot_cost()
+# model.varying_learning_rate_plot(X_train,y_train)
+# model.plot_linear_regression_model(X_train,y_train)
