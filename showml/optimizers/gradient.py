@@ -15,17 +15,24 @@ class BatchGradientDescent(Optimizer):
 		"""
         dw, db = (
             self.loss_function.gradient(X, error),
-            self.loss_function.bias_gradient(X, error),
+            self.loss_function.bias_gradient(error),
         )
         return dw, db
 
     def update_weights(
-        self, X: np.ndarray, error: np.ndarray, weights: np.ndarray, bias: np.float64
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        z: np.ndarray,
+        weights: np.ndarray,
+        bias: np.float64,
     ) -> Tuple[np.ndarray, np.float64]:
+        error = self.calculate_training_error(y, z)
         dw, db = self.calculate_gradient(X, error)
         weights -= self.learning_rate * dw
         bias -= self.learning_rate * db
         return weights, bias
 
-    def get_loss(self, X, y, error):
-        return self.loss_function.objective(X, y, error)
+    def compute_loss(self, y: np.ndarray, z: np.ndarray) -> np.float64:
+        error = self.calculate_training_error(y, z)
+        return self.loss_function.objective(error)

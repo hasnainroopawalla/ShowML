@@ -35,15 +35,6 @@ class Regression(ABC):
         plt.ylabel("loss")
         plt.show()
 
-    def calculate_training_error(self, z: np.ndarray, y: np.ndarray) -> np.ndarray:
-        """
-        Calculate the model error by finding difference between predicted values and true values
-        param y: The true values
-        param z: The predicted values
-        return: Model error
-        """
-        return z - y
-
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
 		This method trains the model given the input X and expected output y
@@ -59,16 +50,13 @@ class Regression(ABC):
         for epoch in range(1, self.num_epochs + 1):
             # Forward pass
             z = self.predict(X)
-            # Calculate Training Error
-            error = self.calculate_training_error(z, y)
             # Update weights based on the error
             self.weights, self.bias = self.optimizer.update_weights(
-                X, error, self.weights, self.bias
+                X, y, z, self.weights, self.bias
             )
 
             z = self.predict(X)
-            error = self.calculate_training_error(z, y)
-            loss = self.optimizer.get_loss(X, y, error)
+            loss = self.optimizer.compute_loss(y, z)
             print(loss)
             self.losses.append(loss)
 
