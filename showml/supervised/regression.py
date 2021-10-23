@@ -35,12 +35,12 @@ class Regression(ABC):
         plt.ylabel("loss")
         plt.show()
 
+
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
 		This method trains the model given the input X and expected output y
 		param X: The input training data
 		param y: The labels of the training data
-		return: A list of losss at every epoch
 		"""
         num_samples, num_dimensions = X.shape
 

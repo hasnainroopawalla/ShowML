@@ -47,8 +47,8 @@ def load_salary():
     return X_train, y_train
 
 
-X_train, y_train = load_salary()
-# X_train = normalize(X_train)
+X_train, y_train = load_auto()
+X_train = normalize(X_train)
 y_train = y_train[:, 0]
 
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
@@ -65,6 +65,3 @@ plt.title("years vs salary")
 plt.xlabel("number of years")
 plt.ylabel("salary (dollars)")
 plt.show()
-
-# model.varying_learning_rate_plot(X_train,y_train)
-# model.plot_linear_regression_model(X_train,y_train)
