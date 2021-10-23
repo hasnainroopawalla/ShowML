@@ -10,13 +10,26 @@ class Optimizer(ABC):
         self.loss_function = loss_function
 
     @abstractmethod
-    def calculate_gradient(self, X: np.ndarray, error: np.ndarray) -> Tuple[np.ndarray, np.float64]: pass
+    def update_weights(
+        self, X: np.ndarray, error: np.ndarray, weights: np.ndarray, bias: np.float64
+    ) -> Tuple[np.ndarray, np.float64]:
+        """
+		Update the weights of the model using the specified loss function and optimizer
+		param X: The input training set
+        param error: The difference between prediction and true values
+		param weights: The set of training weights
+        param bias: The bias value
+        return weights, bias: The set of updated weights and bias after optimization
+		"""
+        pass
 
     @abstractmethod
-    def update_weights(self, X: np.ndarray, y: np.ndarray, z: np.ndarray, weights: np.ndarray, bias: np.float64) -> Tuple[np.ndarray, np.float64]: pass
-
-    @abstractmethod
-    def calculate_training_error(self, z: np.ndarray, y: np.ndarray) -> np.ndarray: pass
-
-    @abstractmethod
-    def get_cost(self, X: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.float64: pass
+    def get_loss(self, X: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.float64:
+        """
+        Compute the loss of the model based on the specified loss function
+        param X: The input training set
+        param y: The labels of the training data
+        param z: The predicted labels
+        return: The loss value of the model
+        """
+        pass

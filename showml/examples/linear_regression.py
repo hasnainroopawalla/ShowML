@@ -1,4 +1,3 @@
-
 import pandas as pd
 from showml.preprocessing.standard import normalize
 from showml.optimizers.gradient import BatchGradientDescent
@@ -39,8 +38,6 @@ y_train = y_train[:, 0]
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.005)
 model = LinearRegression(optimizer=optimizer, num_epochs=1000)
 model.fit(X_train, y_train)
-
-
-model.plot_cost()
+model.plot_loss()
 # model.varying_learning_rate_plot(X_train,y_train)
 # model.plot_linear_regression_model(X_train,y_train)
