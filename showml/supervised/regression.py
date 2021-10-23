@@ -38,8 +38,8 @@ class Regression(ABC):
     def calculate_training_error(self, z: np.ndarray, y: np.ndarray) -> np.ndarray:
         """
         Calculate the model error by finding difference between predicted values and true values
-        param y: The true values
         param z: The predicted values
+        param y: The true values
         return: Model error
         """
         return z - y

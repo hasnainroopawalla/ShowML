@@ -6,7 +6,7 @@ class Loss(ABC):
     @abstractmethod
     def objective(self, X: np.ndarray, y: np.ndarray, error: np.ndarray) -> np.float64:
         """
-        The loss
+        The objective cost function is defined here
         """
         pass
 
@@ -22,7 +22,7 @@ class Loss(ABC):
 class MeanSquareError(Loss):
     def objective(self, X: np.ndarray, y: np.ndarray, error: np.ndarray) -> np.float64:
         num_samples = len(X)
-        loss = (1 / num_samples) * np.sum((error) ** 2)
+        loss = (1 / (2 * num_samples)) * np.sum(np.square(error))
         return loss
 
     def gradient(self, X: np.ndarray, error: np.ndarray) -> np.ndarray:
