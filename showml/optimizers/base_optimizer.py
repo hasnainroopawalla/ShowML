@@ -1,11 +1,11 @@
-from typing import Tuple
-from showml.optimizers.loss_functions import Loss
+from typing import Tuple, Type
+from showml.losses.base_loss import Loss
 from abc import ABC, abstractmethod
 import numpy as np
 
 
 class Optimizer(ABC):
-    def __init__(self, loss_function: Loss, learning_rate: float = 0.005):
+    def __init__(self, loss_function: Type[Loss], learning_rate: float = 0.005):
         self.learning_rate = learning_rate
         self.loss_function = loss_function
 
@@ -32,18 +32,9 @@ class Optimizer(ABC):
     def compute_loss(self, y: np.ndarray, z: np.ndarray) -> np.float64:
         """
         Compute the loss of the model based on the specified loss function
-        param X: The input training set
         param y: The labels of the training data
         param z: The predicted labels
         return: The loss value of the model
         """
         pass
 
-    def calculate_training_error(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
-        """
-        Calculate the model error by finding difference between predicted values and true values
-        param z: The predicted values
-        param y: The true values
-        return: Training error of the model
-        """
-        return z - y
