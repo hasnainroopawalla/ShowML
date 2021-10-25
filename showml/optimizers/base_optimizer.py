@@ -1,11 +1,11 @@
-from typing import Tuple, Type
+from typing import Tuple
 from showml.losses.base_loss import Loss
 from abc import ABC, abstractmethod
 import numpy as np
 
 
 class Optimizer(ABC):
-    def __init__(self, loss_function: Type[Loss], learning_rate: float = 0.005):
+    def __init__(self, loss_function: Loss, learning_rate: float = 0.005):
         self.learning_rate = learning_rate
         self.loss_function = loss_function
 
@@ -37,4 +37,3 @@ class Optimizer(ABC):
         return: The loss value of the model
         """
         pass
-

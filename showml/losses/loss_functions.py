@@ -1,4 +1,4 @@
-from showml.losses.base_loss import Loss 
+from showml.losses.base_loss import Loss
 import numpy as np
 
 

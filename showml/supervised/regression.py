@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import List, Type
+from typing import List
 import numpy as np
 import matplotlib.pyplot as plt
 from showml.optimizers.base_optimizer import Optimizer
 
+
 class Regression(ABC):
-    def __init__(self, optimizer: Type[Optimizer], num_epochs: int = 1000) -> None:
+    def __init__(self, optimizer: Optimizer, num_epochs: int = 1000) -> None:
         """
 		Base Regression class
 		param learning_rate: the learning rate (how much to update the weights at each iteration)
@@ -35,7 +36,6 @@ class Regression(ABC):
         plt.ylabel("loss")
         plt.show()
 
-
     def initialize_params(self, X: np.ndarray) -> None:
         """
         Initialize the weights and bias for the model
@@ -45,18 +45,29 @@ class Regression(ABC):
         self.weights = np.ones(num_dimensions)
         self.bias = np.float64()
 
+    def r2_score(self, y: np.ndarray, z: np.ndarray) -> np.float64:
+        """
+        Calculate the r^2 (coefficient of determination) score of the model
+        param y: The true values
+        param z: The predicted values
+        return: The r^2 score
+        """
+        rss = np.sum(np.square(y - z))
+        tss = np.sum(np.square(y - np.mean(y)))
+        r_2 = 1 - (rss / tss)
+        return r_2
+
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
 		This method trains the model given the input X and expected output y
 		param X: The input training data
 		param y: The labels of the training data
 		"""
-        if not isinstance(X[0][0], np.float64): 
-            X = X.astype('float64')
-        if not isinstance(y[0], np.float64): 
-            y = y.astype('float64')
- 
-        # X, y = X.astype('float64'), y.astype('float64')
+        # if not isinstance(X[0][0], np.float64):
+        #     X = X.astype("float64")
+        # if not isinstance(y[0], np.float64):
+        #     y = y.astype("float64")
+
         self.initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
@@ -69,8 +80,11 @@ class Regression(ABC):
 
             z = self.predict(X)
             loss = self.optimizer.compute_loss(y, z)
-            print(loss)
+            # print(loss)
             self.losses.append(loss)
+
+            # z = self.predict(X)
+            print("r2: ", self.r2_score(y, z), loss)
 
 
 class LinearRegression(Regression):

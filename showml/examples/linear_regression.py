@@ -52,13 +52,11 @@ X_train, y_train = load_auto()
 X_train = normalize(X_train)
 y_train = y_train[:, 0]
 
-
-X_train = np.array([[1, 2, 3, 4], [444, 1, 7, 8]])
-y_train = np.array([10, 18])
-
-optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.00001)
-model = LinearRegression(optimizer=optimizer, num_epochs=10)
+optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
+model = LinearRegression(optimizer=optimizer, num_epochs=10000)
 model.fit(X_train, y_train)
+
+# print('pred',model.predict(np.array([8])))
 model.plot_loss()
 
 
