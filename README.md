@@ -8,7 +8,7 @@ A Python package of Machine Learning Algorithms implemented from scratch.
 
 The aim of this package is to present the working behind fundamental Machine Learning algorithms in a transparent and modular way.
 
-> **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computationally efficiency
+> **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computational efficiency
 
 ## Installation
 
