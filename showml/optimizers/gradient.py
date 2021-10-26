@@ -10,9 +10,9 @@ class BatchGradientDescent(Optimizer):
         """
 		Calculate the gradient of the loss function
 		param X: The input training set
-        param y: The true labels
+        param y: The true labels of the training data
         param z: The predicted labels
-		return: Gradient of the loss function (weights - dw and bias - db)
+		return: Gradient of the loss function (weights -> dw and bias -> db)
 		"""
         dw, db = (
             self.loss_function.gradient(X, y, z),
