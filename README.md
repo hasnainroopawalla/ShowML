@@ -12,7 +12,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 ## Installation
 
-To install the package 
+To install the package
 ```
 $ pip install showml
 ```
@@ -21,7 +21,7 @@ To clone the repository and view the source files
 ```
 $ git clone https://github.com/hasnainroopawalla/ShowML.git
 $ cd ShowML
-$ python setup.py install
+$ pip install -r requirements.txt
 ```
 
 ## Contents
@@ -34,4 +34,3 @@ $ python setup.py install
 
 ### Loss Functions
 - Mean Squared Error (`showml.losses.loss_functions.MeanSquareError`)
-
