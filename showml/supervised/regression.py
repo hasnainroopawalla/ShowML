@@ -9,10 +9,10 @@ from showml.utils.plots import plot_loss, plot_r2_score
 class Regression(ABC):
     def __init__(self, optimizer: Optimizer, num_epochs: int = 1000) -> None:
         """
-		Base Regression class
+        Base Regression class
         param optimizer: The optimizer to be used for training (showml.optimizers)
-		param num_epochs: The number of epochs for training
-		"""
+        param num_epochs: The number of epochs for training
+        """
         self.optimizer = optimizer
         self.num_epochs = num_epochs
         self.weights: np.ndarray = np.array([])
@@ -40,11 +40,11 @@ class Regression(ABC):
 
     def fit(self, X: np.ndarray, y: np.ndarray, plot: bool = True) -> None:
         """
-		This method trains the model given the input data X and labels y
-		param X: The input training data
-		param y: The true labels of the training data
+        This method trains the model given the input data X and labels y
+        param X: The input training data
+        param y: The true labels of the training data
         param plot: A flag which determines if the model evaluation plots should be displayed or not
-		"""
+        """
         self.initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
