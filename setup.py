@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hasnainroopawalla/ShowML",
-    author_name="Hasnain Roopawalla",
+    author="Hasnain Roopawalla",
     author_email="hasnain.roopawalla@gmail.com",
     license="MIT",
     classifiers=[
