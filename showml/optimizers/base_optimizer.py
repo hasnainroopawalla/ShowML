@@ -6,8 +6,13 @@ import numpy as np
 
 class Optimizer(ABC):
     def __init__(self, loss_function: Loss, learning_rate: float = 0.005):
-        self.learning_rate = learning_rate
+        """
+		Base Optimzer class
+        param loss_function: The loss function to be optimized and for computing the gradient
+		param learning_rate: the learning rate (how much to update the weights at each iteration)
+		"""
         self.loss_function = loss_function
+        self.learning_rate = learning_rate
 
     @abstractmethod
     def update_weights(
@@ -21,10 +26,12 @@ class Optimizer(ABC):
         """
 		Update the weights of the model using the specified loss function and optimizer
 		param X: The input training set
+        param y: The true labels of the training data
+        param z: The predicted labels
         param error: The difference between prediction and true values
-		param weights: The set of training weights
-        param bias: The bias value
-        return weights, bias: The set of updated weights and bias after optimization
+		param weights: The set of training weights of the model
+        param bias: The bias value of the model
+        return weights, bias: The set of updated weights and bias after optimization for an epoch
 		"""
         pass
 
@@ -32,7 +39,7 @@ class Optimizer(ABC):
     def compute_loss(self, y: np.ndarray, z: np.ndarray) -> np.float64:
         """
         Compute the loss of the model based on the specified loss function
-        param y: The labels of the training data
+        param y: The true labels of the training data
         param z: The predicted labels
         return: The loss value of the model
         """
