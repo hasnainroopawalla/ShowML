@@ -8,12 +8,12 @@ class BatchGradientDescent(Optimizer):
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, np.float64]:
         """
-		Calculate the gradient of the loss function
-		param X: The input training set
+        Calculate the gradient of the loss function
+        param X: The input training set
         param y: The true labels of the training data
         param z: The predicted labels
-		return: Gradient of the loss function (weights -> dw and bias -> db)
-		"""
+        return: Gradient of the loss function (weights -> dw and bias -> db)
+        """
         dw, db = (
             self.loss_function.gradient(X, y, z),
             self.loss_function.bias_gradient(y, z),
