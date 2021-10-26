@@ -8,13 +8,13 @@ with open(os.path.join(repository_dir, "README.md")) as fh:
 
 setup(
     name="showml",
-    version="0.1.2",
+    version="1.0.0",
     packages=find_packages(exclude="tests"),
     description="A Python package of Machine Learning Algorithms implemented from scratch",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hasnainroopawalla/ShowML",
-    author_name="Hasnain Roopawalla",
+    author="Hasnain Roopawalla",
     author_email="hasnain.roopawalla@gmail.com",
     license="MIT",
     classifiers=[
