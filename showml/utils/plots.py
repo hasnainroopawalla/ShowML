@@ -3,39 +3,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_loss(losses: List[float]) -> None:
+def generic_metric_plot(metric_name: str, metric_values: List[float]) -> None:
     """
-    Plot the loss value at each epoch
-    param losses: A list of loss values for each epoch
+    Plot the metric values after training (epoch vs metric)
+    param metric_name: Name of the metric (accuracy, r^2 score, etc.)
+    param metric_values: A list of metric values collected during training for all epochs
     """
-    plt.plot(losses)
+    plt.plot(metric_values)
     plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.title("Loss")
-    plt.show()
-
-
-def plot_r2_score(r2_scores: List[float]) -> None:
-    """
-    Plot the r^2 score at each epoch
-    param r2_scores: A list of the r^2 score for each epoch
-    """
-    plt.plot(r2_scores)
-    plt.xlabel("Epoch")
-    plt.ylabel("R^2 score")
-    plt.title("R^2 score")
-    plt.show()
-
-
-def plot_accuracy(accuracy: List[float]) -> None:
-    """
-    Plot the r^2 score at each epoch
-    param accuracy: A list of the r^2 score for each epoch
-    """
-    plt.plot(accuracy)
-    plt.xlabel("Epoch")
-    plt.ylabel("Accuracy")
-    plt.title("Accuracy")
+    plt.ylabel(metric_name)
+    plt.title(metric_name)
     plt.show()
 
 

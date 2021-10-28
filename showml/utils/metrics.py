@@ -24,5 +24,13 @@ def r2_score(y: np.ndarray, z: np.ndarray) -> np.float64:
     return r_2
 
 
-def accuracy(y: np.ndarray, z: np.ndarray) -> np.float64:
+def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> np.float64:
+    """
+    Compute the classification accuracy of the model
+    param y: The true labels
+    param z: The predicted labels
+    param logits: A flag indicating that the predicted values are probabilites and not classes
+    """
+    if logits:
+        z = [1 if i > 0.5 else 0 for i in z]
     return np.sum(y == z) / len(y)

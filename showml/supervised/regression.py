@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Dict, List, Callable
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.metrics import r2_score, accuracy
-from showml.utils.plots import plot_loss, plot_r2_score, plot_accuracy
+from showml.utils.plots import generic_metric_plot
 
 
 class Regression(ABC):
@@ -21,12 +21,15 @@ class Regression(ABC):
         self.classification = classification
         self.weights: np.ndarray = np.array([])
         self.bias: np.float64 = np.float64()
-        self.losses: List[float] = []
-        self.r2_scores: List[float] = []
-        self.accuracies: List[float] = []
+        self.metrics_method_map: Dict[str, Callable] = {
+            "loss": self.optimizer.compute_loss,
+            "accuracy": accuracy,
+            "r2_score": r2_score,
+        }
+        self.history: Dict[str, List[float]] = {}
 
     @abstractmethod
-    def model_forward(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         Computes a forward pass of the model given the data, current weights and current bias of the model
         param X: The input dataset
@@ -34,29 +37,34 @@ class Regression(ABC):
         """
         pass
 
-    @abstractmethod
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def evaluate(
+        self, epoch: int, X: np.ndarray, y: np.ndarray, metrics: List[str]
+    ) -> None:
         """
-        Predicts the values/classes, given the data, current weights and current bias of the model
+        Evaluate the model and display all the required metrics (accuracy, r^2 score, etc.)
+        param epoch: The current epoch number
         param X: The input dataset
-        return: An array of predicted values
+        param y: The true labels of the training data
+        param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
-        pass
+        z = self.predict(X)
 
-    def evaluate(self, epoch: int, X: np.ndarray, y: np.ndarray, z: np.ndarray) -> None:
-        loss = self.optimizer.compute_loss(y, z)
-        r2 = r2_score(y, z)
-        acc = None
-        if self.classification:
-            acc = accuracy(y, self.predict(X))
-            self.accuracies.append(acc)
+        for metric in metrics:
+            if metric not in self.history:
+                self.history[metric] = []
+            self.history[metric].append(self.metrics_method_map[metric](y, z))
 
-        print(
-            f"Epoch: {epoch}/{self.num_epochs}, Acc: {acc}, Loss: {loss}, R^2 score: {r2}"
-        )
+        display = f"Epoch: {epoch}/{self.num_epochs}"
+        for metric in self.history:
+            display += f", {metric}: {self.history[metric][-1]}"
+        print(display)
 
-        self.losses.append(loss)
-        self.r2_scores.append(r2)
+    def plot_metrics(self):
+        """
+        Display the plot after training for the specified metrics
+        """
+        for metric in self.history:
+            generic_metric_plot(metric, self.history[metric])
 
     def initialize_params(self, X: np.ndarray) -> None:
         """
@@ -67,40 +75,39 @@ class Regression(ABC):
         self.weights = np.ones(num_dimensions)
         self.bias = np.float64()
 
-    def fit(self, X: np.ndarray, y: np.ndarray, plot: bool = True) -> None:
+    def fit(
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        plot: bool = True,
+        metrics: List[str] = ["loss"],
+    ) -> None:
         """
         This method trains the model given the input data X and labels y
         param X: The input training data
         param y: The true labels of the training data
         param plot: A flag which determines if the model evaluation plots should be displayed or not
+        param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
         self.initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
             # Forward pass
-            z = self.model_forward(X)
+            z = self.predict(X)
 
             # Update weights based on the error
             self.weights, self.bias = self.optimizer.update_weights(
                 X, y, z, self.weights, self.bias
             )
 
-            # Compute loss on the entire training set
-            z = self.model_forward(X)
-
-            self.evaluate(epoch, X, y, z)
+            # Evaluate the model
+            self.evaluate(epoch, X, y, metrics)
 
         if plot:
-            plot_loss(self.losses)
-            plot_r2_score(self.r2_scores)
-            if self.classification:
-                plot_accuracy(self.accuracies)
+            self.plot_metrics()
 
 
 class LinearRegression(Regression):
-    def model_forward(self, X: np.ndarray) -> np.ndarray:
-        return np.dot(X, self.weights) + self.bias
-
     def predict(self, X: np.ndarray) -> np.ndarray:
         return np.dot(X, self.weights) + self.bias
 
@@ -109,9 +116,5 @@ class LogisticRegression(Regression):
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
-    def model_forward(self, X: np.ndarray):
-        return self.sigmoid(np.dot(X, self.weights) + self.bias)
-
     def predict(self, X: np.ndarray):
-        z = self.sigmoid(np.dot(X, self.weights) + self.bias)
-        return [1 if i > 0.5 else 0 for i in z]
+        return self.sigmoid(np.dot(X, self.weights) + self.bias)

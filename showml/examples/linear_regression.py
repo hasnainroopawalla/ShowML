@@ -65,6 +65,6 @@ X_train, y_train = load_salary()
 
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
-model.fit(X_train, y_train, plot=False)
+model.fit(X_train, y_train, plot=True, metrics=["r2_score", "loss"])
 
 plot_regression_line(X_train, y_train, model.predict(X_train))
