@@ -1,5 +1,5 @@
 from showml.losses.loss_functions import MeanSquareError
-from showml.optimizers.gradient import BatchGradientDescent
+from showml.optimizers.gradient_optimizers import BatchGradientDescent
 import numpy as np
 from numpy.testing import assert_almost_equal
 

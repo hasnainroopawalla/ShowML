@@ -2,7 +2,7 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 from showml.preprocessing.standard import normalize
-from showml.optimizers.gradient import BatchGradientDescent
+from showml.optimizers.gradient_optimizers import BatchGradientDescent
 from showml.losses.loss_functions import MeanSquareError
 from showml.supervised.regression import LinearRegression
 from showml.utils.plots import plot_regression_line
@@ -60,7 +60,7 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
     return X_train, y_train
 
 
-X_train, y_train = load_auto()
+X_train, y_train = load_salary()
 # X_train = normalize(X_train)
 
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)

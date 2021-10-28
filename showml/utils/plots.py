@@ -11,7 +11,7 @@ def plot_loss(losses: List[float]) -> None:
     plt.plot(losses)
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
-    plt.title("Epochs vs Loss")
+    plt.title("Loss")
     plt.show()
 
 
@@ -23,7 +23,19 @@ def plot_r2_score(r2_scores: List[float]) -> None:
     plt.plot(r2_scores)
     plt.xlabel("Epoch")
     plt.ylabel("R^2 score")
-    plt.title("Epochs vs R^2 score")
+    plt.title("R^2 score")
+    plt.show()
+
+
+def plot_accuracy(accuracy: List[float]) -> None:
+    """
+    Plot the r^2 score at each epoch
+    param accuracy: A list of the r^2 score for each epoch
+    """
+    plt.plot(accuracy)
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.title("Accuracy")
     plt.show()
 
 
