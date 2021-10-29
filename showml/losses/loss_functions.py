@@ -1,17 +1,16 @@
 from typing import Tuple
 from showml.losses.base_loss import Loss
-from showml.utils.metrics import training_error
 import numpy as np
 
 
 class MeanSquareError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> np.float64:
-        return np.average(np.square(training_error(y, z)), axis=0) / 2
+        return np.average(np.square(self.training_error(y, z)), axis=0) / 2
 
     def gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, np.float64]:
-        error = training_error(y, z)
+        error = self.training_error(y, z)
         num_samples = len(error)
         dw = (1 / num_samples) * X.T.dot(error)
         db = (1 / num_samples) * np.sum(error)
@@ -31,7 +30,7 @@ class BinaryCrossEntropy(Loss):
     def gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, np.float64]:
-        error = training_error(y, z)
+        error = self.training_error(y, z)
         num_samples = len(error)
         dw = (1 / num_samples) * np.dot(X.T, (error))
         db = (1 / num_samples) * np.sum((error))

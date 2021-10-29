@@ -16,6 +16,3 @@ class BatchGradientDescent(Optimizer):
         weights -= self.learning_rate * dw
         bias -= self.learning_rate * db
         return weights, bias
-
-    def compute_loss(self, y: np.ndarray, z: np.ndarray) -> np.float64:
-        return self.loss_function.objective(y, z)

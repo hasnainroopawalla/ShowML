@@ -34,13 +34,3 @@ class Optimizer(ABC):
         return weights, bias: The set of updated weights and bias after optimization for an epoch
         """
         pass
-
-    @abstractmethod
-    def compute_loss(self, y: np.ndarray, z: np.ndarray) -> np.float64:
-        """
-        Compute the loss of the model based on the specified loss function
-        param y: The true labels of the training data
-        param z: The predicted labels
-        return: The loss value of the model
-        """
-        pass

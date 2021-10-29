@@ -1,18 +1,6 @@
-from showml.utils.metrics import training_error, r2_score
+from showml.utils.metrics import r2_score
 import numpy as np
 from numpy.testing import assert_almost_equal
-
-
-def test_training_error_simple() -> None:
-    y = np.array([2, 3, 4, 5])
-    z = np.array([1, 2, 3, 4])
-    assert_almost_equal(training_error(y, z), [-1, -1, -1, -1])
-
-
-def test_training_error_zero() -> None:
-    y = np.array([7.8, 5.6, 3.2, 1, -8.6])
-    z = np.array([7.8, 5.6, 3.2, 1, -8.6])
-    assert_almost_equal(training_error(y, z), [0, 0, 0, 0, 0])
 
 
 def test_r2_score_simple() -> None:

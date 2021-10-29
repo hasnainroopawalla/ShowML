@@ -1,14 +1,5 @@
 import numpy as np
-
-
-def training_error(y: np.ndarray, z: np.ndarray) -> np.ndarray:
-    """
-    Calculate the model error by finding difference between predicted values and true values
-    param y: The true values
-    param z: The predicted values
-    return: Training error of the model
-    """
-    return z - y
+from showml.losses.loss_functions import MeanSquareError, BinaryCrossEntropy
 
 
 def r2_score(y: np.ndarray, z: np.ndarray) -> np.float64:
@@ -34,3 +25,11 @@ def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> np.float64:
     if logits:
         z = [1 if i > 0.5 else 0 for i in z]
     return np.sum(y == z) / len(y)
+
+
+def mean_square_error(y: np.ndarray, z: np.ndarray) -> np.float64:
+    return MeanSquareError().objective(y, z)
+
+
+def binary_cross_entropy(y: np.ndarray, z: np.ndarray) -> np.float64:
+    return BinaryCrossEntropy().objective(y, z)

@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List, Callable
+from typing import Dict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
-from showml.utils.metrics import r2_score, accuracy
 from showml.utils.plots import generic_metric_plot
+from showml.config.metric_map import metric_map
 
 
 class Regression(ABC):
@@ -21,11 +21,6 @@ class Regression(ABC):
         self.classification = classification
         self.weights: np.ndarray = np.array([])
         self.bias: np.float64 = np.float64()
-        self.metrics_method_map: Dict[str, Callable] = {
-            "loss": self.optimizer.compute_loss,
-            "accuracy": accuracy,
-            "r2_score": r2_score,
-        }
         self.history: Dict[str, List[float]] = {}
 
     @abstractmethod
@@ -52,7 +47,7 @@ class Regression(ABC):
         for metric in metrics:
             if metric not in self.history:
                 self.history[metric] = []
-            self.history[metric].append(self.metrics_method_map[metric](y, z))
+            self.history[metric].append(metric_map[metric](y, z))
 
         display = f"Epoch: {epoch}/{self.num_epochs}"
         for metric in self.history:
@@ -80,7 +75,7 @@ class Regression(ABC):
         X: np.ndarray,
         y: np.ndarray,
         plot: bool = True,
-        metrics: List[str] = ["loss"],
+        metrics: List[str] = ["training_error"],
     ) -> None:
         """
         This method trains the model given the input data X and labels y
@@ -113,8 +108,13 @@ class LinearRegression(Regression):
 
 
 class LogisticRegression(Regression):
-    def sigmoid(self, x):
+    def sigmoid(self, x) -> np.float64:
+        """
+        The sigmoid activation function
+        param x: The input to the sigmoid function
+        return: The output after passing the input through a sigmoid function
+        """
         return 1 / (1 + np.exp(-x))
 
-    def predict(self, X: np.ndarray):
+    def predict(self, X: np.ndarray) -> np.ndarray:
         return self.sigmoid(np.dot(X, self.weights) + self.bias)

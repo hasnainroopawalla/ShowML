@@ -27,3 +27,12 @@ class Loss(ABC):
         return db: Gradient of the loss function with respect to the bias
         """
         pass
+
+    def training_error(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
+        """
+        Calculate the model error by finding difference between predicted values and true values
+        param y: The true values
+        param z: The predicted values
+        return: Training error of the model
+        """
+        return z - y
