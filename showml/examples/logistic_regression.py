@@ -50,7 +50,7 @@ X_train, y_train = load_wine()
 # X_train = normalize(X_train)
 
 optimizer = BatchGradientDescent(
-    loss_function=BinaryCrossEntropy(), learning_rate=0.0001
+    loss_function=BinaryCrossEntropy(), learning_rate=0.001
 )
 model = LogisticRegression(optimizer=optimizer, num_epochs=1000)
 model.fit(X_train, y_train, plot=True, metrics=["binary_cross_entropy", "accuracy"])

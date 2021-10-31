@@ -84,6 +84,7 @@ class Regression(ABC):
         param plot: A flag which determines if the model evaluation plots should be displayed or not
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
+        assert isinstance(X, np.ndarray) and isinstance(y, np.ndarray)
         self.initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
@@ -108,13 +109,13 @@ class LinearRegression(Regression):
 
 
 class LogisticRegression(Regression):
-    def sigmoid(self, x) -> np.float64:
+    def sigmoid(self, X) -> np.float64:
         """
         The sigmoid activation function
-        param x: The input to the sigmoid function
+        param X: The input to the sigmoid function
         return: The output after passing the input through a sigmoid function
         """
-        return 1 / (1 + np.exp(-x))
+        return 1 / (1 + np.exp(-X))
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         return self.sigmoid(np.dot(X, self.weights) + self.bias)

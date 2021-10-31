@@ -5,7 +5,7 @@ import numpy as np
 
 class MeanSquareError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> np.float64:
-        return np.average(np.square(self.training_error(y, z)), axis=0) / 2
+        return np.average(np.square(self.training_error(y, z)), axis=0)
 
     def gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
@@ -22,10 +22,8 @@ class BinaryCrossEntropy(Loss):
         """
         Also known as Log Loss
         """
-        m = y.shape[0]
-        epsilon = 1e-20
-        z[z == 0] = epsilon
-        return -np.sum(y * np.log(z) + (1 - y) * np.log(1 - z)) / m
+        num_samples = len(y)
+        return -(1 / num_samples) * (np.sum(y * np.log(z) + (1 - y) * np.log(1 - z)))
 
     def gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray

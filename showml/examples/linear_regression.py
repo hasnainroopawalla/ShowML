@@ -60,8 +60,8 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
     return X_train, y_train
 
 
-X_train, y_train = load_salary()
-# X_train = normalize(X_train)
+X_train, y_train = load_auto()
+X_train = normalize(X_train)
 
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
