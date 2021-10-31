@@ -23,6 +23,8 @@ class BinaryCrossEntropy(Loss):
         Also known as Log Loss
         """
         num_samples = len(y)
+        # Avoid division by zero
+        z = np.clip(z, 1e-15, 1 - 1e-15)
         return -(1 / num_samples) * (np.sum(y * np.log(z) + (1 - y) * np.log(1 - z)))
 
     def gradient(

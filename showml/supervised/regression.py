@@ -4,6 +4,7 @@ import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.plots import generic_metric_plot
 from showml.config.metric_map import metric_map
+import math
 
 
 class Regression(ABC):
@@ -67,7 +68,8 @@ class Regression(ABC):
         param X: The input training data
         """
         num_samples, num_dimensions = X.shape
-        self.weights = np.ones(num_dimensions)
+        limit = 1 / math.sqrt(num_dimensions)
+        self.weights = np.random.uniform(-limit, limit, (num_dimensions,))
         self.bias = np.float64()
 
     def fit(
