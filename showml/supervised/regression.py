@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Callable, Dict, List
+from typing import Callable, DefaultDict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.plots import generic_metric_plot
-import math
+from collections import defaultdict
 
 
 class Regression(ABC):
@@ -17,7 +17,7 @@ class Regression(ABC):
         self.num_epochs = num_epochs
         self.weights: np.ndarray = np.array([])
         self.bias: np.float64 = np.float64()
-        self.history: Dict[str, List[float]] = {}
+        self.history: DefaultDict[str, List[float]] = defaultdict(lambda: [])
 
     @abstractmethod
     def predict(self, X: np.ndarray) -> np.ndarray:
@@ -41,8 +41,6 @@ class Regression(ABC):
         z = self.predict(X)
 
         for metric in metrics:
-            if metric not in self.history:
-                self.history[metric.__name__] = []
             self.history[metric.__name__].append(metric(y, z))
 
         text_to_display = f"Epoch: {epoch}/{self.num_epochs}"
@@ -63,7 +61,7 @@ class Regression(ABC):
         param X: The input training data
         """
         num_samples, num_dimensions = X.shape
-        limit = 1 / math.sqrt(num_dimensions)
+        limit = 1 / np.sqrt(num_dimensions)
         self.weights = np.random.uniform(-limit, limit, (num_dimensions,))
         self.bias = np.float64()
 
