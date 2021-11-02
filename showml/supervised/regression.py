@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Callable, DefaultDict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
-from showml.utils.plots import generic_metric_plot
+from showml.utils.plots import plot_metrics
 from collections import defaultdict
 
 
@@ -48,13 +48,6 @@ class Regression(ABC):
             text_to_display += f", {metric_name}: {self.history[metric_name][-1]}"
         print(text_to_display)
 
-    def plot_metrics(self):
-        """
-        Display the plot after training for the specified metrics
-        """
-        for metric in self.history:
-            generic_metric_plot(metric, self.history[metric])
-
     def initialize_params(self, X: np.ndarray) -> None:
         """
         Initialize the weights and bias for the model
@@ -95,7 +88,7 @@ class Regression(ABC):
             self.evaluate(epoch, X, y, metrics)
 
         if plot:
-            self.plot_metrics()
+            plot_metrics(self.history)
 
 
 class LinearRegression(Regression):

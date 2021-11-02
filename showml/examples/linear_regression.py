@@ -6,6 +6,7 @@ from showml.optimizers.gradient_optimizers import BatchGradientDescent
 from showml.losses.loss_functions import MeanSquareError
 from showml.supervised.regression import LinearRegression
 from showml.utils.plots import plot_regression_line
+from showml.utils.metrics import mean_square_error, r2_score
 
 
 def load_auto() -> Tuple[np.ndarray, np.ndarray]:
@@ -65,6 +66,6 @@ X_train = normalize(X_train)
 
 optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
-model.fit(X_train, y_train, plot=True, metrics=["r2_score", "mean_square_error"])
+model.fit(X_train, y_train, plot=True, metrics=[mean_square_error, r2_score])
 
 plot_regression_line(X_train, y_train, model.predict(X_train))
