@@ -1,25 +1,20 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import Callable, Dict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.plots import generic_metric_plot
-from showml.config.metric_map import metric_map
 import math
 
 
 class Regression(ABC):
-    def __init__(
-        self, optimizer: Optimizer, num_epochs: int = 1000, classification: bool = False
-    ) -> None:
+    def __init__(self, optimizer: Optimizer, num_epochs: int = 1000) -> None:
         """
         Base Regression class
         param optimizer: The optimizer to be used for training (showml.optimizers)
         param num_epochs: The number of epochs for training
-        param classification: A flag to indicate if the model is dealing with a classification problem or not
         """
         self.optimizer = optimizer
         self.num_epochs = num_epochs
-        self.classification = classification
         self.weights: np.ndarray = np.array([])
         self.bias: np.float64 = np.float64()
         self.history: Dict[str, List[float]] = {}
@@ -34,7 +29,7 @@ class Regression(ABC):
         pass
 
     def evaluate(
-        self, epoch: int, X: np.ndarray, y: np.ndarray, metrics: List[str]
+        self, epoch: int, X: np.ndarray, y: np.ndarray, metrics: List[Callable]
     ) -> None:
         """
         Evaluate the model and display all the required metrics (accuracy, r^2 score, etc.)
@@ -47,13 +42,13 @@ class Regression(ABC):
 
         for metric in metrics:
             if metric not in self.history:
-                self.history[metric] = []
-            self.history[metric].append(metric_map[metric](y, z))
+                self.history[metric.__name__] = []
+            self.history[metric.__name__].append(metric(y, z))
 
-        display = f"Epoch: {epoch}/{self.num_epochs}"
-        for metric in self.history:
-            display += f", {metric}: {self.history[metric][-1]}"
-        print(display)
+        text_to_display = f"Epoch: {epoch}/{self.num_epochs}"
+        for metric_name in self.history:
+            text_to_display += f", {metric_name}: {self.history[metric_name][-1]}"
+        print(text_to_display)
 
     def plot_metrics(self):
         """
@@ -77,7 +72,7 @@ class Regression(ABC):
         X: np.ndarray,
         y: np.ndarray,
         plot: bool = True,
-        metrics: List[str] = ["training_error"],
+        metrics: List[Callable] = [],
     ) -> None:
         """
         This method trains the model given the input data X and labels y

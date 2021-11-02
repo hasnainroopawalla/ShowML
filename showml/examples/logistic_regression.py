@@ -5,6 +5,7 @@ from showml.losses.loss_functions import BinaryCrossEntropy
 from showml.supervised.regression import LogisticRegression
 import numpy as np
 import pandas as pd
+from showml.utils.metrics import accuracy, binary_cross_entropy
 
 
 def load_wine() -> Tuple[np.ndarray, np.ndarray]:
@@ -53,4 +54,4 @@ optimizer = BatchGradientDescent(
     loss_function=BinaryCrossEntropy(), learning_rate=0.001
 )
 model = LogisticRegression(optimizer=optimizer, num_epochs=1000)
-model.fit(X_train, y_train, plot=True, metrics=["binary_cross_entropy", "accuracy"])
+model.fit(X_train, y_train, plot=True, metrics=[binary_cross_entropy, accuracy])
