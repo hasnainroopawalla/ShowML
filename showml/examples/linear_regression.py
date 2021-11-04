@@ -66,6 +66,8 @@ X_train = normalize(X_train)
 
 optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
-model.fit(X_train, y_train, plot=True, metrics=[mean_square_error, r2_score])
+
+model.fit(X_train, y_train, metrics=[mean_square_error, r2_score])
+model.plot_metrics()
 
 plot_regression_line(X_train, y_train, model.predict(X_train))

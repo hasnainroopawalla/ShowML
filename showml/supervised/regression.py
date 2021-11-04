@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Callable, DefaultDict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
+from showml.utils.model import initialize_params, generate_minibatches
 from showml.utils.plots import generic_metric_plot
 from collections import defaultdict
 
@@ -15,8 +16,6 @@ class Regression(ABC):
         """
         self.optimizer = optimizer
         self.num_epochs = num_epochs
-        self.weights: np.ndarray = np.array([])
-        self.bias: np.float64 = np.float64()
         self.history: DefaultDict[str, List[float]] = defaultdict(lambda: [])
 
     @abstractmethod
@@ -48,20 +47,9 @@ class Regression(ABC):
             text_to_display += f", {metric_name}: {self.history[metric_name][-1]}"
         print(text_to_display)
 
-    def initialize_params(self, X: np.ndarray) -> None:
-        """
-        Initialize the weights and bias for the model
-        param X: The input training data
-        """
-        num_samples, num_dimensions = X.shape
-        limit = 1 / np.sqrt(num_dimensions)
-        self.weights = np.random.uniform(-limit, limit, (num_dimensions,))
-        self.bias = np.float64()
-
     def plot_metrics(self) -> None:
         """
         Display the plot after training for the specified metrics
-        param history: A dictionary which maps a metric to its list of historical values for all epochs during training
         """
         for metric in self.history:
             generic_metric_plot(metric, self.history[metric])
@@ -81,18 +69,22 @@ class Regression(ABC):
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
         assert isinstance(X, np.ndarray) and isinstance(y, np.ndarray)
-        self.initialize_params(X)
+
+        self.weights, self.bias = initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
-            # Forward pass
-            z = self.predict(X)
+            for X_batch, y_batch in generate_minibatches(
+                X, y, batch_size, shuffle=True
+            ):
+                # Forward pass
+                z = self.predict(X_batch)
 
-            # Update weights based on the error
-            self.weights, self.bias = self.optimizer.update_weights(
-                X, y, z, self.weights, self.bias
-            )
+                # Update weights based on the error
+                self.weights, self.bias = self.optimizer.update_weights(
+                    X_batch, y_batch, z, self.weights, self.bias
+                )
 
-            # Evaluate the model
+            # Evaluate the model on the entire dataset
             self.evaluate(epoch, X, y, metrics)
 
 
