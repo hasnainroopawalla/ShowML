@@ -27,10 +27,11 @@ $ pip install -r requirements.txt
 ## Contents
 
 ### Algorithms
-- Linear Regression (`showml.supervised.regression.LinearRegression`)
+- Linear Regression (`from showml.supervised.regression import LinearRegression`)
+- Logistic Regression (`from showml.supervised.regression import LogisticRegression`)
 
 ### Optimizers
-- Batch Gradient Descent (`showml.optimizers.BatchGradientDescent`)
+- Batch Gradient Descent (`from showml.optimizers import BatchGradientDescent`)
 
 ### Loss Functions
-- Mean Squared Error (`showml.losses.MeanSquareError`)
+- Mean Squared Error (`from showml.losses import MeanSquareError`)
