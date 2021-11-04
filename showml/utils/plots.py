@@ -1,4 +1,4 @@
-from typing import DefaultDict, List
+from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -14,15 +14,6 @@ def generic_metric_plot(metric_name: str, metric_values: List[float]) -> None:
     plt.ylabel(metric_name)
     plt.title(metric_name)
     plt.show()
-
-
-def plot_metrics(history: DefaultDict[str, List[float]]):
-    """
-    Display the plot after training for the specified metrics
-    param history: A dictionary which maps a metric to its list of historical values for all epochs during training
-    """
-    for metric in history:
-        generic_metric_plot(metric, history[metric])
 
 
 def plot_regression_line(

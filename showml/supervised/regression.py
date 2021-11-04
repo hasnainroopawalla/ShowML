@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Callable, DefaultDict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
-from showml.utils.plots import plot_metrics
+from showml.utils.plots import generic_metric_plot
 from collections import defaultdict
 
 
@@ -58,18 +58,26 @@ class Regression(ABC):
         self.weights = np.random.uniform(-limit, limit, (num_dimensions,))
         self.bias = np.float64()
 
+    def plot_metrics(self) -> None:
+        """
+        Display the plot after training for the specified metrics
+        param history: A dictionary which maps a metric to its list of historical values for all epochs during training
+        """
+        for metric in self.history:
+            generic_metric_plot(metric, self.history[metric])
+
     def fit(
         self,
         X: np.ndarray,
         y: np.ndarray,
-        plot: bool = True,
+        batch_size: int = 32,
         metrics: List[Callable] = [],
     ) -> None:
         """
         This method trains the model given the input data X and labels y
         param X: The input training data
         param y: The true labels of the training data
-        param plot: A flag which determines if the model evaluation plots should be displayed or not
+        param batch_size: Number of samples per gradient update
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
         assert isinstance(X, np.ndarray) and isinstance(y, np.ndarray)
@@ -86,9 +94,6 @@ class Regression(ABC):
 
             # Evaluate the model
             self.evaluate(epoch, X, y, metrics)
-
-        if plot:
-            plot_metrics(self.history)
 
 
 class LinearRegression(Regression):

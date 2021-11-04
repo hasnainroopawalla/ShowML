@@ -1,5 +1,5 @@
 from showml.losses import MeanSquareError
-from showml.optimizers import BatchGradientDescent
+from showml.optimizers import SGD
 import numpy as np
 from numpy.testing import assert_almost_equal
 
@@ -14,9 +14,7 @@ def test_update_weights() -> None:
     z = np.array([0, 2, -1, 2, -5])
     weights = np.array([1.4, 7.8])
     bias = 2.6
-    optimizer = BatchGradientDescent(
-        loss_function=MeanSquareError(), learning_rate=0.01
-    )
+    optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.01)
     updated_weights, updated_bias = optimizer.update_weights(X, y, z, weights, bias)
     assert_almost_equal(updated_weights, [1.3885, 7.781])
     assert updated_bias == 2.595
@@ -28,7 +26,7 @@ def test_update_weights_simple() -> None:
     z = np.array([5.0, 7.0])
     weights = np.array([1.0, 1.0, 1.0, 1.0])
     bias = 0.0
-    optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.1)
+    optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.1)
     updated_weights, updated_bias = optimizer.update_weights(X, y, z, weights, bias)
     assert_almost_equal(updated_weights, [2.35, 2.05, 5.6, 6.4])
     assert updated_bias == 0.8
@@ -40,7 +38,7 @@ def test_update_weights_int() -> None:
     z = np.array([5, 7]).astype("float64")
     weights = np.array([1, 1, 1, 1]).astype("float64")
     bias = 0
-    optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.1)
+    optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.1)
     updated_weights, updated_bias = optimizer.update_weights(X, y, z, weights, bias)
     assert_almost_equal(updated_weights, [2.35, 2.05, 5.6, 6.4])
     assert updated_bias == 0.8

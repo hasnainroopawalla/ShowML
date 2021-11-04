@@ -3,7 +3,7 @@ import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 
 
-class BatchGradientDescent(Optimizer):
+class SGD(Optimizer):
     def update_weights(
         self,
         X: np.ndarray,

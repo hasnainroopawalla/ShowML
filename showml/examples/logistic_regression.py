@@ -1,6 +1,6 @@
 from typing import Tuple
 from showml.preprocessing.standard import normalize
-from showml.optimizers import BatchGradientDescent
+from showml.optimizers import SGD
 from showml.losses import BinaryCrossEntropy
 from showml.supervised.regression import LogisticRegression
 import numpy as np
@@ -50,8 +50,7 @@ def load_wine() -> Tuple[np.ndarray, np.ndarray]:
 X_train, y_train = load_wine()
 # X_train = normalize(X_train)
 
-optimizer = BatchGradientDescent(
-    loss_function=BinaryCrossEntropy(), learning_rate=0.001
-)
+optimizer = SGD(loss_function=BinaryCrossEntropy(), learning_rate=0.001)
 model = LogisticRegression(optimizer=optimizer, num_epochs=100)
-model.fit(X_train, y_train, plot=True, metrics=[binary_cross_entropy, accuracy])
+model.fit(X_train, y_train, metrics=[binary_cross_entropy, accuracy])
+model.plot_metrics()
