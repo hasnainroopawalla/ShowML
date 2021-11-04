@@ -1,5 +1,5 @@
 import numpy as np
-from showml.losses.loss_functions import MeanSquareError, BinaryCrossEntropy
+from showml.losses import MeanSquareError, BinaryCrossEntropy
 
 
 def r2_score(y: np.ndarray, z: np.ndarray) -> np.float64:

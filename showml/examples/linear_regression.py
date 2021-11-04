@@ -2,8 +2,8 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 from showml.preprocessing.standard import normalize
-from showml.optimizers.gradient_optimizers import BatchGradientDescent
-from showml.losses.loss_functions import MeanSquareError
+from showml.optimizers import BatchGradientDescent
+from showml.losses import MeanSquareError
 from showml.supervised.regression import LinearRegression
 from showml.utils.plots import plot_regression_line
 from showml.utils.metrics import mean_square_error, r2_score

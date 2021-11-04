@@ -1,5 +1,5 @@
-from showml.losses.loss_functions import MeanSquareError
-from showml.optimizers.gradient_optimizers import BatchGradientDescent
+from showml.losses import MeanSquareError
+from showml.optimizers import BatchGradientDescent
 import numpy as np
 from numpy.testing import assert_almost_equal
 
@@ -44,6 +44,3 @@ def test_update_weights_int() -> None:
     updated_weights, updated_bias = optimizer.update_weights(X, y, z, weights, bias)
     assert_almost_equal(updated_weights, [2.35, 2.05, 5.6, 6.4])
     assert updated_bias == 0.8
-
-
-test_update_weights_int()

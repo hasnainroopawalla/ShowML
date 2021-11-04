@@ -1,4 +1,4 @@
-from showml.losses.loss_functions import MeanSquareError
+from showml.losses import MeanSquareError
 import numpy as np
 from numpy.testing import assert_almost_equal
 
@@ -12,14 +12,14 @@ def test_objective_simple() -> None:
     y = np.array([3, -0.5, 2, 7])
     z = np.array([2.5, 0.0, 2, 8])
     MSE = MeanSquareError()
-    assert MSE.objective(y, z) == 0.1875
+    assert MSE.objective(y, z) == 0.375
 
 
 def test_objective_complex() -> None:
     y = np.array([0.5, 1, -1, 1, 7, -6])
     z = np.array([0, 2, -1, 2, 8, -5])
     MSE = MeanSquareError()
-    assert MSE.objective(y, z) == 0.3541666666666667
+    assert MSE.objective(y, z) == 0.7083333333333334
 
 
 def test_objective_no_error() -> None:

@@ -30,7 +30,7 @@ $ pip install -r requirements.txt
 - Linear Regression (`showml.supervised.regression.LinearRegression`)
 
 ### Optimizers
-- Batch Gradient Descent (`showml.optimizers.gradient_optimizers.BatchGradientDescent`)
+- Batch Gradient Descent (`showml.optimizers.BatchGradientDescent`)
 
 ### Loss Functions
-- Mean Squared Error (`showml.losses.loss_functions.MeanSquareError`)
+- Mean Squared Error (`showml.losses.MeanSquareError`)
