@@ -3,12 +3,8 @@ from showml.optimizers import BatchGradientDescent
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-"""
-Batch Gradient Descent
-"""
 
-
-def test_update_weights() -> None:
+def test_bgd_update_weights() -> None:
     X = np.array([[0.5, 1], [-1, 1], [7, -6], [6, 8], [1, 1]])
     y = np.array([0.5, 1, -1, 1, -6])
     z = np.array([0, 2, -1, 2, -5])
@@ -22,7 +18,7 @@ def test_update_weights() -> None:
     assert updated_bias == 2.595
 
 
-def test_update_weights_simple() -> None:
+def test_bgd_update_weights_simple() -> None:
     X = np.array([[1.0, 2.0, 3.0, 4.0], [2.0, 1.0, 7.0, 8.0]])
     y = np.array([10.0, 18.0])
     z = np.array([5.0, 7.0])
@@ -34,7 +30,7 @@ def test_update_weights_simple() -> None:
     assert updated_bias == 0.8
 
 
-def test_update_weights_int() -> None:
+def test_bgd_update_weights_int() -> None:
     X = np.array([[1, 2, 3, 4], [2, 1, 7, 8]]).astype("float64")
     y = np.array([10, 18]).astype("float64")
     z = np.array([5, 7]).astype("float64")
