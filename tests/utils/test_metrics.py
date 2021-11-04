@@ -1,6 +1,5 @@
 from showml.utils.metrics import r2_score
 import numpy as np
-from numpy.testing import assert_almost_equal
 
 
 def test_r2_score_simple() -> None:
