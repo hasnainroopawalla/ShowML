@@ -35,3 +35,26 @@ $ pip install -r requirements.txt
 
 ### Loss Functions
 - Mean Squared Error (`from showml.losses import MeanSquareError`)
+
+
+## Contributing
+1. Fork the repository
+2. Install the necessary dependencies
+```
+$ pip install mypy pre-commit pytest
+ ```
+3. Commit and push your changes
+4. Before creating a Pull Request, run these housekeeping checks
+  - Run pre-commit at the root
+  ```
+  $ pre-commit run -a
+  ```
+  - Run mypy
+  ```
+  $ mypy .
+  ```
+  - Run tests
+  ```
+  $ pytest
+  ```
+5. Once everything succeeds, create a Pull Request (CI will be triggered)
