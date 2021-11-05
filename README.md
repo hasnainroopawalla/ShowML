@@ -45,7 +45,7 @@ $ pip install -r requirements.txt
 $ pip install mypy pre-commit pytest
  ```
 3. Commit and push your changes
-4. Before creating a Pull Request, run these housekeeping checks at the root
+4. Before creating a Pull Request, run these housekeeping checks locally
   - Run pre-commit
   ```
   $ pre-commit run -a
