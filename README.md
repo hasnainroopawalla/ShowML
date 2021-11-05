@@ -32,11 +32,11 @@ $ pip install -r requirements.txt
 - Logistic Regression (`from showml.supervised.regression import LogisticRegression`)
 
 ### Optimizers
-- Batch Gradient Descent (`from showml.optimizers import SGD`)
+- Stochastic/Batch/Mini-Batch Gradient Descent (`from showml.optimizers import SGD`)
 
 ### Loss Functions
 - Mean Squared Error (`from showml.losses import MeanSquareError`)
-
+- Binary Cross Entropy (`from showml.losses import BinaryCrossEntropy`)
 
 ## Contributing
 1. Fork the repository
