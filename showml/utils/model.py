@@ -2,7 +2,7 @@ from typing import Tuple, Generator
 import numpy as np
 
 
-def initialize_params(X: np.ndarray) -> Tuple[np.ndarray, np.float64]:
+def initialize_params(X: np.ndarray) -> Tuple[np.ndarray, float]:
     """
     Initialize the weights and bias for the model
     param X: The input training data
@@ -10,7 +10,7 @@ def initialize_params(X: np.ndarray) -> Tuple[np.ndarray, np.float64]:
     num_samples, num_dimensions = X.shape
     limit = 1 / np.sqrt(num_dimensions)
     weights = np.random.uniform(-limit, limit, (num_dimensions,))
-    bias = np.float64()
+    bias = float()
     return weights, bias
 
 

@@ -50,6 +50,6 @@ X_train, y_train = load_wine()
 # X_train = normalize(X_train)
 
 optimizer = SGD(loss_function=BinaryCrossEntropy(), learning_rate=0.001)
-model = LogisticRegression(optimizer=optimizer, num_epochs=100)
-model.fit(X_train, y_train, batch_size=10, metrics=[binary_cross_entropy, accuracy])
+model = LogisticRegression(optimizer=optimizer, num_epochs=2)
+model.fit(X_train, y_train, batch_size=64, metrics=[binary_cross_entropy, accuracy])
 model.plot_metrics()

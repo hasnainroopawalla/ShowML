@@ -5,7 +5,7 @@ import numpy as np
 
 class Loss(ABC):
     @abstractmethod
-    def objective(self, y: np.ndarray, z: np.ndarray) -> np.float64:
+    def objective(self, y: np.ndarray, z: np.ndarray) -> float:
         """
         The objective cost function is defined here
         param y: The true labels of the training data
@@ -17,7 +17,7 @@ class Loss(ABC):
     @abstractmethod
     def gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
-    ) -> Tuple[np.ndarray, np.float64]:
+    ) -> Tuple[np.ndarray, float]:
         """
         Computes the gradient of the objective function (change in weight)
         param X: The training data

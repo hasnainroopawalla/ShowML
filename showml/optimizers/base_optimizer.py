@@ -21,8 +21,8 @@ class Optimizer(ABC):
         y: np.ndarray,
         z: np.ndarray,
         weights: np.ndarray,
-        bias: np.float64,
-    ) -> Tuple[np.ndarray, np.float64]:
+        bias: float,
+    ) -> Tuple[np.ndarray, float]:
         """
         Update the weights of the model using the specified loss function and optimizer
         param X: The input training set

@@ -10,8 +10,8 @@ class SGD(Optimizer):
         y: np.ndarray,
         z: np.ndarray,
         weights: np.ndarray,
-        bias: np.float64,
-    ) -> Tuple[np.ndarray, np.float64]:
+        bias: float,
+    ) -> Tuple[np.ndarray, float]:
         dw, db = self.loss_function.gradient(X, y, z)
         weights -= self.learning_rate * dw
         bias -= self.learning_rate * db

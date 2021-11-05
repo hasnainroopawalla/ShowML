@@ -94,7 +94,7 @@ class LinearRegression(Regression):
 
 
 class LogisticRegression(Regression):
-    def sigmoid(self, X) -> np.float64:
+    def sigmoid(self, X) -> np.ndarray:
         """
         The sigmoid activation function
         param X: The input to the sigmoid function
