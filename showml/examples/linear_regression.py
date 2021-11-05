@@ -64,7 +64,7 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
 X_train, y_train = load_auto()
 X_train = normalize(X_train)
 
-optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001)
+optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.0)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
 
 model.fit(X_train, y_train, metrics=[mean_square_error, r2_score])

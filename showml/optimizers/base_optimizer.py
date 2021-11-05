@@ -5,7 +5,7 @@ import numpy as np
 
 
 class Optimizer(ABC):
-    def __init__(self, loss_function: Loss, learning_rate: float = 0.005):
+    def __init__(self, loss_function: Loss, learning_rate: float):
         """
         Base Optimzer class
         param loss_function: The loss function to be optimized and for computing the gradient

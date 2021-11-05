@@ -1,4 +1,4 @@
-from showml.preprocessing.standard import normalize
+from showml.utils.preprocessing import normalize
 import numpy as np
 from numpy.testing import assert_almost_equal
 
