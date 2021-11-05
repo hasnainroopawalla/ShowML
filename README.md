@@ -24,6 +24,7 @@ $ cd ShowML
 $ pip install -r requirements.txt
 ```
 
+[How to Contribute](#contributing)
 ## Contents
 
 ### Algorithms
