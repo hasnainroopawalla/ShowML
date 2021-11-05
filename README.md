@@ -42,7 +42,7 @@ $ pip install -r requirements.txt
 1. Fork the repository
 2. Install the necessary dependencies
 ```
-$ pip install mypy pre-commit pytest
+$ pip install pre-commit mypy pytest
  ```
 3. Commit and push your changes to your own branch
 4. Before submitting a Pull Request, run these housekeeping checks locally
