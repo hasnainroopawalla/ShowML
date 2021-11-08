@@ -5,6 +5,7 @@ from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.model import initialize_params, generate_minibatches
 from showml.utils.plots import generic_metric_plot
 from collections import defaultdict
+from showml.utils.dataset import Dataset
 
 
 class Regression(ABC):
@@ -55,21 +56,16 @@ class Regression(ABC):
             generic_metric_plot(metric, self.history[metric])
 
     def fit(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        batch_size: int = 32,
-        metrics: List[Callable] = [],
+        self, dataset: Dataset, batch_size: int = 32, metrics: List[Callable] = []
     ) -> None:
         """
         This method trains the model given the input data X and labels y
-        param X: The input training data
-        param y: The true labels of the training data
+        param dataset: An object of the Dataset class - the input dataset and true labels/values of the dataset
         param batch_size: Number of samples per gradient update
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
-        assert isinstance(X, np.ndarray) and isinstance(y, np.ndarray)
-
+        X: np.ndarray = dataset.X
+        y: np.ndarray = dataset.y
         self.weights, self.bias = initialize_params(X)
 
         for epoch in range(1, self.num_epochs + 1):
