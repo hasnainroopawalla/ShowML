@@ -1,13 +1,14 @@
 from typing import Tuple
+
 import numpy as np
 import pandas as pd
-from showml.utils.dataset import Dataset
-from showml.utils.preprocessing import normalize
-from showml.optimizers import SGD
 from showml.losses import MeanSquareError
+from showml.optimizers import SGD
 from showml.supervised.regression import LinearRegression
-from showml.utils.plots import plot_regression_line
+from showml.utils.dataset import Dataset
 from showml.utils.metrics import mean_square_error, r2_score
+from showml.utils.plots import plot_regression_line
+from showml.utils.preprocessing import normalize
 
 
 def load_auto() -> Tuple[np.ndarray, np.ndarray]:
@@ -67,9 +68,10 @@ X_train = normalize(X_train)
 dataset = Dataset(X_train, y_train)
 
 optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.0)
-model = LinearRegression(optimizer=optimizer, num_epochs=10000)
+model = LinearRegression()
+model.compile(optimizer=optimizer, metrics=[mean_square_error, r2_score])
 
-model.fit(dataset, metrics=[mean_square_error, r2_score])
+model.fit(dataset, epochs=10000)
 model.plot_metrics()
 
 plot_regression_line(X_train, y_train, model.predict(X_train))
