@@ -2,7 +2,7 @@ import numpy as np
 from showml.losses import MeanSquareError, BinaryCrossEntropy
 
 
-def r2_score(y: np.ndarray, z: np.ndarray) -> np.float64:
+def r2_score(y: np.ndarray, z: np.ndarray) -> float:
     """
     Calculate the r^2 (coefficient of determination) score of the model
     param y: The true values
@@ -15,7 +15,7 @@ def r2_score(y: np.ndarray, z: np.ndarray) -> np.float64:
     return r_2
 
 
-def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> np.float64:
+def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> float:
     """
     Compute the classification accuracy of the model
     param y: The true labels
@@ -23,13 +23,13 @@ def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> np.float64:
     param logits: A flag indicating that the predicted values are probabilites and not classes
     """
     if logits:
-        z = [1 if i > 0.5 else 0 for i in z]
-    return np.sum(y == z) / len(y)
+        predicted_classes = [1 if i > 0.5 else 0 for i in z]
+    return np.sum(y == predicted_classes) / len(y)
 
 
-def mean_square_error(y: np.ndarray, z: np.ndarray) -> np.float64:
+def mean_square_error(y: np.ndarray, z: np.ndarray) -> float:
     return MeanSquareError().objective(y, z)
 
 
-def binary_cross_entropy(y: np.ndarray, z: np.ndarray) -> np.float64:
+def binary_cross_entropy(y: np.ndarray, z: np.ndarray) -> float:
     return BinaryCrossEntropy().objective(y, z)

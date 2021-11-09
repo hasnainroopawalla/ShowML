@@ -1,7 +1,8 @@
 from typing import Tuple
 import numpy as np
 import pandas as pd
-from showml.preprocessing.standard import normalize
+from showml.utils.dataset import Dataset
+from showml.utils.preprocessing import normalize
 from showml.optimizers import SGD
 from showml.losses import MeanSquareError
 from showml.supervised.regression import LinearRegression
@@ -63,11 +64,12 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
 
 X_train, y_train = load_auto()
 X_train = normalize(X_train)
+dataset = Dataset(X_train, y_train)
 
-optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001)
+optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.0)
 model = LinearRegression(optimizer=optimizer, num_epochs=10000)
 
-model.fit(X_train, y_train, metrics=[mean_square_error, r2_score])
+model.fit(dataset, metrics=[mean_square_error, r2_score])
 model.plot_metrics()
 
 plot_regression_line(X_train, y_train, model.predict(X_train))

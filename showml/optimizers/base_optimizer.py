@@ -5,7 +5,7 @@ import numpy as np
 
 
 class Optimizer(ABC):
-    def __init__(self, loss_function: Loss, learning_rate: float = 0.005):
+    def __init__(self, loss_function: Loss, learning_rate: float):
         """
         Base Optimzer class
         param loss_function: The loss function to be optimized and for computing the gradient
@@ -21,8 +21,8 @@ class Optimizer(ABC):
         y: np.ndarray,
         z: np.ndarray,
         weights: np.ndarray,
-        bias: np.float64,
-    ) -> Tuple[np.ndarray, np.float64]:
+        bias: float,
+    ) -> Tuple[np.ndarray, float]:
         """
         Update the weights of the model using the specified loss function and optimizer
         param X: The input training set

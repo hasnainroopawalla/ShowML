@@ -24,6 +24,7 @@ $ cd ShowML
 $ pip install -r requirements.txt
 ```
 
+[How to Contribute](#contributing)
 ## Contents
 
 ### Algorithms
@@ -31,7 +32,30 @@ $ pip install -r requirements.txt
 - Logistic Regression (`from showml.supervised.regression import LogisticRegression`)
 
 ### Optimizers
-- Batch Gradient Descent (`from showml.optimizers import SGD`)
+- Stochastic/Batch/Mini-Batch Gradient Descent (`from showml.optimizers import SGD`)
 
 ### Loss Functions
 - Mean Squared Error (`from showml.losses import MeanSquareError`)
+- Binary Cross Entropy (`from showml.losses import BinaryCrossEntropy`)
+
+## Contributing
+1. Fork the repository
+2. Install the necessary dependencies
+```
+$ pip install pre-commit mypy pytest
+ ```
+3. Commit and push your changes to your own branch
+4. Before submitting a Pull Request, run these housekeeping checks locally
+  - Run pre-commit
+   ```
+   $ pre-commit run -a
+   ```
+  - Run mypy
+  ```
+  $ mypy .
+  ```
+  - Run tests
+  ```
+  $ pytest
+  ```
+5. Once everything succeeds, create a Pull Request (CI will be triggered)
