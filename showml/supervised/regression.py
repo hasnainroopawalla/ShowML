@@ -4,7 +4,7 @@ from typing import Callable, Dict, List
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.dataset import Dataset
-from showml.utils.model import generate_minibatches, initialize_params
+from showml.utils.model_utilities import generate_minibatches, initialize_params
 from showml.utils.plots import generic_metric_plot
 
 
