@@ -7,6 +7,7 @@ from showml.utils.plots import plot_regression_line
 from showml.utils.preprocessing import normalize
 from showml.utils.data_loader import load_salary, load_auto
 
+
 X_train, y_train = load_auto()
 X_train = normalize(X_train)
 dataset = Dataset(X_train, y_train)
