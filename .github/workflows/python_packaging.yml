@@ -29,6 +29,7 @@ jobs:
           mypy . --ignore-missing-imports
       - name: Run Tests
         run: |
+          pip install pytest
           pytest
 #       - name: Build and publish to TestPyPi
 #         env:
