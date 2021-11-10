@@ -1,11 +1,46 @@
 from typing import Tuple
 import numpy as np
 import pandas as pd
-from showml.preprocessing.standard import normalize
-from showml.optimizers.gradient import BatchGradientDescent
-from showml.losses.loss_functions import MeanSquareError
-from showml.supervised.regression import LinearRegression
-from showml.utils.plots import plot_regression_line
+from typing import Tuple
+
+
+def load_wine() -> Tuple[np.ndarray, np.ndarray]:
+    """
+    A method to load the Auto.csv file, include the necessary columns and return X_train and y_train
+    return X_train: The input training data
+    return y_train: The input training labels
+    """
+    wine = (
+        pd.read_csv(
+            "./data/Wine_Quality.csv", sep=";", na_values="?", dtype={"ID": str}
+        )
+        .dropna()
+        .reset_index()
+    )
+    X_train = wine[
+        [
+            # "fixed acidity",
+            # "volatile acidity",
+            # "citric acid",
+            # "residual sugar",
+            # "chlorides",
+            # "free sulfur dioxide",
+            # "total sulfur dioxide",
+            # "density",
+            # "pH",
+            "sulphates",
+            "alcohol",
+        ]
+    ].values
+
+    # Remap wine quality to only 2 groups
+    wine["quality"] = wine["quality"].map({3: 0, 4: 0, 5: 0, 6: 1, 7: 1, 8: 1, 9: 1})
+    y_train = wine[["quality"]].values
+
+    # Make y_train 1D if its not
+    if y_train.ndim > 1:
+        y_train = y_train[:, 0]
+    return X_train, y_train
 
 
 def load_auto() -> Tuple[np.ndarray, np.ndarray]:
@@ -58,13 +93,3 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
         y_train = y_train[:, 0]
 
     return X_train, y_train
-
-
-X_train, y_train = load_auto()
-# X_train = normalize(X_train)
-
-optimizer = BatchGradientDescent(loss_function=MeanSquareError(), learning_rate=0.001)
-model = LinearRegression(optimizer=optimizer, num_epochs=10000)
-model.fit(X_train, y_train, plot=False)
-
-plot_regression_line(X_train, y_train, model.predict(X_train))
