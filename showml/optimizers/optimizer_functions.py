@@ -27,6 +27,10 @@ class SGD(Optimizer):
     ) -> Tuple[np.ndarray, float]:
         dw, db = self.loss_function.gradient(X, y, z)
 
+        if self.prev_change["weights"].shape[0] == 0:
+            self.prev_change["weights"] = np.zeros(np.shape(weights))
+            self.prev_change["bias"] = np.zeros(np.shape(bias))
+
         curr_change_weights = self.learning_rate * dw + (
             self.momentum * self.prev_change["weights"]
         )
