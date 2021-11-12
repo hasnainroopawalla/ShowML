@@ -33,6 +33,8 @@ $ pip install -r requirements.txt
 
 ### Optimizers
 - Stochastic/Batch/Mini-Batch Gradient Descent (`from showml.optimizers import SGD`)
+- Adaptive Gradient (`from showml.optimizers import AdaGrad`)
+- Root Mean Squared Propagation (`from showml.optimizers import RMSProp`)
 
 ### Loss Functions
 - Mean Squared Error (`from showml.losses import MeanSquareError`)
