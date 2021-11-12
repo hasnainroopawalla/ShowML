@@ -12,7 +12,7 @@ X_train, y_train = load_auto()
 X_train = normalize(X_train)
 dataset = Dataset(X_train, y_train)
 
-optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.0)
+optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.8)
 model = LinearRegression()
 model.compile(optimizer=optimizer, metrics=[mean_square_error, r2_score])
 
