@@ -61,28 +61,32 @@ class AdaGrad(Optimizer):
         self,
         X: np.ndarray,
         y: np.ndarray,
-        z: np.ndarray,  
+        z: np.ndarray,
         weights: np.ndarray,
         bias: float,
     ) -> Tuple[np.ndarray, float]:
         dw, db = self.loss_function.gradient(X, y, z)
-        
-        if self.G['weights'].shape[0] == 0:
-            self.G['weights'] = np.zeros(np.shape(weights))
-            self.G['bias'] = np.zeros(np.shape(bias))
-     
-        self.G['weights'] += np.square(dw)
-        self.G['bias'] += np.square(db)
 
-        weights -= self.learning_rate * (dw / np.sqrt(self.G['weights'] + self.epsilon))
-        bias -= self.learning_rate * (db / np.sqrt(self.G['bias'] + self.epsilon))
+        if self.G["weights"].shape[0] == 0:
+            self.G["weights"] = np.zeros(np.shape(weights))
+            self.G["bias"] = np.zeros(np.shape(bias))
+
+        self.G["weights"] += np.square(dw)
+        self.G["bias"] += np.square(db)
+
+        weights -= self.learning_rate * (dw / np.sqrt(self.G["weights"] + self.epsilon))
+        bias -= self.learning_rate * (db / np.sqrt(self.G["bias"] + self.epsilon))
 
         return weights, bias
-    
-    
+
+
 class RMSProp(Optimizer):
     def __init__(
-        self, loss_function: Loss, learning_rate: float = 0.001, rho: float = 0.9, epsilon: float = 1e-8
+        self,
+        loss_function: Loss,
+        learning_rate: float = 0.001,
+        rho: float = 0.9,
+        epsilon: float = 1e-8,
     ):
         """
         The Root Mean Squared Propagation (RMSProp) Optimizer
@@ -98,20 +102,22 @@ class RMSProp(Optimizer):
         self,
         X: np.ndarray,
         y: np.ndarray,
-        z: np.ndarray,  
+        z: np.ndarray,
         weights: np.ndarray,
         bias: float,
     ) -> Tuple[np.ndarray, float]:
         dw, db = self.loss_function.gradient(X, y, z)
 
-        if self.G['weights'].shape[0] == 0:
-            self.G['weights'] = np.zeros(np.shape(weights))
-            self.G['bias'] = np.zeros(np.shape(bias))
-        
-        self.G['weights'] = (self.rho * self.G['weights']) + ((1 - self.rho) + np.square(dw))
-        self.G['bias'] = (self.rho * self.G['bias']) + ((1 - self.rho) + np.square(db))
+        if self.G["weights"].shape[0] == 0:
+            self.G["weights"] = np.zeros(np.shape(weights))
+            self.G["bias"] = np.zeros(np.shape(bias))
 
-        weights -= self.learning_rate * (dw / np.sqrt(self.G['weights'] + self.epsilon))
-        bias -= self.learning_rate * (db / np.sqrt(self.G['bias'] + self.epsilon))
+        self.G["weights"] = (self.rho * self.G["weights"]) + (
+            (1 - self.rho) + np.square(dw)
+        )
+        self.G["bias"] = (self.rho * self.G["bias"]) + ((1 - self.rho) + np.square(db))
+
+        weights -= self.learning_rate * (dw / np.sqrt(self.G["weights"] + self.epsilon))
+        bias -= self.learning_rate * (db / np.sqrt(self.G["bias"] + self.epsilon))
 
         return weights, bias
