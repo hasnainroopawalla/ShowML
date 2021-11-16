@@ -1,15 +1,6 @@
 from typing import Tuple
 import numpy as np
 import pandas as pd
-<<<<<<< HEAD:examples/linear_regression.py
-from showml.utils.dataset import Dataset
-from showml.utils.preprocessing import normalize
-from showml.optimizers import SGD
-from showml.losses import MeanSquareError
-from showml.supervised.regression import LinearRegression
-from showml.utils.plots import plot_regression_line
-from showml.utils.metrics import mean_square_error, r2_score
-=======
 from typing import Tuple
 
 
@@ -50,7 +41,6 @@ def load_wine() -> Tuple[np.ndarray, np.ndarray]:
     if y_train.ndim > 1:
         y_train = y_train[:, 0]
     return X_train, y_train
->>>>>>> master:showml/utils/data_loader.py
 
 
 def load_auto() -> Tuple[np.ndarray, np.ndarray]:
@@ -103,19 +93,3 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
         y_train = y_train[:, 0]
 
     return X_train, y_train
-<<<<<<< HEAD:examples/linear_regression.py
-
-
-X_train, y_train = load_auto()
-X_train = normalize(X_train)
-dataset = Dataset(X_train, y_train)
-
-optimizer = SGD(loss_function=MeanSquareError(), learning_rate=0.001, momentum=0.0)
-model = LinearRegression(optimizer=optimizer, num_epochs=10000)
-
-model.fit(dataset, metrics=[mean_square_error, r2_score])
-model.plot_metrics()
-
-plot_regression_line(X_train, y_train, model.predict(X_train))
-=======
->>>>>>> master:showml/utils/data_loader.py
