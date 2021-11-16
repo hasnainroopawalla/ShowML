@@ -25,9 +25,11 @@ jobs:
           pip install -r requirements.txt
       - name: Run mypy
         run: |
+          pip install mypy
           mypy . --ignore-missing-imports
       - name: Run Tests
         run: |
+          pip install pytest
           pytest
 #       - name: Build and publish to TestPyPi
 #         env:

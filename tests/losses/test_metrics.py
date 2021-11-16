@@ -1,4 +1,4 @@
-from showml.utils.metrics import r2_score
+from showml.losses.metrics import r2_score
 import numpy as np
 
 
