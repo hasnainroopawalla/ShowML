@@ -9,13 +9,9 @@ from showml.utils.plots import generic_metric_plot
 
 
 class Regression(ABC):
-    def __init__(self) -> None:
-        """
-        Base Regression class
-        """
-        pass
+    """Base Regression class"""
 
-    def compile(self, optimizer: Optimizer, metrics: List[Callable] = []):
+    def compile(self, optimizer: Optimizer, metrics: List[Callable] = []) -> None:
         """
         Compiles the model with the specified optimizer and evaluation metrics.
         This method also initializes the model.history object to store metric values during training
