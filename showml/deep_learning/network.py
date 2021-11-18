@@ -55,7 +55,7 @@ class Sequential:
         """
         for layer in self.layers[::-1]:
             grad = layer.backward(dw, db)
-            
+
     def evaluate(self, X: np.ndarray, y: np.ndarray) -> None:
         """
         Evaluate the model and display all the required metrics (accuracy, r^2 score, etc.)
@@ -71,7 +71,7 @@ class Sequential:
         for metric_name in self.history:
             text_to_display += f", {metric_name}: {self.history[metric_name][-1]}"
         print(text_to_display)
-        
+
     def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 1) -> None:
         """
         This method trains the model given the input data X and labels y
@@ -92,7 +92,6 @@ class Sequential:
                 dw, db = self.optimizer.loss_function.gradient(X_batch, y_batch, z)
                 self.backward_pass(dw, db)
 
-            
                 # Update weights based on the error
                 # self.weights, self.bias = self.optimizer.update_weights(
                 #     X_batch, y_batch, z, self.weights, self.bias

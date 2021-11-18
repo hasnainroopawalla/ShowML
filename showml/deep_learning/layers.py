@@ -90,11 +90,13 @@ class Dense(Layer):
         old_weights = self.weights
         dw = self.layer_input.dot(dw)
         db = np.sum(db, axis=0, keepdims=True)
-        
-        self.weights, self.bias = self.optimizer.update_weights_dl(self.weights, self.bias, dw, db)
+
+        self.weights, self.bias = self.optimizer.update_weights_dl(
+            self.weights, self.bias, dw, db
+        )
 
         return dw.dot(old_weights.T)
-    
+
 
 class Activation(Layer):
     def __init__(self, input_shape=None):

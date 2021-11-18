@@ -47,13 +47,7 @@ class SGD(Optimizer):
 
         return weights, bias
 
-    def update_weights_dl(
-        self,
-        weights,
-        bias,
-        dw,
-        db
-    ) -> Tuple[np.ndarray, float]:
+    def update_weights_dl(self, weights, bias, dw, db) -> Tuple[np.ndarray, float]:
 
         if self.prev_change["weights"].shape[0] == 0:
             self.prev_change["weights"] = np.zeros(np.shape(weights))
@@ -74,6 +68,7 @@ class SGD(Optimizer):
         self.prev_change["bias"] = curr_change_bias
 
         return weights, bias
+
 
 class AdaGrad(Optimizer):
     def __init__(
