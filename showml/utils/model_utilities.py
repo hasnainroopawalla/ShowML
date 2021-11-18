@@ -2,12 +2,11 @@ from typing import Tuple, Generator
 import numpy as np
 
 
-def initialize_params(X: np.ndarray) -> Tuple[np.ndarray, float]:
+def initialize_params(num_dimensions: int) -> Tuple[np.ndarray, float]:
     """
     Initialize the weights and bias for the model
-    param X: The input training data
+    param num_dimensions: The number of dimensions/features needed for initialization of weights and bias
     """
-    num_samples, num_dimensions = X.shape
     limit = 1 / np.sqrt(num_dimensions)
     weights = np.random.uniform(-limit, limit, (num_dimensions,))
     bias = float()

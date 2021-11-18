@@ -63,7 +63,8 @@ class Regression(ABC):
         param batch_size: Number of samples per gradient update
         param epochs: The number of epochs for training
         """
-        self.weights, self.bias = initialize_params(dataset.X)
+        num_samples, num_dimensions = dataset.X.shape
+        self.weights, self.bias = initialize_params(num_dimensions)
 
         for epoch in range(1, epochs + 1):
             print(f"Epoch: {epoch}/{epochs}", end="")
