@@ -10,9 +10,9 @@ class Layer(ABC):
     A layer class
     """
 
-    def __init__(self, input_shape=None):
+    def __init__(self, input_shape=None, has_params=True):
         self.input_shape = input_shape
-        self.has_weights = True
+        self.has_weights = has_params
 
     @abstractmethod
     def initialize_params(self) -> None:
@@ -58,8 +58,7 @@ class Dense(Layer):
         param input_shape: A tuple indicating the shape of the input to the layer (to be specified if is the first layer of the network)
         """
         self.num_nodes = num_nodes
-        self.input_shape = input_shape
-        self.has_weights = True
+        super().__init__(input_shape=input_shape)
 
     def initialize_params(self) -> None:
         """
@@ -80,8 +79,9 @@ class Dense(Layer):
     def get_output_shape(self):
         return (self.num_nodes,)
 
-    def forward(self, X) -> np.ndarray:
-        pass
+    def forward(self, X: np.ndarray) -> np.ndarray:
+        self.layer_input = X
+        return X.dot(self.weights) + self.bias
 
     def backward(self, X) -> np.ndarray:
         pass
@@ -89,8 +89,7 @@ class Dense(Layer):
 
 class Activation(Layer):
     def __init__(self, input_shape=None):
-        self.input_shape = input_shape
-        self.has_weights = False
+        super().__init__(input_shape=input_shape, has_params=False)
 
     def get_output_shape(self) -> None:
         return self.input_shape

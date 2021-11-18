@@ -1,7 +1,10 @@
 from typing import Callable, Dict, List
+from terminaltables import AsciiTable
+
 from showml.optimizers.base_optimizer import Optimizer
 from showml.deep_learning.layers import Layer
-from terminaltables import AsciiTable
+from showml.utils.dataset import Dataset
+from showml.utils.model_utilities import generate_minibatches
 
 
 class Sequential:
@@ -36,6 +39,44 @@ class Sequential:
             layer.initialize_params()
         self.layers.append(layer)
 
+    def forward_pass(self, X):
+        """
+        A forward pass of the network
+        """
+        prev_layer_output = X
+        for layer in self.layers:
+            prev_layer_output = layer.forward(prev_layer_output)
+        return prev_layer_output
+        
+    def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 1) -> None:
+        """
+        This method trains the model given the input data X and labels y
+        param dataset: An object of the Dataset class - the input dataset and true labels/values of the dataset
+        param batch_size: Number of samples per gradient update
+        param epochs: The number of epochs for training
+        """
+        num_samples, num_dimensions = dataset.X.shape
+
+        for epoch in range(1, epochs + 1):
+            print(f"Epoch: {epoch}/{epochs}", end="")
+
+            for X_batch, y_batch in generate_minibatches(
+                dataset.X, dataset.y, batch_size, shuffle=True
+            ):
+                # Forward pass
+                z = self.predict(X_batch)
+
+                # Update weights based on the error
+                self.weights, self.bias = self.optimizer.update_weights(
+                    X_batch, y_batch, z, self.weights, self.bias
+                )
+
+            # Evaluate the model on the entire dataset
+            self.evaluate(dataset.X, dataset.y)
+    
+    def predict(self, X):
+        return self.forward_pass(X)
+        
     def summary(self) -> None:
         """
         Summarizes the model by displaying all layers and their parameters

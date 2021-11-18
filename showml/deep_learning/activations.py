@@ -20,3 +20,14 @@ class Relu(Activation):
     """
 
     pass
+
+class Softmax(Activation):
+    """
+    A layer which applies the Softmax operation to an input
+    """
+    def forward(self, X) -> np.ndarray:
+        e_x = np.exp(X - np.max(X, axis=1, keepdims=True))
+        return e_x / np.sum(e_x, axis=1, keepdims=True)
+
+    def backward(self, X) -> np.ndarray:
+        return self.forward(X) * (1 - self.forward(X))
