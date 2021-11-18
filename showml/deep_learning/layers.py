@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 import numpy as np
+from showml.losses.loss_functions import BinaryCrossEntropy
+from showml.optimizers.optimizer_functions import SGD
 
 from showml.utils.model_utilities import initialize_params
 
@@ -57,6 +59,7 @@ class Dense(Layer):
         param num_nodes: The number of neurons in the layer
         param input_shape: A tuple indicating the shape of the input to the layer (to be specified if is the first layer of the network)
         """
+        self.optimizer = SGD(loss_function=BinaryCrossEntropy())
         self.num_nodes = num_nodes
         super().__init__(input_shape=input_shape)
 
@@ -83,9 +86,15 @@ class Dense(Layer):
         self.layer_input = X
         return X.dot(self.weights) + self.bias
 
-    def backward(self, X) -> np.ndarray:
-        pass
+    def backward(self, dw, db) -> np.ndarray:
+        old_weights = self.weights
+        dw = self.layer_input.dot(dw)
+        db = np.sum(db, axis=0, keepdims=True)
+        
+        self.weights, self.bias = self.optimizer.update_weights_dl(self.weights, self.bias, dw, db)
 
+        return dw.dot(old_weights.T)
+    
 
 class Activation(Layer):
     def __init__(self, input_shape=None):

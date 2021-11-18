@@ -9,7 +9,8 @@ def normalize(matrix: np.ndarray) -> np.ndarray:
     """
     return (matrix - np.mean(matrix, axis=0)) / np.std(matrix, axis=0)
 
+
 def one_hot_encoding(X: np.ndarray) -> np.ndarray:
-    b = np.zeros((X.size, X.max()+1))
+    b = np.zeros((X.size, X.max() + 1))
     b[np.arange(X.size), X] = 1
     return b
