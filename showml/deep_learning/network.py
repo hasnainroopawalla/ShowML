@@ -8,6 +8,7 @@ from showml.deep_learning.layers import Layer
 from showml.optimizers.optimizer_functions import SGD
 from showml.utils.dataset import Dataset
 from showml.utils.model_utilities import generate_minibatches
+import copy
 
 
 class Sequential:
@@ -30,16 +31,22 @@ class Sequential:
         self.history: Dict[str, List[float]] = {
             metric.__name__: [] for metric in self.metrics
         }
+        self.initialize_layers()
 
+    def initialize_layers(self) -> None:
+        """
+        Initializes all the layers with the specified optimizer and parameters
+        """
+        for layer_idx, layer in enumerate(self.layers):
+            if layer_idx > 0:
+                layer.input_shape = self.layers[layer_idx-1].get_output_shape()
+            if layer.has_weights == True:
+                layer.initialize_params(optimizer=copy.deepcopy(self.optimizer))
+        
     def add(self, layer: Layer) -> None:
         """
         Adds a layer to the network
         """
-        if len(self.layers) > 0:
-            layer.input_shape = self.layers[-1].get_output_shape()
-
-        if layer.has_weights == True:
-            layer.initialize_params(optimizer=SGD(loss_function=CrossEntropy()))
         self.layers.append(layer)
 
     def forward_pass(self, X):

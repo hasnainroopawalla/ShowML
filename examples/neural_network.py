@@ -18,10 +18,7 @@ y_train = one_hot_encoding(data.target)
 dataset = Dataset(X_train, y_train)
 print(f"X: {X_train.shape}, y: {y_train.shape}")
 
-optimizer = SGD(loss_function=CrossEntropy())
-
 model = Sequential()
-model.compile(optimizer=optimizer, metrics=[accuracy_2d])
 
 model.add(Dense(num_nodes=32, input_shape=(64,)))
 model.add(Relu())
@@ -29,6 +26,9 @@ model.add(Dense(32))
 model.add(Relu())
 model.add(Dense(10))
 model.add(Softmax())
+
+optimizer = SGD(loss_function=CrossEntropy())
+model.compile(optimizer=optimizer, metrics=[accuracy_2d])
 
 model.summary()
 
