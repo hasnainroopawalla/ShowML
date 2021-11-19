@@ -19,7 +19,11 @@ class Relu(Activation):
     A layer which applies the ReLU operation to an input
     """
 
-    pass
+    def forward(self, X) -> np.ndarray:
+        return abs(X) * (X > 0)
+
+    def backward(self, X) -> np.ndarray:
+        return 1.0 * (X > 0)
 
 
 class Softmax(Activation):

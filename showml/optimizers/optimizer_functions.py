@@ -25,7 +25,7 @@ class SGD(Optimizer):
         weights: np.ndarray,
         bias: float,
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.gradient(X, y, z)
+        dw, db = self.loss_function.parameter_gradient(X, y, z)
 
         if self.prev_change["weights"].shape[0] == 0:
             self.prev_change["weights"] = np.zeros(np.shape(weights))
@@ -48,7 +48,6 @@ class SGD(Optimizer):
         return weights, bias
 
     def update_weights_dl(self, weights, bias, dw, db) -> Tuple[np.ndarray, float]:
-
         if self.prev_change["weights"].shape[0] == 0:
             self.prev_change["weights"] = np.zeros(np.shape(weights))
             self.prev_change["bias"] = np.zeros(np.shape(bias))
@@ -91,7 +90,7 @@ class AdaGrad(Optimizer):
         weights: np.ndarray,
         bias: float,
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.gradient(X, y, z)
+        dw, db = self.loss_function.parameter_gradient(X, y, z)
 
         if self.G["weights"].shape[0] == 0:
             self.G["weights"] = np.zeros(np.shape(weights))
@@ -132,7 +131,7 @@ class RMSProp(Optimizer):
         weights: np.ndarray,
         bias: float,
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.gradient(X, y, z)
+        dw, db = self.loss_function.parameter_gradient(X, y, z)
 
         if self.G["weights"].shape[0] == 0:
             self.G["weights"] = np.zeros(np.shape(weights))

@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 
 import numpy as np
-from showml.losses.loss_functions import BinaryCrossEntropy
-from showml.optimizers.optimizer_functions import SGD
+from showml.losses.loss_functions import BinaryCrossEntropy, CrossEntropy
+from showml.optimizers.base_optimizer import Optimizer
+from showml.optimizers.optimizer_functions import SGD, RMSProp
 
 from showml.utils.model_utilities import initialize_params
 
@@ -17,7 +18,7 @@ class Layer(ABC):
         self.has_weights = has_params
 
     @abstractmethod
-    def initialize_params(self) -> None:
+    def initialize_params(self, optimizer: Optimizer) -> None:
         pass
 
     @abstractmethod
@@ -59,14 +60,14 @@ class Dense(Layer):
         param num_nodes: The number of neurons in the layer
         param input_shape: A tuple indicating the shape of the input to the layer (to be specified if is the first layer of the network)
         """
-        self.optimizer = SGD(loss_function=BinaryCrossEntropy())
         self.num_nodes = num_nodes
         super().__init__(input_shape=input_shape)
 
-    def initialize_params(self) -> None:
+    def initialize_params(self, optimizer: Optimizer) -> None:
         """
         Initializes the weights and bias of the Dense layer
         """
+        self.optimizer = optimizer
         limit = 1 / np.sqrt(self.num_nodes)
         self.weights = np.random.uniform(
             -limit, limit, (self.input_shape[0], self.num_nodes)
@@ -86,16 +87,16 @@ class Dense(Layer):
         self.layer_input = X
         return X.dot(self.weights) + self.bias
 
-    def backward(self, dw, db) -> np.ndarray:
+    def backward(self, grad) -> np.ndarray:
         old_weights = self.weights
-        dw = self.layer_input.dot(dw)
-        db = np.sum(db, axis=0, keepdims=True)
+        dw = self.layer_input.T.dot(grad)
+        db = np.sum(grad, axis=0, keepdims=True)
 
         self.weights, self.bias = self.optimizer.update_weights_dl(
             self.weights, self.bias, dw, db
         )
 
-        return dw.dot(old_weights.T)
+        return grad.dot(old_weights.T)
 
 
 class Activation(Layer):
@@ -108,5 +109,5 @@ class Activation(Layer):
     def get_params_count(self) -> int:
         return 0
 
-    def initialize_params(self) -> None:
+    def initialize_params(self, optimizer: Optimizer) -> None:
         pass

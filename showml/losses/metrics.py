@@ -22,9 +22,25 @@ def accuracy(y: np.ndarray, z: np.ndarray, logits: bool = True) -> float:
     param z: The predicted labels
     param logits: A flag indicating that the predicted values are probabilites and not classes
     """
+    print(y)
+    print()
+    print(z)
+    p = []
     if logits:
         predicted_classes = [1 if i > 0.5 else 0 for i in z]
     return np.sum(y == predicted_classes) / len(y)
+
+
+def accuracy_2d(y: np.ndarray, z: np.ndarray) -> float:
+    """
+    Compute the classification accuracy of the model
+    param y: The true labels
+    param z: The predicted labels
+    param logits: A flag indicating that the predicted values are probabilites and not classes
+    """
+    y = np.argmax(y, axis=1)
+    z = np.argmax(z, axis=1)
+    return np.sum(y == z) / len(y)
 
 
 def mean_square_error(y: np.ndarray, z: np.ndarray) -> float:

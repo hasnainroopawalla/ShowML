@@ -15,16 +15,26 @@ class Loss(ABC):
         pass
 
     @abstractmethod
-    def gradient(
+    def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, float]:
         """
-        Computes the gradient of the objective function (change in weight)
+        Computes the derivative of the weights and bias w.r.t the objective function
         param X: The training data
         param y: The true labels of the training data
         param z: The predicted labels
         return dw: Gradient of the loss function with respect to the weights
         return db: Gradient of the loss function with respect to the bias
+        """
+        pass
+
+    @abstractmethod
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> float:
+        """
+        Computes the gradient of the objective function
+        param y: The true values
+        param z: The predicted values
+        return: Gradient of the objective function
         """
         pass
 

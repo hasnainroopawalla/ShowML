@@ -1,9 +1,11 @@
 from typing import Callable, Dict, List
 import numpy as np
 from terminaltables import AsciiTable
+from showml.losses.loss_functions import CrossEntropy
 
 from showml.optimizers.base_optimizer import Optimizer
 from showml.deep_learning.layers import Layer
+from showml.optimizers.optimizer_functions import SGD
 from showml.utils.dataset import Dataset
 from showml.utils.model_utilities import generate_minibatches
 
@@ -37,7 +39,7 @@ class Sequential:
             layer.input_shape = self.layers[-1].get_output_shape()
 
         if layer.has_weights == True:
-            layer.initialize_params()
+            layer.initialize_params(optimizer=SGD(loss_function=CrossEntropy()))
         self.layers.append(layer)
 
     def forward_pass(self, X):
@@ -49,12 +51,12 @@ class Sequential:
             prev_layer_output = layer.forward(prev_layer_output)
         return prev_layer_output
 
-    def backward_pass(self, dw, db):
+    def backward_pass(self, grad):
         """
         A backward pass of the network
         """
         for layer in self.layers[::-1]:
-            grad = layer.backward(dw, db)
+            grad = layer.backward(grad)
 
     def evaluate(self, X: np.ndarray, y: np.ndarray) -> None:
         """
@@ -87,10 +89,11 @@ class Sequential:
             ):
                 # Forward pass
                 z = self.forward_pass(X_batch)
-                print(z)
-                print(z.shape)
-                dw, db = self.optimizer.loss_function.gradient(X_batch, y_batch, z)
-                self.backward_pass(dw, db)
+                # print(y_batch)
+                # print()
+                # print(z)
+                grad = self.optimizer.loss_function.objective_gradient(y_batch, z)
+                self.backward_pass(grad)
 
                 # Update weights based on the error
                 # self.weights, self.bias = self.optimizer.update_weights(
