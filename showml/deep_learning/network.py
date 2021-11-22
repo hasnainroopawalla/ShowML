@@ -39,10 +39,10 @@ class Sequential:
         """
         for layer_idx, layer in enumerate(self.layers):
             if layer_idx > 0:
-                layer.input_shape = self.layers[layer_idx-1].get_output_shape()
+                layer.input_shape = self.layers[layer_idx - 1].get_output_shape()
             if layer.has_weights == True:
                 layer.initialize_params(optimizer=copy.deepcopy(self.optimizer))
-        
+
     def add(self, layer: Layer) -> None:
         """
         Adds a layer to the network

@@ -1,6 +1,6 @@
 import numpy as np
 from showml.deep_learning.network import Sequential
-from showml.losses.metrics import accuracy, accuracy_2d, binary_cross_entropy
+from showml.losses.metrics import accuracy, binary_cross_entropy
 from showml.optimizers import RMSProp
 from showml.losses import CrossEntropy
 from showml.deep_learning.layers import Dense
@@ -28,7 +28,7 @@ model.add(Dense(10))
 model.add(Softmax())
 
 optimizer = SGD(loss_function=CrossEntropy())
-model.compile(optimizer=optimizer, metrics=[accuracy_2d])
+model.compile(optimizer=optimizer, metrics=[accuracy])
 
 model.summary()
 
