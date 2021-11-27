@@ -7,7 +7,8 @@ class MeanSquareError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
         return np.average(np.square(self.training_error(y, z)), axis=0)
 
-    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> float:
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
+        # TODO: Fix
         return super().objective_gradient(y, z)
 
     def parameter_gradient(
@@ -28,8 +29,9 @@ class BinaryCrossEntropy(Loss):
         z = np.clip(z, 1e-15, 1 - 1e-15)
         return -(1 / num_samples) * (np.sum(y * np.log(z) + (1 - y) * np.log(1 - z)))
 
-    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> float:
-        return (z - y) / (z * (1 - z))  # return (-y/z)-(1-y)/(z-1)
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
+        z = np.clip(z, 1e-15, 1 - 1e-15)
+        return (-y / z) - (1 - y) / (z - 1)
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
@@ -53,7 +55,7 @@ class CrossEntropy(Loss):
         z = np.clip(z, 1e-15, 1 - 1e-15)
         return -y * np.log(z) - (1 - y) * np.log(1 - z)
 
-    def objective_gradient(self, y, z):
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
         # Avoid division by zero
         z = np.clip(z, 1e-15, 1 - 1e-15)
         return -(y / z) + (1 - y) / (1 - z)

@@ -29,7 +29,7 @@ class Loss(ABC):
         pass
 
     @abstractmethod
-    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> float:
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
         """
         Computes the gradient of the objective function
         param y: The true values

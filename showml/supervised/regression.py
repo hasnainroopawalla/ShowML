@@ -59,13 +59,15 @@ class Regression(ABC):
         """
         Display the plot after training for the specified metrics
         """
-        [generic_metric_plot(metric, self.history[metric]) for metric in self.history]
+        for metric in self.history:
+            generic_metric_plot(metric, self.history[metric])
 
-    def optimize(self, X, y, z) -> Tuple[np.ndarray, np.ndarray]:
+    def optimize(self, X, y, z) -> Tuple[np.ndarray, float]:
         dw, db = self.loss.parameter_gradient(X, y, z)
-        self.weights, self.bias = self.optimizer.update_weights(
+        weights, bias = self.optimizer.update_weights(
             self.weights, self.bias, dw, db
         )
+        return weights, bias
 
     def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 1) -> None:
         """
@@ -87,7 +89,7 @@ class Regression(ABC):
                 z = self.predict(X_batch)
 
                 # Optimize weights
-                self.optimize(X_batch, y_batch, z)
+                self.weights, self.bias = self.optimize(X_batch, y_batch, z)
 
             # Evaluate the model on the entire dataset
             self.evaluate(dataset.X, dataset.y)
