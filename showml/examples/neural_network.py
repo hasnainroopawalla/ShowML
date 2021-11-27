@@ -27,8 +27,8 @@ model.add(Relu())
 model.add(Dense(10))
 model.add(Softmax())
 
-optimizer = SGD(loss_function=CrossEntropy())
-model.compile(optimizer=optimizer, metrics=[accuracy])
+optimizer = SGD()
+model.compile(optimizer=optimizer, loss=CrossEntropy(), metrics=[accuracy])
 
 model.summary()
 

@@ -7,6 +7,9 @@ class MeanSquareError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
         return np.average(np.square(self.training_error(y, z)), axis=0)
 
+    def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> float:
+        return super().objective_gradient(y, z)
+
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, float]:

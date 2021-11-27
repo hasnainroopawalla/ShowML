@@ -5,9 +5,7 @@ from showml.losses.base_loss import Loss
 
 
 class SGD(Optimizer):
-    def __init__(
-        self, loss_function: Loss, learning_rate: float = 0.001, momentum: float = 0.0
-    ):
+    def __init__(self, learning_rate: float = 0.001, momentum: float = 0.0):
         """
         The Stochastic Gradient Descent Optimizer
         param momentum: This parameter builds inertia to overcome noisy gradients. Previous gradient values are stored and used to update the weights and bias at the current step
@@ -15,39 +13,11 @@ class SGD(Optimizer):
         assert 0.0 <= momentum <= 1.0
         self.momentum = momentum
         self.prev_change: Dict[str, Any] = {"weights": np.array([]), "bias": 0.0}
-        super().__init__(loss_function, learning_rate)
+        super().__init__(learning_rate)
 
     def update_weights(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        z: np.ndarray,
-        weights: np.ndarray,
-        bias: float,
+        self, weights: np.ndarray, bias: float, dw: np.ndarray, db: float
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.parameter_gradient(X, y, z)
-
-        if self.prev_change["weights"].shape[0] == 0:
-            self.prev_change["weights"] = np.zeros(np.shape(weights))
-            self.prev_change["bias"] = np.zeros(np.shape(bias))
-
-        curr_change_weights = self.learning_rate * dw + (
-            self.momentum * self.prev_change["weights"]
-        )
-        curr_change_bias = self.learning_rate * db + (
-            self.momentum * self.prev_change["bias"]
-        )
-
-        weights -= curr_change_weights
-        bias -= curr_change_bias
-
-        # Store the current gradient for the next iteration
-        self.prev_change["weights"] = curr_change_weights
-        self.prev_change["bias"] = curr_change_bias
-
-        return weights, bias
-
-    def update_weights_dl(self, weights, bias, dw, db) -> Tuple[np.ndarray, float]:
         if self.prev_change["weights"].shape[0] == 0:
             self.prev_change["weights"] = np.zeros(np.shape(weights))
             self.prev_change["bias"] = np.zeros(np.shape(bias))
@@ -70,9 +40,7 @@ class SGD(Optimizer):
 
 
 class AdaGrad(Optimizer):
-    def __init__(
-        self, loss_function: Loss, learning_rate: float = 0.01, epsilon: float = 1e-8
-    ):
+    def __init__(self, learning_rate: float = 0.01, epsilon: float = 1e-8):
         """
         The Adaptive Gradient Descent Optimizer
         Reference: https://ruder.io/optimizing-gradient-descent/index.html#adagrad
@@ -80,17 +48,11 @@ class AdaGrad(Optimizer):
         """
         self.G: Dict[str, Any] = {"weights": np.array([]), "bias": 0.0}
         self.epsilon = epsilon
-        super().__init__(loss_function, learning_rate)
+        super().__init__(learning_rate)
 
     def update_weights(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        z: np.ndarray,
-        weights: np.ndarray,
-        bias: float,
+        self, weights: np.ndarray, bias: float, dw: np.ndarray, db: float
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.parameter_gradient(X, y, z)
 
         if self.G["weights"].shape[0] == 0:
             self.G["weights"] = np.zeros(np.shape(weights))
@@ -107,11 +69,7 @@ class AdaGrad(Optimizer):
 
 class RMSProp(Optimizer):
     def __init__(
-        self,
-        loss_function: Loss,
-        learning_rate: float = 0.001,
-        rho: float = 0.9,
-        epsilon: float = 1e-8,
+        self, learning_rate: float = 0.001, rho: float = 0.9, epsilon: float = 1e-8
     ):
         """
         The Root Mean Squared Propagation (RMSProp) Optimizer
@@ -121,17 +79,11 @@ class RMSProp(Optimizer):
         self.G: Dict[str, Any] = {"weights": np.array([]), "bias": 0.0}
         self.rho = rho
         self.epsilon = epsilon
-        super().__init__(loss_function, learning_rate)
+        super().__init__(learning_rate)
 
     def update_weights(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        z: np.ndarray,
-        weights: np.ndarray,
-        bias: float,
+        self, weights: np.ndarray, bias: float, dw: np.ndarray, db: float
     ) -> Tuple[np.ndarray, float]:
-        dw, db = self.loss_function.parameter_gradient(X, y, z)
 
         if self.G["weights"].shape[0] == 0:
             self.G["weights"] = np.zeros(np.shape(weights))

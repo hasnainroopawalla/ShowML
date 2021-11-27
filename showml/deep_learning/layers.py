@@ -40,7 +40,7 @@ class Dense(Layer):
         dw = self.layer_input.T.dot(grad)
         db = np.sum(grad, axis=0, keepdims=True)
 
-        self.weights, self.bias = self.optimizer.update_weights_dl(
+        self.weights, self.bias = self.optimizer.update_weights(
             self.weights, self.bias, dw, db
         )
 

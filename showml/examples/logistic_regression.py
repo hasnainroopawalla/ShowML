@@ -10,8 +10,12 @@ X_train, y_train = load_wine()
 dataset = Dataset(X_train, y_train)
 
 model = LogisticRegression()
-optimizer = RMSProp(loss_function=BinaryCrossEntropy())
+optimizer = RMSProp()
 
-model.compile(optimizer=optimizer, metrics=[binary_cross_entropy, accuracy])
+model.compile(
+    optimizer=optimizer,
+    loss=BinaryCrossEntropy(),
+    metrics=[binary_cross_entropy, accuracy],
+)
 model.fit(dataset, batch_size=64, epochs=2000)
 model.plot_metrics()

@@ -1,24 +1,30 @@
 from abc import ABC, abstractmethod
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Tuple
 
 import numpy as np
+from showml.losses.base_loss import Loss
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.dataset import Dataset
 from showml.utils.model_utilities import generate_minibatches, initialize_params
 from showml.utils.plots import generic_metric_plot
+from showml.deep_learning.activations import Sigmoid
 
 
 class Regression(ABC):
     """Base Regression class"""
 
-    def compile(self, optimizer: Optimizer, metrics: List[Callable] = []) -> None:
+    def compile(
+        self, optimizer: Optimizer, loss: Loss, metrics: List[Callable] = []
+    ) -> None:
         """
         Compiles the model with the specified optimizer and evaluation metrics.
         This method also initializes the model.history object to store metric values during training
         param optimizer: The optimizer to be used for training (showml.optimizers)
+        param loss: The objective/loss function used by the model to evaluate a solution
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
         self.optimizer = optimizer
+        self.loss = loss
         self.metrics = metrics
         self.history: Dict[str, List[float]] = {
             metric.__name__: [] for metric in self.metrics
@@ -53,8 +59,13 @@ class Regression(ABC):
         """
         Display the plot after training for the specified metrics
         """
-        for metric in self.history:
-            generic_metric_plot(metric, self.history[metric])
+        [generic_metric_plot(metric, self.history[metric]) for metric in self.history]
+
+    def optimize(self, X, y, z) -> Tuple[np.ndarray, np.ndarray]:
+        dw, db = self.loss.parameter_gradient(X, y, z)
+        self.weights, self.bias = self.optimizer.update_weights(
+            self.weights, self.bias, dw, db
+        )
 
     def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 1) -> None:
         """
@@ -75,10 +86,8 @@ class Regression(ABC):
                 # Forward pass
                 z = self.predict(X_batch)
 
-                # Update weights based on the error
-                self.weights, self.bias = self.optimizer.update_weights(
-                    X_batch, y_batch, z, self.weights, self.bias
-                )
+                # Optimize weights
+                self.optimize(X_batch, y_batch, z)
 
             # Evaluate the model on the entire dataset
             self.evaluate(dataset.X, dataset.y)
@@ -94,9 +103,9 @@ class LogisticRegression(Regression):
         """
         The sigmoid activation function
         param X: The input to the sigmoid function
-        return: The output after passing the input through a sigmoid function
+        return: The output after passing the input through a sigmoid function (showml.deep_learning.activations.Sigmoid)
         """
-        return 1 / (1 + np.exp(-X))
+        return Sigmoid().forward(X)
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         return self.sigmoid(np.dot(X, self.weights) + self.bias)

@@ -1,6 +1,7 @@
 from typing import Callable, Dict, List
 import numpy as np
 from terminaltables import AsciiTable
+from showml.losses.base_loss import Loss
 from showml.optimizers.base_optimizer import Optimizer
 from showml.deep_learning.layers import Layer
 from showml.utils.dataset import Dataset
@@ -16,7 +17,9 @@ class Sequential:
     def __init__(self) -> None:
         self.layers: List[Layer] = []
 
-    def compile(self, optimizer: Optimizer, metrics: List[Callable] = []) -> None:
+    def compile(
+        self, optimizer: Optimizer, loss: Loss, metrics: List[Callable] = []
+    ) -> None:
         """
         Compiles the model with the specified optimizer and evaluation metrics.
         This method also initializes the model.history object to store metric values during training
@@ -24,6 +27,7 @@ class Sequential:
         param metrics: A list of metrics which have to be calculated and displayed for model evaluation
         """
         self.optimizer = optimizer
+        self.loss = loss
         self.metrics = metrics
         self.history: Dict[str, List[float]] = {
             metric.__name__: [] for metric in self.metrics
@@ -58,12 +62,15 @@ class Sequential:
             prev_layer_output = layer.forward(prev_layer_output)
         return prev_layer_output
 
-    def backward_pass(self, grad: np.ndarray) -> None:
+    def backward_pass(self, y_batch: np.ndarray, z: np.ndarray) -> None:
         """
-        Computes a backward pass of the network
-        param grad: The gradient of the loss function [shape: (batch_size x num_classes)]
+        Computes a backward pass of the network (optimize)
+        param y_batch: The true labels
+        param z: The predicted labels
         """
         # Traverse the layers in the reverse order
+        # The gradient of the loss function [shape: (batch_size x num_classes)]
+        grad = self.loss.objective_gradient(y_batch, z)
         for layer in self.layers[::-1]:
             grad = layer.backward(grad)
 
@@ -99,13 +106,7 @@ class Sequential:
                 # Forward pass
                 z = self.forward_pass(X_batch)
 
-                grad = self.optimizer.loss_function.objective_gradient(y_batch, z)
-                self.backward_pass(grad)
-
-                # Update weights based on the error
-                # self.weights, self.bias = self.optimizer.update_weights(
-                #     X_batch, y_batch, z, self.weights, self.bias
-                # )
+                self.backward_pass(y_batch, z)
 
             # Evaluate the model on the entire dataset
             self.evaluate(dataset.X, dataset.y)
