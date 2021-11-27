@@ -1,11 +1,8 @@
 from typing import Callable, Dict, List
 import numpy as np
 from terminaltables import AsciiTable
-from showml.losses.loss_functions import CrossEntropy
-
 from showml.optimizers.base_optimizer import Optimizer
 from showml.deep_learning.layers import Layer
-from showml.optimizers.optimizer_functions import SGD
 from showml.utils.dataset import Dataset
 from showml.utils.model_utilities import generate_minibatches
 import copy
@@ -39,6 +36,7 @@ class Sequential:
         """
         for layer_idx, layer in enumerate(self.layers):
             if layer_idx > 0:
+                # If it is NOT the first layer of the network, input shape = output shape of previous layer
                 layer.input_shape = self.layers[layer_idx - 1].get_output_shape()
             if layer.has_weights == True:
                 layer.initialize_params(optimizer=copy.deepcopy(self.optimizer))
@@ -49,19 +47,23 @@ class Sequential:
         """
         self.layers.append(layer)
 
-    def forward_pass(self, X):
+    def forward_pass(self, X: np.ndarray) -> np.ndarray:
         """
-        A forward pass of the network
+        Computes a forward pass of the network
+        param X: The input to the network
+        return: Output of the last layer of the network [shape: (batch_size x num_classes)]
         """
         prev_layer_output = X
         for layer in self.layers:
             prev_layer_output = layer.forward(prev_layer_output)
         return prev_layer_output
 
-    def backward_pass(self, grad):
+    def backward_pass(self, grad: np.ndarray) -> None:
         """
-        A backward pass of the network
+        Computes a backward pass of the network
+        param grad: The gradient of the loss function [shape: (batch_size x num_classes)]
         """
+        # Traverse the layers in the reverse order
         for layer in self.layers[::-1]:
             grad = layer.backward(grad)
 
@@ -81,7 +83,7 @@ class Sequential:
             text_to_display += f", {metric_name}: {self.history[metric_name][-1]}"
         print(text_to_display)
 
-    def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 1) -> None:
+    def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 50) -> None:
         """
         This method trains the model given the input data X and labels y
         param dataset: An object of the Dataset class - the input dataset and true labels/values of the dataset
@@ -96,9 +98,7 @@ class Sequential:
             ):
                 # Forward pass
                 z = self.forward_pass(X_batch)
-                # print(y_batch)
-                # print()
-                # print(z)
+
                 grad = self.optimizer.loss_function.objective_gradient(y_batch, z)
                 self.backward_pass(grad)
 
@@ -110,12 +110,17 @@ class Sequential:
             # Evaluate the model on the entire dataset
             self.evaluate(dataset.X, dataset.y)
 
-    def predict(self, X):
+    def predict(self, X: np.ndarray) -> np.ndarray:
+        """
+        Computes a forward pass of the model on the given data
+        param X: The input data to the network
+        return: Outputs of the last layer of the network [shape: (num_samples_of_X x num_classes)]]
+        """
         return self.forward_pass(X)
 
     def summary(self) -> None:
         """
-        Summarizes the model by displaying all layers and their parameters
+        Summarizes the model by displaying all layers, their parameters and total number of trainable parameters
         """
         total_params = 0
         print(AsciiTable([[self.__class__.__name__]]).table)

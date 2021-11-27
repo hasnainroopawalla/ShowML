@@ -20,7 +20,7 @@ def accuracy(y: np.ndarray, z: np.ndarray) -> float:
     Compute the classification accuracy of the model
     param y: The true labels
     param z: The predicted labels
-    param logits: A flag indicating that the predicted values are probabilites and not classes
+    return: The classification accuracy of the model
     """
     if y.ndim == 1:
         # y and z are not one hot encoded
@@ -30,6 +30,7 @@ def accuracy(y: np.ndarray, z: np.ndarray) -> float:
         # y and z are one hot encoded
         true_class = np.argmax(y, axis=1)
         predicted_class = np.argmax(z, axis=1)
+
     return np.sum(true_class == predicted_class) / len(true_class)
 
 

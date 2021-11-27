@@ -1,53 +1,7 @@
-from abc import ABC, abstractmethod
-
+from typing import Tuple
 import numpy as np
-from showml.losses.loss_functions import BinaryCrossEntropy, CrossEntropy
+from showml.deep_learning.base_layer import Layer
 from showml.optimizers.base_optimizer import Optimizer
-from showml.optimizers.optimizer_functions import SGD, RMSProp
-
-from showml.utils.model_utilities import initialize_params
-
-
-class Layer(ABC):
-    """
-    A layer class
-    """
-
-    def __init__(self, input_shape=None, has_params=True):
-        self.input_shape = input_shape
-        self.has_weights = has_params
-
-    @abstractmethod
-    def initialize_params(self, optimizer: Optimizer) -> None:
-        pass
-
-    @abstractmethod
-    def forward(self, X: np.ndarray) -> np.ndarray:
-        """
-        A method which computes a forward pass of a layer
-        """
-        pass
-
-    @abstractmethod
-    def backward(self, X: np.ndarray) -> np.ndarray:
-        """
-        A method which computes a backward pass of a layer
-        """
-        pass
-
-    @abstractmethod
-    def get_output_shape(self) -> None:
-        """
-        Returns the output shape of the layer
-        """
-        pass
-
-    @abstractmethod
-    def get_params_count(self) -> int:
-        """
-        Returns the number of trainable parameters of a layer
-        """
-        pass
 
 
 class Dense(Layer):
@@ -57,16 +11,13 @@ class Dense(Layer):
 
     def __init__(self, num_nodes, input_shape=None):
         """
+        Initializes a Dense layer with the specified number of neurons
         param num_nodes: The number of neurons in the layer
-        param input_shape: A tuple indicating the shape of the input to the layer (to be specified if is the first layer of the network)
         """
         self.num_nodes = num_nodes
         super().__init__(input_shape=input_shape)
 
     def initialize_params(self, optimizer: Optimizer) -> None:
-        """
-        Initializes the weights and bias of the Dense layer
-        """
         self.optimizer = optimizer
         limit = 1 / np.sqrt(self.num_nodes)
         self.weights = np.random.uniform(
@@ -75,19 +26,16 @@ class Dense(Layer):
         self.bias = np.zeros((1, self.num_nodes))
 
     def get_params_count(self) -> int:
-        """
-        Computes and returns the total number of trainable parameters for the layer
-        """
         return np.prod(self.weights.shape) + np.prod(self.bias.shape)
 
-    def get_output_shape(self):
+    def get_output_shape(self) -> Tuple[int]:
         return (self.num_nodes,)
 
     def forward(self, X: np.ndarray) -> np.ndarray:
         self.layer_input = X
         return X.dot(self.weights) + self.bias
 
-    def backward(self, grad) -> np.ndarray:
+    def backward(self, grad: np.ndarray) -> np.ndarray:
         old_weights = self.weights
         dw = self.layer_input.T.dot(grad)
         db = np.sum(grad, axis=0, keepdims=True)
@@ -101,9 +49,9 @@ class Dense(Layer):
 
 class Activation(Layer):
     def __init__(self, input_shape=None):
-        super().__init__(input_shape=input_shape, has_params=False)
+        super().__init__(input_shape=input_shape, has_weights=False)
 
-    def get_output_shape(self) -> None:
+    def get_output_shape(self) -> Tuple[int]:
         return self.input_shape
 
     def get_params_count(self) -> int:
