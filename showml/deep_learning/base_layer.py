@@ -9,7 +9,9 @@ class Layer(ABC):
     A layer class
     """
 
-    def __init__(self, input_shape: Optional[Tuple[int]] = None, has_weights: bool = True):
+    def __init__(
+        self, input_shape: Optional[Tuple[int]] = None, has_weights: bool = True
+    ):
         """
         param input_shape: The shape of the input (This is set to the previous layer's output shape if it is NOT the first layer of the network)
         param has_weights: A boolean to indicate if this layer has trainable params. Activation layers have this flag set to False

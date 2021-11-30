@@ -8,8 +8,8 @@ class MeanSquareError(Loss):
         return np.average(np.square(self.training_error(y, z)), axis=0)
 
     def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
-        # TODO: Fix
-        return super().objective_gradient(y, z)
+        # TODO
+        pass
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
@@ -46,25 +46,18 @@ class BinaryCrossEntropy(Loss):
 class CrossEntropy(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
         """
-        Computes cross entropy between targets (encoded as one-hot vectors)
-        and predictions.
-        Input: predictions (N, k) ndarray
-            targets (N, k) ndarray
-        Returns: scalar
+        param y: one hot encoded values
         """
-        z = np.clip(z, 1e-15, 1 - 1e-15)
-        return -y * np.log(z) - (1 - y) * np.log(1 - z)
+        num_samples = len(z)
+        z = np.clip(z, 1e-15, 1.0 - 1e-15)
+        return -np.sum(y * np.log(z)) / num_samples
 
     def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
-        # Avoid division by zero
         z = np.clip(z, 1e-15, 1 - 1e-15)
         return -(y / z) + (1 - y) / (1 - z)
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, float]:
-        error = self.training_error(y, z)
-        num_samples = len(error)
-        dw = (1 / num_samples) * np.dot(X.T, (error))
-        db = (1 / num_samples) * np.sum((error))
-        return dw, db
+        # TODO
+        pass

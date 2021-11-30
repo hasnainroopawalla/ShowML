@@ -39,7 +39,6 @@ class Sequential:
         Initializes all the layers with the specified optimizer and parameters
         """
         for layer_idx, layer in enumerate(self.layers):
-            print(layer)
             if layer_idx > 0:
                 # If this layer is NOT the first layer of the network, then input shape = output shape of previous layer
                 layer.input_shape = self.layers[layer_idx - 1].get_output_shape()

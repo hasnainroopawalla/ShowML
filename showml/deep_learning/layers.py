@@ -9,7 +9,7 @@ class Dense(Layer):
     A Dense Layer
     """
 
-    def __init__(self, num_nodes, input_shape=None):
+    def __init__(self, num_nodes: int, input_shape: Optional[Tuple[int]]=None):
         """
         Initializes a Dense layer with the specified number of neurons
         param num_nodes: The number of neurons in the layer
@@ -48,7 +48,7 @@ class Dense(Layer):
 
 
 class Activation(Layer):
-    def __init__(self, input_shape=None):
+    def __init__(self, input_shape: Optional[Tuple[int]]=None):
         super().__init__(input_shape=input_shape, has_weights=False)
 
     def get_output_shape(self) -> Optional[Tuple[int]]:

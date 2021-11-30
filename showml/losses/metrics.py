@@ -1,5 +1,6 @@
 import numpy as np
 from showml.losses import MeanSquareError, BinaryCrossEntropy
+from showml.losses.loss_functions import CrossEntropy
 
 
 def r2_score(y: np.ndarray, z: np.ndarray) -> float:
@@ -40,3 +41,7 @@ def mean_square_error(y: np.ndarray, z: np.ndarray) -> float:
 
 def binary_cross_entropy(y: np.ndarray, z: np.ndarray) -> float:
     return BinaryCrossEntropy().objective(y, z)
+
+
+def cross_entropy(y: np.ndarray, z: np.ndarray) -> float:
+    return CrossEntropy().objective(y, z)

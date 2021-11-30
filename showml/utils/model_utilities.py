@@ -1,8 +1,8 @@
-from typing import Tuple, Generator
+from typing import Any, Tuple, Generator
 import numpy as np
 
 
-def initialize_params(num_dimensions: int) -> Tuple[np.ndarray, float]:
+def initialize_params(num_dimensions: int) -> Tuple[np.ndarray, Any]:
     """
     Initialize the weights and bias for the model
     param num_dimensions: The number of dimensions/features needed for initialization of weights and bias
