@@ -1,4 +1,4 @@
-from typing import Any, Tuple
+from typing import Tuple
 from abc import ABC, abstractmethod
 import numpy as np
 
@@ -14,8 +14,8 @@ class Optimizer(ABC):
 
     @abstractmethod
     def update_weights(
-        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: Any
-    ) -> Tuple[np.ndarray, Any]:
+        self, weights: np.ndarray, bias: np.ndarray, dw: np.ndarray, db: np.ndarray
+    ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Update the weights of the model using the specified loss function and optimizer
         param weights: The set of training weights of the model
