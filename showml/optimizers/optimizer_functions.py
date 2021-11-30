@@ -1,4 +1,4 @@
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Tuple
 import numpy as np
 from showml.optimizers.base_optimizer import Optimizer
 
@@ -15,7 +15,7 @@ class SGD(Optimizer):
         super().__init__(learning_rate)
 
     def update_weights(
-        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: float
+        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: Any
     ) -> Tuple[np.ndarray, Any]:
         if self.prev_change["weights"].shape[0] == 0:
             self.prev_change["weights"] = np.zeros(np.shape(weights))
@@ -50,7 +50,7 @@ class AdaGrad(Optimizer):
         super().__init__(learning_rate)
 
     def update_weights(
-        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: float
+        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: Any
     ) -> Tuple[np.ndarray, Any]:
 
         if self.G["weights"].shape[0] == 0:
@@ -81,7 +81,7 @@ class RMSProp(Optimizer):
         super().__init__(learning_rate)
 
     def update_weights(
-        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: float
+        self, weights: np.ndarray, bias: Any, dw: np.ndarray, db: Any
     ) -> Tuple[np.ndarray, Any]:
 
         if self.G["weights"].shape[0] == 0:

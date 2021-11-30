@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Tuple
+from typing import Tuple
 from showml.optimizers.base_optimizer import Optimizer
 import numpy as np
 
@@ -9,9 +9,7 @@ class Layer(ABC):
     A layer class
     """
 
-    def __init__(
-        self, input_shape: Optional[Tuple[int]] = None, has_weights: bool = True
-    ):
+    def __init__(self, input_shape: Tuple[int] = (0,), has_weights: bool = True):
         """
         param input_shape: The shape of the input (This is set to the previous layer's output shape if it is NOT the first layer of the network)
         param has_weights: A boolean to indicate if this layer has trainable params. Activation layers have this flag set to False
@@ -43,7 +41,7 @@ class Layer(ABC):
         pass
 
     @abstractmethod
-    def get_output_shape(self) -> Optional[Tuple[int]]:
+    def get_output_shape(self) -> Tuple[int]:
         """
         Returns the output shape of the layer
         """

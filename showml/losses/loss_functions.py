@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Any, Tuple
 from showml.losses.base_loss import Loss
 import numpy as np
 
@@ -13,7 +13,7 @@ class MeanSquareError(Loss):
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
-    ) -> Tuple[np.ndarray, float]:
+    ) -> Tuple[np.ndarray, Any]:
         error = self.training_error(y, z)
         num_samples = len(error)
         dw = (1 / num_samples) * X.T.dot(error)
@@ -35,7 +35,7 @@ class BinaryCrossEntropy(Loss):
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
-    ) -> Tuple[np.ndarray, float]:
+    ) -> Tuple[np.ndarray, Any]:
         error = self.training_error(y, z)
         num_samples = len(error)
         dw = (1 / num_samples) * np.dot(X.T, (error))
@@ -58,6 +58,6 @@ class CrossEntropy(Loss):
 
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
-    ) -> Tuple[np.ndarray, float]:
+    ) -> Tuple[np.ndarray, Any]:
         # TODO
         pass

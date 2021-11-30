@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from typing import Tuple
 import numpy as np
 from showml.deep_learning.base_layer import Layer
 from showml.optimizers.base_optimizer import Optimizer
@@ -9,7 +9,7 @@ class Dense(Layer):
     A Dense Layer
     """
 
-    def __init__(self, num_nodes: int, input_shape: Optional[Tuple[int]]=None):
+    def __init__(self, num_nodes: int, input_shape: Tuple[int] = (0,)):
         """
         Initializes a Dense layer with the specified number of neurons
         param num_nodes: The number of neurons in the layer
@@ -28,7 +28,7 @@ class Dense(Layer):
     def get_params_count(self) -> int:
         return np.prod(self.weights.shape) + np.prod(self.bias.shape)
 
-    def get_output_shape(self) -> Optional[Tuple[int]]:
+    def get_output_shape(self) -> Tuple[int]:
         return (self.num_nodes,)
 
     def forward(self, X: np.ndarray) -> np.ndarray:
@@ -37,6 +37,7 @@ class Dense(Layer):
 
     def backward(self, X: np.ndarray) -> np.ndarray:
         old_weights = self.weights
+
         dw = self.layer_input.T.dot(X)
         db = np.sum(X, axis=0, keepdims=True)
 
@@ -48,10 +49,10 @@ class Dense(Layer):
 
 
 class Activation(Layer):
-    def __init__(self, input_shape: Optional[Tuple[int]]=None):
+    def __init__(self, input_shape: Tuple[int] = (0,)):
         super().__init__(input_shape=input_shape, has_weights=False)
 
-    def get_output_shape(self) -> Optional[Tuple[int]]:
+    def get_output_shape(self) -> Tuple[int]:
         return self.input_shape
 
     def get_params_count(self) -> int:
