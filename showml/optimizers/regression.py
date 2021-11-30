@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Tuple, Union
+from typing import Any, Callable, Dict, List, Tuple
 
 import numpy as np
+from showml.deep_learning.activations import Sigmoid
 from showml.losses.base_loss import Loss
 from showml.optimizers.base_optimizer import Optimizer
 from showml.utils.dataset import Dataset
 from showml.utils.model_utilities import generate_minibatches, initialize_params
 from showml.utils.plots import generic_metric_plot
-from showml.deep_learning.activations import Sigmoid
 
 
 class Regression(ABC):

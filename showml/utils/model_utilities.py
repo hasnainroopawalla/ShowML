@@ -1,4 +1,5 @@
-from typing import Any, Tuple, Generator, Union
+from typing import Any, Generator, Tuple
+
 import numpy as np
 
 
