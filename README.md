@@ -12,12 +12,12 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 
 ## Usage
-showml/examples contains examples of using ShowML to train/evaluate various Machine Learning models
+[showml/examples](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples) contains examples of using ShowML to train various Machine Learning models.
 
 ## Installation
 
 
-To install the package
+Install the package
 ```
 $ pip install showml
 ```
@@ -34,9 +34,13 @@ $ pip install -r requirements.txt
 
 ## Contents
 
-### Regression
+### Models
+#### Regression
 - Linear Regression (`showml.supervised.regression.LinearRegression`)
 - Logistic Regression (`showml.supervised.regression.LogisticRegression`)
+
+#### Neural Network
+- Sequential (`showml.deep_learning.network.Sequential`)
 
 ### Deep Learning
 #### Layers
