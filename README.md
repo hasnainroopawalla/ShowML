@@ -35,11 +35,11 @@ $ pip install -r requirements.txt
 ## Contents
 
 ### Models
-#### Regression
+#### Linear
 - Linear Regression (`showml.supervised.regression.LinearRegression`)
 - Logistic Regression (`showml.supervised.regression.LogisticRegression`)
 
-#### Neural Network
+#### Non-Linear
 - Sequential (`showml.deep_learning.network.Sequential`)
 
 ### Deep Learning
