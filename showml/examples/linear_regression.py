@@ -5,7 +5,7 @@ from showml.utils.dataset import Dataset
 from showml.losses.metrics import mean_squared_error, r2_score
 from showml.utils.plots import plot_regression_line
 from showml.utils.preprocessing import normalize
-from showml.utils.data_loader import load_salary, load_auto
+from showml.utils.data_loader import load_auto
 
 
 X_train, y_train = load_auto()

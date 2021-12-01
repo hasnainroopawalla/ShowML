@@ -10,7 +10,12 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 > **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computational efficiency
 
+
+## Usage
+showml/examples contains examples of using ShowML to train/evaluate various Machine Learning models
+
 ## Installation
+
 
 To install the package
 ```
@@ -25,20 +30,33 @@ $ pip install -r requirements.txt
 ```
 
 [How to Contribute](#contributing)
+
+
 ## Contents
 
-### Algorithms
-- Linear Regression (`from showml.supervised.regression import LinearRegression`)
-- Logistic Regression (`from showml.supervised.regression import LogisticRegression`)
+### Regression
+- Linear Regression (`showml.supervised.regression.LinearRegression`)
+- Logistic Regression (`showml.supervised.regression.LogisticRegression`)
+
+### Deep Learning
+#### Layers
+- Dense (`showml.deep_learning.layers.Dense`)
+
+#### Activations
+- Sigmoid (`showml.deep_learning.activations.Sigmoid`)
+- ReLu (`showml.deep_learning.activations.Relu`)
+- Softmax (`showml.deep_learning.activations.Softmax`)
 
 ### Optimizers
-- Stochastic/Batch/Mini-Batch Gradient Descent (`from showml.optimizers import SGD`)
-- Adaptive Gradient (`from showml.optimizers import AdaGrad`)
-- Root Mean Squared Propagation (`from showml.optimizers import RMSProp`)
+- Stochastic/Batch/Mini-Batch Gradient Descent (`showml.optimizers.SGD`)
+- Adaptive Gradient (`showml.optimizers.AdaGrad`)
+- Root Mean Squared Propagation (`showml.optimizers.RMSProp`)
 
 ### Loss Functions
-- Mean Squared Error (`from showml.losses import MeanSquareError`)
-- Binary Cross Entropy (`from showml.losses import BinaryCrossEntropy`)
+- Mean Squared Error (`showml.losses.MeanSquareError`)
+- Binary Cross Entropy (`showml.losses.BinaryCrossEntropy`)
+- Categorical Cross Entropy (`showml.losses.CrossEntropy`)
+
 
 ## Contributing
 1. Fork the repository
