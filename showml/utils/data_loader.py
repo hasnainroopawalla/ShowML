@@ -5,10 +5,11 @@ from typing import Tuple
 
 
 def load_wine() -> Tuple[np.ndarray, np.ndarray]:
-    """
-    A method to load the Auto.csv file, include the necessary columns and return X_train and y_train
-    return X_train: The input training data
-    return y_train: The input training labels
+    """A method to load the Wine_Quality.csv file and initialize X_train and y_train.
+
+    Returns:
+        np.ndarray: The training data.
+        np.ndarray: The training labels.
     """
     wine = (
         pd.read_csv(
@@ -26,8 +27,8 @@ def load_wine() -> Tuple[np.ndarray, np.ndarray]:
             # "chlorides",
             # "free sulfur dioxide",
             # "total sulfur dioxide",
-            # "density",
-            # "pH",
+            "density",
+            "pH",
             "sulphates",
             "alcohol",
         ]
@@ -44,10 +45,11 @@ def load_wine() -> Tuple[np.ndarray, np.ndarray]:
 
 
 def load_auto() -> Tuple[np.ndarray, np.ndarray]:
-    """
-    A method to load the Auto.csv file, include the necessary columns and return X_train and y_train
-    return X_train: The input training data
-    return y_train: The input training labels
+    """A method to load the Auto.csv file and initialize X_train and y_train.
+
+    Returns:
+        np.ndarray: The training data.
+        np.ndarray: The training labels.
     """
     auto = (
         pd.read_csv("./data/Auto.csv", na_values="?", dtype={"ID": str})
@@ -75,10 +77,11 @@ def load_auto() -> Tuple[np.ndarray, np.ndarray]:
 
 
 def load_salary() -> Tuple[np.ndarray, np.ndarray]:
-    """
-    A method to load the Salary.csv file, include the necessary columns and return X_train and y_train
-    return X_train: The input training data
-    return y_train: The input training labels
+    """A method to load the Salary.csv file and initialize X_train and y_train.
+
+    Returns:
+        np.ndarray: The training data.
+        np.ndarray: The training labels.
     """
     salary_data = (
         pd.read_csv("./data/Salary.csv", na_values="?", dtype={"ID": str})
@@ -92,4 +95,36 @@ def load_salary() -> Tuple[np.ndarray, np.ndarray]:
     if y_train.ndim > 1:
         y_train = y_train[:, 0]
 
+    return X_train, y_train
+
+
+def load_housepricedata() -> Tuple[np.ndarray, np.ndarray]:
+    """A method to load the House_Price_Data.csv file and initialize X_train and y_train.
+
+    Returns:
+        np.ndarray: The training data.
+        np.ndarray: The training labels.
+    """
+    house = pd.read_csv("./data/House_Price_Data.csv")
+
+    X_train = house[
+        [
+            "LotArea",
+            "OverallQual",
+            "OverallCond",
+            "TotalBsmtSF",
+            "FullBath",
+            "HalfBath",
+            "BedroomAbvGr",
+            "TotRmsAbvGrd",
+            "Fireplaces",
+            "GarageArea",
+        ]
+    ].values
+
+    y_train = house["AboveMedianPrice"].values
+
+    # Make y_train 1D if its not
+    if y_train.ndim > 1:
+        y_train = y_train[:, 0]
     return X_train, y_train

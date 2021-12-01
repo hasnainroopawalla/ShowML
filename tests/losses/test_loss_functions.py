@@ -29,7 +29,7 @@ def test_mse_gradient() -> None:
     y = np.array([0.5, 1, -1, 1, -6])
     z = np.array([0, 2, -1, 2, -5])
     MSE = MeanSquareError()
-    dw, db = MSE.gradient(X, y, z)
+    dw, db = MSE.parameter_gradient(X, y, z)
     assert_almost_equal(dw, [1.15, 1.9])
     assert db == 0.5
 
@@ -39,6 +39,6 @@ def test_mse_gradient_zero() -> None:
     y = np.array([0, 1, 3, 2, 5.78])
     z = np.array([0, 1, 3, 2, 5.78])
     MSE = MeanSquareError()
-    dw, db = MSE.gradient(X, y, z)
+    dw, db = MSE.parameter_gradient(X, y, z)
     assert_almost_equal(dw, [0.0, 0.0])
     assert db == 0.0
