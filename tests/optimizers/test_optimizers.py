@@ -1,4 +1,4 @@
-from showml.losses import MeanSquareError
+from showml.losses import MeanSquaredError
 from showml.optimizers import SGD
 import numpy as np
 from numpy.testing import assert_almost_equal
@@ -11,7 +11,7 @@ def test_sgd_mse_update_weights() -> None:
     weights = np.array([1.4, 7.8])
     bias = [2.6]
     optimizer = SGD(learning_rate=0.01)
-    loss = MeanSquareError()
+    loss = MeanSquaredError()
     dw, db = loss.parameter_gradient(X, y, z)
     assert_almost_equal(dw, [1.15, 1.9])
     assert db == 0.5
@@ -27,7 +27,7 @@ def test_sgd_mse_update_weights_simple() -> None:
     weights = np.array([1.0, 1.0, 1.0, 1.0])
     bias = [0.0]
     optimizer = SGD(learning_rate=0.1)
-    loss = MeanSquareError()
+    loss = MeanSquaredError()
     dw, db = loss.parameter_gradient(X, y, z)
     assert_almost_equal(dw, [-13.5, -10.5, -46.0, -54.0])
     assert db == -8.0
@@ -43,7 +43,7 @@ def test_sgd_mse_update_weights_int() -> None:
     weights = np.array([1, 1, 1, 1]).astype("float64")
     bias = [0]
     optimizer = SGD(learning_rate=0.1)
-    loss = MeanSquareError()
+    loss = MeanSquaredError()
     dw, db = loss.parameter_gradient(X, y, z)
     assert_almost_equal(dw, [-13.5, -10.5, -46.0, -54.0])
     assert db == -8.0

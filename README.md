@@ -8,7 +8,7 @@ A Python package of Machine Learning Algorithms implemented from scratch.
 
 The aim of this package is to present the working behind fundamental Machine Learning algorithms in a transparent and modular way.
 
-> **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computational efficiency
+> **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computational efficiency.
 
 
 ## Usage
@@ -57,7 +57,7 @@ $ pip install -r requirements.txt
 - Root Mean Squared Propagation (`showml.optimizers.RMSProp`)
 
 ### Loss Functions
-- Mean Squared Error (`showml.losses.MeanSquareError`)
+- Mean Squared Error (`showml.losses.MeanSquaredError`)
 - Binary Cross Entropy (`showml.losses.BinaryCrossEntropy`)
 - Categorical Cross Entropy (`showml.losses.CrossEntropy`)
 

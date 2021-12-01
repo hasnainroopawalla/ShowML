@@ -3,7 +3,7 @@ from showml.losses.base_loss import Loss
 import numpy as np
 
 
-class MeanSquareError(Loss):
+class MeanSquaredError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
         return np.average(np.square(self.training_error(y, z)), axis=0)
 

@@ -1,4 +1,4 @@
-from showml.losses import MeanSquareError
+from showml.losses import MeanSquaredError
 from showml.optimizers import SGD
 from showml.supervised.regression import LinearRegression
 from showml.utils.dataset import Dataset
@@ -15,7 +15,7 @@ dataset = Dataset(X_train, y_train)
 optimizer = SGD(learning_rate=0.001, momentum=0.8)
 model = LinearRegression()
 model.compile(
-    optimizer=optimizer, loss=MeanSquareError(), metrics=[mean_squared_error, r2_score]
+    optimizer=optimizer, loss=MeanSquaredError(), metrics=[mean_squared_error, r2_score]
 )
 
 model.fit(dataset, epochs=10000)
