@@ -9,7 +9,7 @@ def test_sgd_mse_update_weights() -> None:
     y = np.array([0.5, 1, -1, 1, -6])
     z = np.array([0, 2, -1, 2, -5])
     weights = np.array([1.4, 7.8])
-    bias = 2.6
+    bias = [2.6]
     optimizer = SGD(learning_rate=0.01)
     loss = MeanSquareError()
     dw, db = loss.parameter_gradient(X, y, z)
@@ -25,7 +25,7 @@ def test_sgd_mse_update_weights_simple() -> None:
     y = np.array([10.0, 18.0])
     z = np.array([5.0, 7.0])
     weights = np.array([1.0, 1.0, 1.0, 1.0])
-    bias = 0.0
+    bias = [0.0]
     optimizer = SGD(learning_rate=0.1)
     loss = MeanSquareError()
     dw, db = loss.parameter_gradient(X, y, z)
@@ -41,7 +41,7 @@ def test_sgd_mse_update_weights_int() -> None:
     y = np.array([10, 18]).astype("float64")
     z = np.array([5, 7]).astype("float64")
     weights = np.array([1, 1, 1, 1]).astype("float64")
-    bias = 0
+    bias = [0]
     optimizer = SGD(learning_rate=0.1)
     loss = MeanSquareError()
     dw, db = loss.parameter_gradient(X, y, z)
