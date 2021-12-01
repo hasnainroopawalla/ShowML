@@ -3,8 +3,7 @@ import numpy as np
 
 
 class Sigmoid(Activation):
-    """
-    A layer which applies the Sigmoid operation to an input
+    """A layer which applies the Sigmoid operation to an input.
     """
 
     def forward(self, X: np.ndarray) -> np.ndarray:
@@ -15,8 +14,7 @@ class Sigmoid(Activation):
 
 
 class Relu(Activation):
-    """
-    A layer which applies the ReLU operation to an input
+    """A layer which applies the ReLU operation to an input.
     """
 
     def forward(self, X: np.ndarray) -> np.ndarray:
@@ -27,8 +25,7 @@ class Relu(Activation):
 
 
 class Softmax(Activation):
-    """
-    A layer which applies the Softmax operation to an input
+    """A layer which applies the Softmax operation to an input.
     """
 
     def forward(self, X: np.ndarray) -> np.ndarray:

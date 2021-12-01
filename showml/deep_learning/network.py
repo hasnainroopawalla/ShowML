@@ -10,21 +10,25 @@ import copy
 
 
 class Sequential:
-    """
-    A Sequential model (neural network) with various types of layers and activation functions
+    """A Sequential model (deep neural network) with various types of layers and activation functions.
     """
 
     def __init__(self) -> None:
+        """Constructor for the Sequential model class.
+        """
         self.layers: List[Layer] = []
 
     def compile(
         self, optimizer: Optimizer, loss: Loss, metrics: List[Callable] = []
     ) -> None:
-        """
-        Compiles the model with the specified optimizer and evaluation metrics.
-        This method also initializes the model.history object to store metric values during training
-        param optimizer: The optimizer to be used for training (showml.optimizers)
-        param metrics: A list of metrics which have to be calculated and displayed for model evaluation
+        """Compiles the model with the specified optimizer and evaluation metrics.
+        This method also initializes the model.history object to store metric values during training.
+        This method also initializes all the layers.
+
+        Args:
+            optimizer (Optimizer): The optimizer to be used for training (showml.optimizers).
+            loss (Loss): The loss function used by the model to evaluate the solution.
+            metrics (List[Callable], optional): A list of metrics which have to be calculated and displayed for model evaluation. Defaults to [].
         """
         self.optimizer = optimizer
         self.loss = loss
@@ -35,8 +39,7 @@ class Sequential:
         self.initialize_layers()
 
     def initialize_layers(self) -> None:
-        """
-        Initializes all the layers with the specified optimizer and parameters
+        """Initializes all the layers with the specified optimizer and parameters.
         """
         for layer_idx, layer in enumerate(self.layers):
             if layer_idx > 0:
@@ -46,16 +49,21 @@ class Sequential:
                 layer.initialize_params(optimizer=copy.deepcopy(self.optimizer))
 
     def add(self, layer: Layer) -> None:
-        """
-        Adds a layer to the network
+        """Adds a layer to the network.
+
+        Args:
+            layer (Layer): An object of the Layer class which will be appended to the model.
         """
         self.layers.append(layer)
 
     def forward_pass(self, X: np.ndarray) -> np.ndarray:
-        """
-        Computes a forward pass of the network
-        param X: The input to the network
-        return: Output of the last layer of the network [shape: (batch_size x num_classes)]
+        """Computes a forward pass of the network.
+
+        Args:
+            X (np.ndarray): The input to the network.
+
+        Returns:
+            np.ndarray: Output of the last layer of the network [shape: (batch_size x num_classes)].
         """
         prev_layer_output = X
         for layer in self.layers:
@@ -63,10 +71,11 @@ class Sequential:
         return prev_layer_output
 
     def backward_pass(self, y_batch: np.ndarray, z: np.ndarray) -> None:
-        """
-        Computes a backward pass of the network (optimize)
-        param y_batch: The true labels
-        param z: The predicted labels
+        """Computes a backward pass of the network (optimize).
+
+        Args:
+            y_batch (np.ndarray): The true labels.
+            z (np.ndarray): The predicted labels.
         """
         # Traverse the layers in the reverse order
         # The gradient of the loss function [shape: (batch_size x num_classes)]
@@ -75,10 +84,11 @@ class Sequential:
             grad = layer.backward(grad)
 
     def evaluate(self, X: np.ndarray, y: np.ndarray) -> None:
-        """
-        Evaluate the model and display all the required metrics (accuracy, r^2 score, etc.)
-        param X: The input dataset
-        param y: The true labels of the training data
+        """Evaluate the model and display all the required metrics (accuracy, r^2 score, etc.).
+
+        Args:
+            X (np.ndarray): The input dataset.
+            y (np.ndarray): The true labels of the training data.
         """
         z = self.predict(X)
 
@@ -91,11 +101,12 @@ class Sequential:
         print(text_to_display)
 
     def fit(self, dataset: Dataset, batch_size: int = 32, epochs: int = 50) -> None:
-        """
-        This method trains the model given the input data X and labels y
-        param dataset: An object of the Dataset class - the input dataset and true labels/values of the dataset
-        param batch_size: Number of samples per gradient update
-        param epochs: The number of epochs for training
+        """This method trains the model given the showml.utils.dataset.Dataset object (initialized with input data X and labels y).
+
+        Args:
+            dataset (Dataset): An object of the  showml.utils.dataset.Dataset class - the input dataset and true labels/values of the dataset.
+            batch_size (int, optional): Number of samples per gradient update. Defaults to 32.
+            epochs (int, optional): The number of epochs for training. Defaults to 50.
         """
         for epoch in range(1, epochs + 1):
             print(f"Epoch: {epoch}/{epochs}", end="")
@@ -103,25 +114,25 @@ class Sequential:
             for X_batch, y_batch in generate_minibatches(
                 dataset.X, dataset.y, batch_size, shuffle=True
             ):
-                # Forward pass
                 z = self.forward_pass(X_batch)
-
                 self.backward_pass(y_batch, z)
 
             # Evaluate the model on the entire dataset
             self.evaluate(dataset.X, dataset.y)
 
     def predict(self, X: np.ndarray) -> np.ndarray:
-        """
-        Computes a forward pass of the model on the given data
-        param X: The input data to the network
-        return: Outputs of the last layer of the network [shape: (num_samples_of_X x num_classes)]]
+        """Computes a forward pass of the model on the given data.
+
+        Args:
+            X (np.ndarray): The input data to the network.
+
+        Returns:
+            np.ndarray: Outputs of the last layer of the network [shape: (num_samples_of_X x num_classes)]].
         """
         return self.forward_pass(X)
 
     def summary(self) -> None:
-        """
-        Summarizes the model by displaying all layers, their parameters and total number of trainable parameters
+        """Summarizes the model by displaying all layers, their parameters and total number of trainable parameters.
         """
         total_params = 0
         print(AsciiTable([[self.__class__.__name__]]).table)

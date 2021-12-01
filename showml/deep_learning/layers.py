@@ -5,14 +5,15 @@ from showml.optimizers.base_optimizer import Optimizer
 
 
 class Dense(Layer):
-    """
-    A Dense Layer
+    """A Dense Layer.
     """
 
     def __init__(self, num_nodes: int, input_shape: Tuple[int] = (0,)):
-        """
-        Initializes a Dense layer with the specified number of neurons
-        param num_nodes: The number of neurons in the layer
+        """Constructor for the Dense Layer.
+
+        Args:
+            num_nodes (int): Initializes a Dense layer with the specified number of neurons.
+            input_shape (Tuple[int], optional): The number of neurons in the layer. Defaults to (0,).
         """
         self.num_nodes = num_nodes
         super().__init__(input_shape=input_shape)

@@ -23,7 +23,8 @@ class MeanSquareError(Loss):
 
 class BinaryCrossEntropy(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
-        """Also known as Log Loss"""
+        """Also known as Log Loss
+        """
         num_samples = len(y)
         # Avoid division by zero
         z = np.clip(z, 1e-15, 1 - 1e-15)
@@ -45,8 +46,7 @@ class BinaryCrossEntropy(Loss):
 
 class CrossEntropy(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
-        """
-        param y: one hot encoded values
+        """param y: one hot encoded values
         """
         num_samples = len(z)
         z = np.clip(z, 1e-15, 1.0 - 1e-15)
