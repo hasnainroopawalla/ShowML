@@ -29,6 +29,8 @@ class Layer(ABC):
     def forward(self, X: np.ndarray) -> np.ndarray:
         """
         A method which computes a forward pass of a layer
+        param X: The input to the layer
+        return: Output of the layer (multiplying the weights and adding the bias term)
         """
         pass
 
@@ -36,20 +38,21 @@ class Layer(ABC):
     def backward(self, X: np.ndarray) -> np.ndarray:
         """
         A method which computes a backward pass of a layer
-        X here corresponds to the input to the layer in the backward propagation
+        param X: Corresponds to the input to the layer in the backward propagation
+        return: Output of the layer after backpropagation
         """
         pass
 
     @abstractmethod
     def get_output_shape(self) -> Tuple[int]:
         """
-        Returns the output shape of the layer
+        return: The output shape of the layer
         """
         pass
 
     @abstractmethod
     def get_params_count(self) -> int:
         """
-        Returns the number of trainable parameters of a layer
+        return: The number of trainable parameters of a layer
         """
         pass

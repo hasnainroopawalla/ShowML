@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Callable, Dict, List, Tuple
 
 import numpy as np
 from showml.losses.base_loss import Loss
@@ -62,7 +62,16 @@ class Regression(ABC):
         for metric in self.history:
             generic_metric_plot(metric, self.history[metric])
 
-    def optimize(self, X, y, z) -> Tuple[np.ndarray, Any]:
+    def optimize(
+        self, X: np.ndarray, y: np.ndarray, z: np.ndarray
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        This method optimizes the weights and bias of the model using the specified loss function and optimizer
+        param X: The input data
+        param y: The true labels/values
+        param z: The predicted labels/values
+        return: Updated weights and bias
+        """
         dw, db = self.loss.parameter_gradient(X, y, z)
         weights, bias = self.optimizer.update_weights(self.weights, self.bias, dw, db)
         return weights, bias

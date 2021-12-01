@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple
+from typing import Tuple
 import numpy as np
 
 
@@ -17,7 +17,7 @@ class Loss(ABC):
     @abstractmethod
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
-    ) -> Tuple[np.ndarray, Any]:
+    ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Computes the derivative of the weights and bias w.r.t the objective function
         param X: The training data

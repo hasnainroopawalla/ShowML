@@ -1,4 +1,4 @@
-from typing import Any, Tuple
+from typing import Tuple
 from showml.losses.base_loss import Loss
 import numpy as np
 

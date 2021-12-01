@@ -6,7 +6,6 @@ from showml.deep_learning.activations import Relu, Softmax
 from showml.optimizers.optimizer_functions import SGD
 from showml.utils.dataset import Dataset
 from showml.utils.preprocessing import one_hot_encode
-from showml.utils.data_loader import load_housepricedata, load_wine
 
 from sklearn import datasets
 
