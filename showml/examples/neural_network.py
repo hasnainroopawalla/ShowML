@@ -1,4 +1,4 @@
-from showml.deep_learning.network import Sequential
+from showml.deep_learning.model import Sequential
 from showml.losses.metrics import accuracy, cross_entropy
 from showml.losses import CrossEntropy
 from showml.deep_learning.layers import Dense
