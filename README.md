@@ -15,9 +15,6 @@ The aim of this package is to present the working behind fundamental Machine Lea
 [showml/examples](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples) contains examples of using ShowML to train various Machine Learning models.
 
 
-## Usage
-[showml/examples](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples) contains examples of using ShowML to train various Machine Learning models.
-
 ## Installation
 
 

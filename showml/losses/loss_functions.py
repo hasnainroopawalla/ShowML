@@ -5,7 +5,7 @@ import numpy as np
 
 class MeanSquaredError(Loss):
     def objective(self, y: np.ndarray, z: np.ndarray) -> float:
-        return np.average(np.square(self.training_error(y, z)), axis=0)
+        return np.average(np.square(z - y), axis=0)
 
     def objective_gradient(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
         # TODO
@@ -14,7 +14,7 @@ class MeanSquaredError(Loss):
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, np.ndarray]:
-        error = self.training_error(y, z)
+        error = z - y
         num_samples = len(error)
         dw = (1 / num_samples) * X.T.dot(error)
         db = (1 / num_samples) * np.sum(error)
@@ -37,7 +37,7 @@ class BinaryCrossEntropy(Loss):
     def parameter_gradient(
         self, X: np.ndarray, y: np.ndarray, z: np.ndarray
     ) -> Tuple[np.ndarray, np.ndarray]:
-        error = self.training_error(y, z)
+        error = z - y
         num_samples = len(error)
         dw = (1 / num_samples) * np.dot(X.T, (error))
         db = (1 / num_samples) * np.sum((error))
