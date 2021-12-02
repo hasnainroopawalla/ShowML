@@ -27,7 +27,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-release.sh
+ignore/
 .vscode/
 
 # PyInstaller
