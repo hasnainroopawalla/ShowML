@@ -46,15 +46,3 @@ class Loss(ABC):
             np.ndarray: Gradient of the objective function.
         """
         pass
-
-    def training_error(self, y: np.ndarray, z: np.ndarray) -> np.ndarray:
-        """Calculate the model error by finding difference between predicted values and true values.
-
-        Args:
-            y (np.ndarray): The true values.
-            z (np.ndarray): The predicted values.
-
-        Returns:
-            np.ndarray: Training error of the model.
-        """
-        return z - y
