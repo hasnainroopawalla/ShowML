@@ -1,1 +1,1 @@
-from showml.simulations.conways_game_of_life.run import GameOfLife
+from showml.simulations.conways_game_of_life.game_of_life import GameOfLife
