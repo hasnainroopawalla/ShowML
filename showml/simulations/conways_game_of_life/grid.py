@@ -1,8 +1,8 @@
 class Grid:
-    def __init__(self, num_rows, num_cols) -> None:
+    def __init__(self, num_rows, num_columns) -> None:
         self.num_rows = num_rows
-        self.num_cols = num_cols
-        self.grid = [[0 for _ in range(num_cols)] for _ in range(num_rows)]
+        self.num_columns = num_columns
+        self.grid = [[0 for _ in range(num_columns)] for _ in range(num_rows)]
 
         # Set initial live cells
         self.grid[2][3] = 1
@@ -22,7 +22,7 @@ class Grid:
                 + self.grid[row][column + 1]
                 + self.grid[row + 1][column + 1]
             )
-        elif row == 0 and column == self.num_cols - 1:
+        elif row == 0 and column == self.num_columns - 1:
             neighbor_sum = (
                 self.grid[row][column - 1]
                 + self.grid[row + 1][column]
@@ -52,7 +52,7 @@ class Grid:
                 + self.grid[row + 1][column + 1]
             )
 
-        elif column == self.num_cols - 1 and row == self.num_rows - 1:
+        elif column == self.num_columns - 1 and row == self.num_rows - 1:
             neighbor_sum = (
                 self.grid[row - 1][column]
                 + self.grid[row][column - 1]
@@ -68,7 +68,7 @@ class Grid:
                 + self.grid[row - 1][column + 1]
             )
 
-        elif column == self.num_cols - 1:
+        elif column == self.num_columns - 1:
             neighbor_sum = (
                 self.grid[row][column - 1]
                 + self.grid[row - 1][column]
@@ -92,9 +92,9 @@ class Grid:
         return neighbor_sum
 
     def update_grid(self):
-        new_grid = [[0 for _ in range(self.num_cols)] for _ in range(self.num_rows)]
+        new_grid = [[0 for _ in range(self.num_columns)] for _ in range(self.num_rows)]
         for row in range(self.num_rows):
-            for column in range(self.num_cols):
+            for column in range(self.num_columns):
                 neighbor_sum = self.calculate_neighbor_sum(row, column)
                 if self.grid[row][column] == 1:
                     if neighbor_sum == 2 or neighbor_sum == 3:
@@ -109,7 +109,7 @@ class Grid:
         self.grid = new_grid
 
     def reset_grid(self):
-        self.grid = [[0 for x in range(self.num_cols)] for y in range(self.num_rows)]
+        self.grid = [[0 for x in range(self.num_columns)] for y in range(self.num_rows)]
 
     def toggle_cell_value(self, row, column):
         self.grid[row][column] = 1 if self.grid[row][column] == 0 else 0

@@ -1,18 +1,19 @@
 import pygame
 from showml.simulations.conways_game_of_life.grid import Grid
-from showml.simulations.conways_game_of_life.event import Action, Event
 
 
-class Controller:
-    """The Game Controller class responsible for observing events taking place in the window as well as initializing and managing the Grid.
+class GameWindow:
+    """The GameWindow class responsible for observing events taking place in the window as well as initializing and managing the Grid.
     """
 
     def __init__(self, grid: Grid) -> None:
-        """Constructor for the Controller clas
+        """Constructor for the GameWindow class.
 
         Args:
-            grid (Grid): A 2D grid containing cells where the simulation will take place
+            grid (Grid): A 2D grid containing cells where the simulation will take place.
         """
+        self.grid = grid
+
         self.BLACK = (0, 0, 0)
         self.GRAY = (50, 50, 50)
         self.WHITE = (255, 255, 255)
@@ -21,12 +22,8 @@ class Controller:
         self.CELL_HEIGHT = 9
         self.CELL_MARGIN = 1
 
-        self.grid = grid
-
-        self.SCREEN_WIDTH = (
-            self.grid.num_cols * self.CELL_WIDTH + self.grid.num_cols + 100
-        )
-        self.SCREEN_HEIGHT = self.grid.num_rows * self.CELL_HEIGHT + self.grid.num_rows
+        self.SCREEN_WIDTH = grid.num_columns * self.CELL_WIDTH + grid.num_columns + 100
+        self.SCREEN_HEIGHT = grid.num_rows * self.CELL_HEIGHT + grid.num_rows
 
         pygame.init()
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
@@ -42,36 +39,6 @@ class Controller:
             self.screen, self.WHITE, (self.SCREEN_WIDTH - 80, 70, 60, 20)
         )
         self.clock = pygame.time.Clock()
-
-    def get_event(self) -> Event:
-        """This method returns an Event object based on the Action taken by the user.
-        It checks the collide point of the user's mouse click with the different entities in the window.
-
-        Returns:
-            Event: An Event object containing the Action performed by the user (and also the row, column if a cell is toggled).
-        """
-        for event in pygame.event.get():
-            x, y = pygame.mouse.get_pos()
-
-            if event.type == pygame.QUIT:
-                pygame.quit()
-
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.START_BUTTON.collidepoint(x, y):
-                    return Event(action=Action.START)
-
-                if self.STOP_BUTTON.collidepoint(x, y):
-                    return Event(action=Action.STOP)
-
-                if self.RESET_BUTTON.collidepoint(x, y):
-                    return Event(action=Action.RESET)
-
-                elif x < self.SCREEN_WIDTH - 100 and y:
-                    column = x // (self.CELL_WIDTH + self.CELL_MARGIN)
-                    row = y // (self.CELL_HEIGHT + self.CELL_MARGIN)
-                    return Event(action=Action.CELL_TOGGLE, row=row, column=column)
-
-        return Event(action=Action.NO_EVENT)
 
     def display_window_and_grid(self, delay: int) -> None:
         """This method is repsonsible for displaying the entire Game window with the grid, buttons and textual entities.
@@ -110,7 +77,7 @@ class Controller:
         """This private method displays the entire grid in the window.
         """
         for row in range(self.grid.num_rows):
-            for column in range(self.grid.num_cols):
+            for column in range(self.grid.num_columns):
                 if self.grid.grid[row][column] == 1:
                     color = self.WHITE
                 else:
