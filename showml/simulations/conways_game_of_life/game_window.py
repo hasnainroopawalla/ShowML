@@ -62,15 +62,15 @@ class GameWindow:
 
         self.screen.blit(
             pygame.font.SysFont("Arial", 15).render("Start", True, self.BLACK),
-            (self.SCREEN_WIDTH - 65, 14),
+            (self.SCREEN_WIDTH - 65, 13),
         )
         self.screen.blit(
             pygame.font.SysFont("Arial", 15).render("Stop", True, self.BLACK),
-            (self.SCREEN_WIDTH - 65, 38),
+            (self.SCREEN_WIDTH - 65, 42),
         )
         self.screen.blit(
             pygame.font.SysFont("Arial", 15).render("Reset", True, self.BLACK),
-            (self.SCREEN_WIDTH - 65, 68),
+            (self.SCREEN_WIDTH - 68, 72),
         )
 
     def _display_grid(self):
