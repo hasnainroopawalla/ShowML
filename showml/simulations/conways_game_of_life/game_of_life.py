@@ -19,20 +19,27 @@ class GameOfLife:
         self.event_handler = EventHandler(self.window)
         self.delay: int = 0
         self.game_running: bool = False
+        self.event_dict = {
+            Action.START: self.start_event,
+            Action.STOP: self.stop_event,
+            Action.RESET: self.reset_event,
+            Action.CELL_TOGGLE: self.cell_toggle_event,
+            Action.NO_EVENT: self.no_event
+        }
 
-    def start_event(self) -> None:
+    def start_event(self, row: int, column: int) -> None:
         """This method runs when the game starts.
         """
         self.game_running = True
         self.delay = 150
 
-    def stop_event(self) -> None:
+    def stop_event(self, row: int, column: int) -> None:
         """This method runs when the game is stopped.
         """
         self.game_running = False
         self.delay = 0
 
-    def reset_event(self) -> None:
+    def reset_event(self, row: int, column: int) -> None:
         """This method runs when the RESET button is pressed.
         """
         self.game_running = False
@@ -48,6 +55,9 @@ class GameOfLife:
         """
         self.window.grid.toggle_cell_value(row, column)
 
+    def no_event(self, row: int, column: int) -> None:
+        pass
+    
     def run(self) -> None:
         """This method runs the game loop by communicating with the EventHandler to receive event information.
         """
@@ -57,17 +67,8 @@ class GameOfLife:
 
             event = self.event_handler.get_event()
 
-            if event.action == Action.START:
-                self.start_event()
-
-            elif event.action == Action.STOP:
-                self.stop_event()
-
-            elif event.action == Action.RESET:
-                self.reset_event()
-
-            elif event.action == Action.CELL_TOGGLE:
-                self.cell_toggle_event(event.row, event.column)
+            # Call the event function
+            self.event_dict[event.action](event.row, event.column)
 
             self.window.display_window_and_grid(self.delay)
 

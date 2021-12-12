@@ -38,18 +38,5 @@ class EventHandler:
                     for button in self.window.buttons:
                         if button.button.collidepoint(x, y):
                             return button.on_click()
-                # if self.window.START_BUTTON.collidepoint(x, y):
-                #     return Event(action=Action.START)
-
-                # if self.window.STOP_BUTTON.collidepoint(x, y):
-                #     return Event(action=Action.STOP)
-
-                # if self.window.RESET_BUTTON.collidepoint(x, y):
-                #     return Event(action=Action.RESET)
-
-                # elif x < self.window.SCREEN_WIDTH - 100 and y:
-                #     row = y // (self.window.CELL_HEIGHT + self.window.CELL_MARGIN)
-                #     column = x // (self.window.CELL_WIDTH + self.window.CELL_MARGIN)
-                # return Event(action=Action.CELL_TOGGLE, row=row, column=column)
 
         return Event(action=Action.NO_EVENT)

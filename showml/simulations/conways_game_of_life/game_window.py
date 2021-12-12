@@ -4,7 +4,7 @@ from showml.simulations.conways_game_of_life.button import (
     StopButton,
     ResetButton,
 )
-from showml.simulations.conways_game_of_life.config import GameWindowSettings, Colors
+from showml.simulations.conways_game_of_life.config import GameWindowSettings, Color
 from showml.simulations.conways_game_of_life.grid import Grid
 
 
@@ -18,27 +18,24 @@ class GameWindow:
         Args:
             grid (Grid): A 2D grid containing cells where the simulation will take place.
         """
-        self.grid = grid
-
         self.window_settings = GameWindowSettings()
-        self.colors = Colors()
-
+        
+        pygame.init()
+        pygame.display.set_caption(self.window_settings.CAPTION)
+        
+        self.grid = grid
+       
         self.CELL_HEIGHT = self.window_settings.CELL_HEIGHT
         self.CELL_WIDTH = self.window_settings.CELL_WIDTH
         self.CELL_MARGIN = self.window_settings.CELL_MARGIN
 
-        self.SCREEN_WIDTH = grid.num_columns * self.CELL_WIDTH + grid.num_columns + 100
-        self.SCREEN_HEIGHT = grid.num_rows * self.CELL_HEIGHT + grid.num_rows
-
-        pygame.init()
-        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
-
-        pygame.display.set_caption(self.window_settings.CAPTION)
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = self._compute_screen_width_and_height()
+        self.SCREEN = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
         self.buttons = [
-            StartButton(self.screen, self.SCREEN_WIDTH, self.colors.WHITE),
-            StopButton(self.screen, self.SCREEN_WIDTH, self.colors.WHITE),
-            ResetButton(self.screen, self.SCREEN_WIDTH, self.colors.WHITE),
+            StartButton(self.SCREEN, Color.WHITE),
+            StopButton(self.SCREEN, Color.WHITE),
+            ResetButton(self.SCREEN, Color.WHITE),
         ]
 
         self.clock = pygame.time.Clock()
@@ -58,19 +55,19 @@ class GameWindow:
     def _display_buttons_and_text(self):
         """This private method displays the buttons and the text objects in the window.
         """
-        self.screen.fill(self.colors.BLACK)
+        self.SCREEN.fill(Color.BLACK)
         for button in self.buttons:
             # Button
             pygame.draw.rect(
-                self.screen,
+                self.SCREEN,
                 button.color,
                 (button.x, button.y, button.width, button.height),
             )
 
             # Button Text
-            self.screen.blit(
+            self.SCREEN.blit(
                 pygame.font.SysFont(self.window_settings.FONT, 15).render(
-                    button.text, True, self.colors.BLACK
+                    button.text, True, Color.BLACK
                 ),
                 (button.text_x, button.text_y),
             )
@@ -81,11 +78,11 @@ class GameWindow:
         for row in range(self.grid.num_rows):
             for column in range(self.grid.num_columns):
                 if self.grid.grid[row][column] == 1:
-                    color = self.colors.WHITE
+                    color = Color.WHITE
                 else:
-                    color = self.colors.GRAY
+                    color = Color.GRAY
                 pygame.draw.rect(
-                    self.screen,
+                    self.SCREEN,
                     color,
                     [
                         self.window_settings.CELL_MARGIN
@@ -104,3 +101,8 @@ class GameWindow:
                         self.window_settings.CELL_HEIGHT,
                     ],
                 )
+    
+    def _compute_screen_width_and_height(self):
+        screen_width = self.grid.num_columns * self.CELL_WIDTH + self.grid.num_columns + 100
+        screen_height = self.grid.num_rows * self.CELL_HEIGHT + self.grid.num_rows
+        return screen_width, screen_height

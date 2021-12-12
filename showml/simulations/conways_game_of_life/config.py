@@ -11,7 +11,8 @@ class GameWindowSettings(BaseSettings):
     CAPTION: str = "Conway's Game of Life - Cellular Automaton"
 
 
-class Colors(BaseSettings):
+class Color:
     BLACK: Tuple[int, int, int] = (0, 0, 0)
     GRAY: Tuple[int, int, int] = (50, 50, 50)
     WHITE: Tuple[int, int, int] = (255, 255, 255)
+

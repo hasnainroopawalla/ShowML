@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from showml.simulations.conways_game_of_life.event import Action, Event
+
 import pygame
 
 
@@ -21,14 +22,15 @@ class Button(ABC):
 
 
 class StartButton(Button):
-    def __init__(self, screen, screen_width, color):
+    def __init__(self, screen, color):
+        _, _, w, _ = screen.get_rect()
         super().__init__(
             text="Start",
-            text_x=screen_width - 65,
+            text_x=w - 65,
             text_y=13,
             width=60,
             height=20,
-            x=screen_width - 80,
+            x=w - 80,
             y=10,
             color=color,
             screen=screen,
@@ -39,15 +41,15 @@ class StartButton(Button):
 
 
 class StopButton(Button):
-    def __init__(self, screen, screen_width, color):
-        print(screen)
+    def __init__(self, screen, color):
+        _ , _, w, _ = screen.get_rect()
         super().__init__(
             text="Stop",
-            text_x=screen_width - 65,
+            text_x=w - 65,
             text_y=42,
             width=60,
             height=20,
-            x=screen_width - 80,
+            x=w - 80,
             y=40,
             color=color,
             screen=screen,
@@ -58,15 +60,15 @@ class StopButton(Button):
 
 
 class StopButton(Button):
-    def __init__(self, screen, screen_width, color):
-        print(screen)
+    def __init__(self, screen: pygame.Surface, color):
+        _, _, w, _ = screen.get_rect()
         super().__init__(
             text="Stop",
-            text_x=screen_width - 65,
+            text_x=w - 65,
             text_y=42,
             width=60,
             height=20,
-            x=screen_width - 80,
+            x=w - 80,
             y=40,
             color=color,
             screen=screen,
@@ -77,15 +79,15 @@ class StopButton(Button):
 
 
 class ResetButton(Button):
-    def __init__(self, screen, screen_width, color):
-        print(screen)
+    def __init__(self, screen, color):
+        _, _, w, _ = screen.get_rect()
         super().__init__(
             text="Reset",
-            text_x=screen_width - 68,
+            text_x=w - 68,
             text_y=72,
             width=60,
             height=20,
-            x=screen_width - 80,
+            x=w - 80,
             y=70,
             color=color,
             screen=screen,
