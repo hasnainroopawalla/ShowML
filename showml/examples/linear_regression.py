@@ -1,6 +1,6 @@
 from showml.losses import MeanSquaredError
 from showml.optimizers import SGD
-from showml.supervised.regression import LinearRegression
+from showml.linear_model.regression import LinearRegression
 from showml.utils.dataset import Dataset
 from showml.losses.metrics import mean_squared_error, r2_score
 from showml.utils.plots import plot_regression_line

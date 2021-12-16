@@ -37,11 +37,11 @@ $ pip install -r requirements.txt
 
 ### Models
 #### Linear
-- Linear Regression (`showml.supervised.regression.LinearRegression`)
-- Logistic Regression (`showml.supervised.regression.LogisticRegression`)
+- Linear Regression (`showml.linear_model.regression.LinearRegression`)
+- Logistic Regression (`showml.linear_model.regression.LogisticRegression`)
 
 #### Non-Linear
-- Sequential (`showml.deep_learning.network.Sequential`)
+- Sequential (`showml.deep_learning.model.Sequential`)
 
 ### Deep Learning
 #### Layers
@@ -62,6 +62,8 @@ $ pip install -r requirements.txt
 - Binary Cross Entropy (`showml.losses.BinaryCrossEntropy`)
 - Categorical Cross Entropy (`showml.losses.CrossEntropy`)
 
+### Simulations
+- [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (`showml.simulations.conways_game_of_life.GameOfLife`)
 
 ## Contributing
 1. Fork the repository

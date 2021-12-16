@@ -1,6 +1,6 @@
 from showml.losses import BinaryCrossEntropy
 from showml.optimizers import RMSProp
-from showml.supervised.regression import LogisticRegression
+from showml.linear_model.regression import LogisticRegression
 from showml.utils.dataset import Dataset
 from showml.losses.metrics import accuracy, binary_cross_entropy
 from showml.utils.data_loader import load_wine
