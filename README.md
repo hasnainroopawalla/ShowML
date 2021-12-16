@@ -12,18 +12,18 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 
 ## Usage
-[showml/examples](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples) contains examples of using ShowML to train various Machine Learning models.
+Check out: [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples).
 
 
 ## Installation
 
 
-Install the package
+Install the package:
 ```
 $ pip install showml
 ```
 
-To clone the repository and view the source files
+To clone the repository and view the source files:
 ```
 $ git clone https://github.com/hasnainroopawalla/ShowML.git
 $ cd ShowML
@@ -66,22 +66,22 @@ $ pip install -r requirements.txt
 - [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (`showml.simulations.conways_game_of_life.GameOfLife`)
 
 ## Contributing
-1. Fork the repository
-2. Install the necessary dependencies
+1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
+2. Install the necessary dependencies:
 ```
 $ pip install pre-commit mypy pytest
  ```
-3. Commit and push your changes to your own branch
-4. Before submitting a Pull Request, run these housekeeping checks locally
-  - Run pre-commit
+3. Commit and push your changes to your own branch.
+4. Before submitting a Pull Request, run these housekeeping checks locally:-
+  - Run [pre-commit](https://pre-commit.com/):
    ```
    $ pre-commit run -a
    ```
-  - Run mypy
+  - Run [mypy](https://github.com/python/mypy):
   ```
   $ mypy .
   ```
-  - Run tests
+  - Run [pytest](https://docs.pytest.org):
   ```
   $ pytest
   ```
