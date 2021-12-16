@@ -1,5 +1,7 @@
+from typing import List, Tuple
 import pygame
 from showml.simulations.conways_game_of_life.button import (
+    Button,
     StartButton,
     StopButton,
     ResetButton,
@@ -19,12 +21,12 @@ class GameWindow:
             grid (Grid): A 2D grid containing cells where the simulation will take place.
         """
         self.window_settings = GameWindowSettings()
-        
+
         pygame.init()
         pygame.display.set_caption(self.window_settings.CAPTION)
-        
+
         self.grid = grid
-       
+
         self.CELL_HEIGHT = self.window_settings.CELL_HEIGHT
         self.CELL_WIDTH = self.window_settings.CELL_WIDTH
         self.CELL_MARGIN = self.window_settings.CELL_MARGIN
@@ -32,7 +34,7 @@ class GameWindow:
         self.SCREEN_WIDTH, self.SCREEN_HEIGHT = self._compute_screen_width_and_height()
         self.SCREEN = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-        self.buttons = [
+        self.buttons: List[Button] = [
             StartButton(self.SCREEN, Color.WHITE),
             StopButton(self.SCREEN, Color.WHITE),
             ResetButton(self.SCREEN, Color.WHITE),
@@ -52,7 +54,7 @@ class GameWindow:
         pygame.display.flip()
         self.clock.tick(60)
 
-    def _display_buttons_and_text(self):
+    def _display_buttons_and_text(self) -> None:
         """This private method displays the buttons and the text objects in the window.
         """
         self.SCREEN.fill(Color.BLACK)
@@ -66,20 +68,22 @@ class GameWindow:
 
             # Button Text
             self.SCREEN.blit(
-                pygame.font.SysFont(self.window_settings.FONT, 15).render(
-                    button.text, True, Color.BLACK
-                ),
+                pygame.font.SysFont(
+                    self.window_settings.FONT, self.window_settings.FONT_SIZE
+                ).render(button.text, True, Color.BLACK),
                 (button.text_x, button.text_y),
             )
 
-    def _display_grid(self):
+    def _display_grid(self) -> None:
         """This private method displays the entire grid in the window.
         """
         for row in range(self.grid.num_rows):
             for column in range(self.grid.num_columns):
                 if self.grid.grid[row][column] == 1:
+                    # Alive cell
                     color = Color.WHITE
                 else:
+                    # Dead cell
                     color = Color.GRAY
                 pygame.draw.rect(
                     self.SCREEN,
@@ -101,8 +105,16 @@ class GameWindow:
                         self.window_settings.CELL_HEIGHT,
                     ],
                 )
-    
-    def _compute_screen_width_and_height(self):
-        screen_width = self.grid.num_columns * self.CELL_WIDTH + self.grid.num_columns + 100
+
+    def _compute_screen_width_and_height(self) -> Tuple[int, int]:
+        """This method computes the width and height of the screen based on the defined cell size and number of rows and columns.
+
+        Returns:
+            int: The screen width
+            int: The screen height
+        """
+        screen_width = (
+            self.grid.num_columns * self.CELL_WIDTH + self.grid.num_columns + 100
+        )
         screen_height = self.grid.num_rows * self.CELL_HEIGHT + self.grid.num_rows
         return screen_width, screen_height

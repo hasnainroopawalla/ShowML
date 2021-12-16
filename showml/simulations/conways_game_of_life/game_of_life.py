@@ -24,7 +24,7 @@ class GameOfLife:
             Action.STOP: self.stop_event,
             Action.RESET: self.reset_event,
             Action.CELL_TOGGLE: self.cell_toggle_event,
-            Action.NO_EVENT: self.no_event
+            Action.NO_EVENT: self.no_event,
         }
 
     def start_event(self, row: int, column: int) -> None:
@@ -57,7 +57,7 @@ class GameOfLife:
 
     def no_event(self, row: int, column: int) -> None:
         pass
-    
+
     def run(self) -> None:
         """This method runs the game loop by communicating with the EventHandler to receive event information.
         """
@@ -71,6 +71,3 @@ class GameOfLife:
             self.event_dict[event.action](event.row, event.column)
 
             self.window.display_window_and_grid(self.delay)
-
-
-GameOfLife().run()
