@@ -62,6 +62,8 @@ $ pip install -r requirements.txt
 - Binary Cross Entropy (`showml.losses.BinaryCrossEntropy`)
 - Categorical Cross Entropy (`showml.losses.CrossEntropy`)
 
+### Simulations
+- [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (`showml.simulations.conways_game_of_life.GameOfLife`)
 
 ## Contributing
 1. Fork the repository
