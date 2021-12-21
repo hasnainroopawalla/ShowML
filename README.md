@@ -26,7 +26,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 ## 📝 Table of Contents
 
 - [Getting Started](#getting_started)
-- [Package Contents](#package_contents)
+- [Contents](#contents)
 - [Contributing](#contributing)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -45,7 +45,7 @@ $ pip install -r requirements.txt
 > **_Check out:_** [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples)
 >
 
-## 📦 Package Contents <a name = "package_contents"></a>
+## 📦 Contents <a name = "contents"></a>
 
 ### Models
 - Linear
