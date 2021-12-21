@@ -89,14 +89,12 @@ $ pip install pre-commit mypy pytest
 
 
 <p align="center">
-  <a href="" rel="noopener">
-    <img width=400px height=400px src="./static/images/showml.png" alt="Project logo" style = "background-color:#0e1117; text-align: center"></a>
+    <img width=300px height=300px src="./static/images/showml.png" alt="ShowML Logo">
 </p>
 
 ---
 
-
-<h1 align="center">Show the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h1>
+<h3 align="center"><i>Show</i> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h1>
 
 <div align="center">
 
