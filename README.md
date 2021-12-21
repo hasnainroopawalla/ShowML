@@ -1,22 +1,36 @@
-# ShowML
+<p align="center">
+    <img height=300 src="./static/images/showml.png" alt="ShowML Logo">
+</p>
 
-[![Python packaging](https://github.com/hasnainroopawalla/ShowML/actions/workflows/python_packaging.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/python_packaging.yml)
+---
 
-**Show** the **ML** Code!
+<h2 align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h2>
+
+<div align="center">
+
+[![Develop](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml)
+[![Deploy](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml)
+[![PyPi version](https://img.shields.io/pypi/v/showml.svg)](https://pypi.python.org/pypi/py_d3/)
+[![Python versions](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)
+![Status](https://img.shields.io/badge/status-stable-green.svg)
+
+</div>
+
+---
 
 A Python package of Machine Learning Algorithms implemented from scratch.
 
 The aim of this package is to present the working behind fundamental Machine Learning algorithms in a transparent and modular way.
 
-> **_NOTE:_**  The implementations of these algorithms are not thoroughly optimized for high computational efficiency.
+> **_NOTE:_** The implementations of these algorithms are not thoroughly optimized for high computational efficiency.
 
+## 📝 Table of Contents
 
-## Usage
-Check out: [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples).
+- [Getting Started](#getting_started)
+- [Contents](#contents)
+- [Contributing](#contributing)
 
-
-## Installation
-
+## 🏁 Getting Started <a name = "getting_started"></a>
 
 Install the package:
 ```
@@ -29,28 +43,27 @@ $ git clone https://github.com/hasnainroopawalla/ShowML.git
 $ cd ShowML
 $ pip install -r requirements.txt
 ```
+> **_Check out:_** [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples)
+>
 
-[How to Contribute](#contributing)
-
-
-## Contents
+## 📦 Contents <a name = "contents"></a>
 
 ### Models
-#### Linear
-- Linear Regression (`showml.linear_model.regression.LinearRegression`)
-- Logistic Regression (`showml.linear_model.regression.LogisticRegression`)
+- Linear
+  - Linear Regression (`showml.linear_model.regression.LinearRegression`)
+  - Logistic Regression (`showml.linear_model.regression.LogisticRegression`)
 
-#### Non-Linear
-- Sequential (`showml.deep_learning.model.Sequential`)
+- Non-Linear
+  - Sequential (`showml.deep_learning.model.Sequential`)
 
 ### Deep Learning
-#### Layers
-- Dense (`showml.deep_learning.layers.Dense`)
+- Layers
+  - Dense (`showml.deep_learning.layers.Dense`)
 
-#### Activations
-- Sigmoid (`showml.deep_learning.activations.Sigmoid`)
-- ReLu (`showml.deep_learning.activations.Relu`)
-- Softmax (`showml.deep_learning.activations.Softmax`)
+- Activations
+  - Sigmoid (`showml.deep_learning.activations.Sigmoid`)
+  - ReLu (`showml.deep_learning.activations.Relu`)
+  - Softmax (`showml.deep_learning.activations.Softmax`)
 
 ### Optimizers
 - Stochastic/Batch/Mini-Batch Gradient Descent (`showml.optimizers.SGD`)
@@ -65,7 +78,9 @@ $ pip install -r requirements.txt
 ### Simulations
 - [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (`showml.simulations.conways_game_of_life.GameOfLife`)
 
-## Contributing
+
+## ✏️ Contributing <a name = "contributing"></a>
+
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
 2. Install the necessary dependencies:
 ```
@@ -85,4 +100,3 @@ $ pip install pre-commit mypy pytest
   ```
   $ pytest
   ```
-5. Once everything succeeds, create a Pull Request (CI will be triggered)
