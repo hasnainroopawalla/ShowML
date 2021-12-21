@@ -21,7 +21,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 ## 📝 Table of Contents
 
 - [Getting Started](#getting_started)
-- [Algorithms](#algorithms)
+- [Package Contents](#package_contents)
 - [Contributing](#contributing)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -38,26 +38,26 @@ $ cd ShowML
 $ pip install -r requirements.txt
 ```
 > **_Check out:_** [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples)
-> 
+>
 
-## 📦 Algorithms <a name = "algorithms"></a>
+## 📦 Package Contents <a name = "package_contents"></a>
 
 ### Models
-#### Linear
-- Linear Regression (`showml.linear_model.regression.LinearRegression`)
-- Logistic Regression (`showml.linear_model.regression.LogisticRegression`)
+- Linear
+  - Linear Regression (`showml.linear_model.regression.LinearRegression`)
+  - Logistic Regression (`showml.linear_model.regression.LogisticRegression`)
 
-#### Non-Linear
-- Sequential (`showml.deep_learning.model.Sequential`)
+- Non-Linear
+  - Sequential (`showml.deep_learning.model.Sequential`)
 
 ### Deep Learning
-#### Layers
-- Dense (`showml.deep_learning.layers.Dense`)
+- Layers
+  - Dense (`showml.deep_learning.layers.Dense`)
 
-#### Activations
-- Sigmoid (`showml.deep_learning.activations.Sigmoid`)
-- ReLu (`showml.deep_learning.activations.Relu`)
-- Softmax (`showml.deep_learning.activations.Softmax`)
+- Activations
+  - Sigmoid (`showml.deep_learning.activations.Sigmoid`)
+  - ReLu (`showml.deep_learning.activations.Relu`)
+  - Softmax (`showml.deep_learning.activations.Softmax`)
 
 ### Optimizers
 - Stochastic/Batch/Mini-Batch Gradient Descent (`showml.optimizers.SGD`)
