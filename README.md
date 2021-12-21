@@ -90,7 +90,7 @@ $ pip install pre-commit mypy pytest
 
 <p align="center">
   <a href="" rel="noopener">
-    <img width=400px height=400px src="./static/images/logo_transparent.png" alt="Project logo" style = "background-color:#0e1117; text-align: center"></a>
+    <img width=400px height=400px src="./static/images/showml.png" alt="Project logo" style = "background-color:#0e1117; text-align: center"></a>
 </p>
 
 ---
