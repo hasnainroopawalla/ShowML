@@ -94,7 +94,7 @@ $ pip install pre-commit mypy pytest
 
 ---
 
-<h3 align="center"><i>Show</i> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h1>
+<p align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</p>
 
 <div align="center">
 
