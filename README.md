@@ -8,6 +8,7 @@
 
 <div align="center">
 
+[![Develop](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml)
 [![Deploy](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml)
 [![PyPi version](https://img.shields.io/pypi/v/showml.svg)](https://pypi.python.org/pypi/py_d3/)
 [![Python versions](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)
