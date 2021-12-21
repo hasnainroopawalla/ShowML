@@ -1,4 +1,4 @@
-name: Python Packaging
+name: Develop
 
 on:
   push:
