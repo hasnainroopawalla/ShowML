@@ -6,10 +6,15 @@
 
 <h2 align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h2>
 
+<div align="center">
+
 [![Python packaging](https://github.com/hasnainroopawalla/ShowML/actions/workflows/python_packaging.yml/badge.svg?branch=master)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/python_packaging.yml)
 [![PyPi version](https://img.shields.io/pypi/v/showml.svg)](https://pypi.python.org/pypi/py_d3/)
 [![Python versions](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
+
+</div>
+
 ---
 
 A Python package of Machine Learning Algorithms implemented from scratch.
