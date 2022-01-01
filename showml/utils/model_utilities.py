@@ -51,7 +51,7 @@ def generate_minibatches(
     for start_idx in range(0, X.shape[0], batch_size):
         end_idx = min(start_idx + batch_size, X.shape[0])
         if shuffle:
-            batch = indices[start_idx:end_idx]
+            batch = indices[start_idx:end_idx]  # type: ignore
         else:
-            batch = slice(start_idx, end_idx)
+            batch = slice(start_idx, end_idx)  # type: ignore
         yield X[batch], y[batch]
