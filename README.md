@@ -1,5 +1,5 @@
 <p align="center">
-    <img height=250 src="static/images/showml1.png" alt="ShowML Logo">
+    <img height=250 src="static/images/showml2.png" alt="ShowML Logo">
 </p>
 
 ---
