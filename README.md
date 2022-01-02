@@ -75,12 +75,12 @@ $ pip install -r requirements.txt
 ## ✏️ Contributing <a name = "contributing"></a>
 
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
-2. Install the necessary dependencies:
+2. Install the necessary housekeeping dependencies:
 ```
 $ pip install pre-commit mypy pytest
  ```
 3. Commit and push your changes to your own branch.
-4. Before submitting a Pull Request, run these housekeeping checks locally:-
+4. Run these housekeeping checks locally (required for the CI to pass):-
   - Run [pre-commit](https://pre-commit.com/):
    ```
    $ pre-commit run -a
@@ -93,3 +93,4 @@ $ pip install pre-commit mypy pytest
   ```
   $ pytest
   ```
+5. Open a Pull Request and I'll review it.
