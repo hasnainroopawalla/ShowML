@@ -1,20 +1,14 @@
 <p align="center">
-    <img height=300 src="static/images/showml2.png" alt="ShowML Logo">
+    <img height=300 src="https://raw.githubusercontent.com/hasnainroopawalla/ShowML/master/static/images/showml.png" alt="ShowML Logo">
 </p>
 
 ---
-<!-- 
-<h2 align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h2> -->
-<!-- 
-<div align="center"> -->
 
 [![Develop](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml/badge.svg)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/develop.yml)
 [![Deploy](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml/badge.svg)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml)
 [![PyPi version](https://img.shields.io/pypi/v/showml.svg)](https://pypi.python.org/pypi/showml/)
 [![Python versions](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
-
-<!-- </div> -->
 
 
 A Python package of Machine Learning Algorithms implemented from scratch.
