@@ -3,8 +3,8 @@
 </p>
 
 ---
-
-<h2 align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h2>
+<!-- 
+<h2 align="center"><b><i>Show</i></b> the <b><i>M</i></b>achine <b><i>L</i></b>earning Code</h2> -->
 
 <div align="center">
 
@@ -16,7 +16,6 @@
 
 </div>
 
----
 
 A Python package of Machine Learning Algorithms implemented from scratch.
 
