@@ -1,5 +1,5 @@
 <p align="center">
-    <img height=500 src="https://raw.githubusercontent.com/hasnainroopawalla/ShowML/logo-update/static/images/showml.png" alt="ShowML Logo">
+    <img height=500 src="https://raw.githubusercontent.com/hasnainroopawalla/ShowML/logo-update/static/images/showml1.png" alt="ShowML Logo">
 </p>
 
 ---
