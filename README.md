@@ -75,22 +75,15 @@ $ pip install -r requirements.txt
 ## ✏️ Contributing <a name = "contributing"></a>
 
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
-2. Install the necessary housekeeping dependencies:
-```
-$ pip install pre-commit mypy pytest
- ```
-3. Commit and push your changes to your own branch.
-4. Run these housekeeping checks locally (required for the CI to pass):-
-  - Run [pre-commit](https://pre-commit.com/):
+2. Commit and push your changes to your own branch.
+3. Install and run the necessary housekeeping dependencies ([pre-commit](https://pre-commit.com/), [mypy](https://github.com/python/mypy) and [pytest](https://docs.pytest.org)):
+    ```
+    $ pip install pre-commit mypy pytest
+    ```
+4. Run these housekeeping checks locally and make sure all of them succeed (required for the CI to pass):-
    ```
    $ pre-commit run -a
+   $ mypy .
+   $ pytest
    ```
-  - Run [mypy](https://github.com/python/mypy):
-  ```
-  $ mypy .
-  ```
-  - Run [pytest](https://docs.pytest.org):
-  ```
-  $ pytest
-  ```
 5. Open a Pull Request and I'll review it.
