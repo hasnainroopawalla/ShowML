@@ -27,7 +27,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-### To install the package from PyPi:
+### To install the package directly from PyPi:
 ```
 $ pip install showml
 ```
@@ -38,7 +38,7 @@ $ git clone https://github.com/hasnainroopawalla/ShowML.git
 $ cd ShowML
 $ pip install -r requirements.txt
 ```
-Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using locally.
+Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using locally:-
 
 - For Windows:
   ```
