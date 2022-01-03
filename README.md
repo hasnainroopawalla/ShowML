@@ -17,27 +17,43 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 > **_NOTE:_** The implementations of these algorithms are not thoroughly optimized for high computational efficiency.
 
+
 ## 📝 Table of Contents
 
 - [Getting Started](#getting_started)
 - [Contents](#contents)
 - [Contributing](#contributing)
 
+
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-Install the package:
+### To install the package directly from PyPi:
 ```
 $ pip install showml
 ```
 
-To clone the repository and view the source files:
+### To clone the repository and view the source files:
 ```
 $ git clone https://github.com/hasnainroopawalla/ShowML.git
 $ cd ShowML
 $ pip install -r requirements.txt
 ```
+Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using locally:-
+
+- For Windows:
+  ```
+  $ set PYTHONPATH=%PYTHONPATH%;<path-to-directory>\ShowML
+  ```
+- For MacOS:
+  ```
+  $ export PYTHONPATH=/<path-to-directory>/ShowML:$PYTHONPATH
+  ```
+- For Linux:
+  ```
+  $ export PYTHONPATH="${PYTHONPATH}:/<path-to-directory>/ShowML"
+  ```
 > **_Check out:_** [showml/examples/](https://github.com/hasnainroopawalla/ShowML/tree/master/showml/examples)
->
+
 
 ## 📦 Contents <a name = "contents"></a>
 
