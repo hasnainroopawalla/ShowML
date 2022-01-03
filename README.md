@@ -56,6 +56,7 @@ Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using 
 
 
 ## 📦 Contents <a name = "contents"></a>
+_ShowML_ currently includes the following content, however, this repository will continue to expand in order to include implementations of many more Machine Learning Algorithms.
 
 ### Models
 - Linear
