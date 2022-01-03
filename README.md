@@ -44,7 +44,7 @@ Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using 
   ```
   $ set PYTHONPATH=%PYTHONPATH%;<path-to-directory>\ShowML
   ```
-- For Mac:
+- For MacOS:
   ```
   $ export PYTHONPATH=/<path-to-directory>/ShowML:$PYTHONPATH
   ```
