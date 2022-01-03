@@ -48,7 +48,7 @@ Remember to add `ShowML/` to the `PYTHONPATH` environment variable before using 
   ```
   $ export PYTHONPATH=/<path-to-directory>/ShowML:$PYTHONPATH
   ```
-- For Linux: 
+- For Linux:
   ```
   $ export PYTHONPATH="${PYTHONPATH}:/<path-to-directory>/ShowML"
   ```
