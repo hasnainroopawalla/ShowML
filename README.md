@@ -27,7 +27,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-### To install the package form PyPi:
+### To install the package from PyPi:
 ```
 $ pip install showml
 ```
