@@ -3,7 +3,7 @@ from showml.optimizers import SGD
 from showml.linear_model.regression import LinearRegression
 from showml.utils.dataset import Dataset
 from showml.losses.metrics import mean_squared_error, r2_score
-from showml.utils.plots import plot_regression_line
+from showml.utils.plots import plot_actual_vs_predicted
 from showml.utils.preprocessing import normalize
 from showml.utils.data_loader import load_auto
 
@@ -21,4 +21,4 @@ model.compile(
 model.fit(dataset, epochs=10000)
 model.plot_metrics()
 
-plot_regression_line(X_train, y_train, model.predict(X_train))
+plot_actual_vs_predicted(y_train, model.predict(X_train))
