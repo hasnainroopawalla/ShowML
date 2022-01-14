@@ -2,8 +2,6 @@ from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 
-from showml.utils.exceptions import InvalidShapeError
-
 
 def generic_metric_plot(metric_name: str, metric_values: List[float]) -> None:
     """Plot the metric values after training (epoch vs metric).
@@ -19,25 +17,16 @@ def generic_metric_plot(metric_name: str, metric_values: List[float]) -> None:
     plt.show()
 
 
-def plot_regression_line(
-    X: np.ndarray, y: np.ndarray, z: np.ndarray, xlabel: str = "", ylabel: str = ""
-) -> None:
+def plot_actual_vs_predicted(y: np.ndarray, z: np.ndarray) -> None:
     """Plot the regression line to visualize how well the model fits to the data.
     Only works when the entire dataset is 2-dimensional i.e., input data (X) is 1-dimensional.
 
     Args:
-        X (np.ndarray): The input data.
         y (np.ndarray): The true labels of the input data.
         z (np.ndarray): The predicted values for the input data.
-        xlabel (str, optional): The label corresponding to the input feature name. Defaults to "".
-        ylabel (str, optional): The label corresponding to the output feature name. Defaults to "".
     """
-    if X.shape[1] != 1:
-        raise InvalidShapeError("X must have exactly 1 dimension.")
-
-    plt.scatter(X, y, color="red")
-    plt.plot(X, z, color="blue")
-    plt.title("Regression Line")
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    plt.scatter(y, z, color="red")
+    plt.title("Actual vs Predicted")
+    plt.xlabel("Actual")
+    plt.ylabel("Predicted")
     plt.show()
