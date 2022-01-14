@@ -18,8 +18,8 @@ def generic_metric_plot(metric_name: str, metric_values: List[float]) -> None:
 
 
 def plot_actual_vs_predicted(y: np.ndarray, z: np.ndarray) -> None:
-    """Plot the regression line to visualize how well the model fits to the data.
-    Only works when the entire dataset is 2-dimensional i.e., input data (X) is 1-dimensional.
+    """Generates a scatter plot of the true values and predicted values.
+    A diagonal line from (0, 0) to (+limit, +limit) indicates a very good fit i.e., the true values and predicted values are almost the same.
 
     Args:
         y (np.ndarray): The true labels of the input data.
