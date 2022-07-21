@@ -26,7 +26,7 @@ class Dense(Layer):
         self.bias = np.zeros((1, self.num_nodes))
 
     def get_params_count(self) -> int:
-        return np.prod(self.weights.shape) + np.prod(self.bias.shape)
+        return int(np.prod(self.weights.shape) + np.prod(self.bias.shape))
 
     def get_output_shape(self) -> Tuple[int]:
         return (self.num_nodes,)
