@@ -5,8 +5,7 @@ from showml.simulations.conways_game_of_life.event_handler import EventHandler
 
 
 class GameOfLife:
-    """A simulation of Conway's Game of Life (Cellular Automaton): https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-    """
+    """A simulation of Conway's Game of Life (Cellular Automaton): https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"""
 
     def __init__(self, num_rows: int = 50, num_columns: int = 100) -> None:
         """Constructor for the GameOfLife class.
@@ -28,20 +27,17 @@ class GameOfLife:
         }
 
     def start_event(self, row: int, column: int) -> None:
-        """This method runs when the game starts.
-        """
+        """This method runs when the game starts."""
         self.game_running = True
         self.delay = 150
 
     def stop_event(self, row: int, column: int) -> None:
-        """This method runs when the game is stopped.
-        """
+        """This method runs when the game is stopped."""
         self.game_running = False
         self.delay = 0
 
     def reset_event(self, row: int, column: int) -> None:
-        """This method runs when the RESET button is pressed.
-        """
+        """This method runs when the RESET button is pressed."""
         self.game_running = False
         self.window.grid.reset_grid()
         self.delay = 0
@@ -59,8 +55,7 @@ class GameOfLife:
         pass
 
     def run(self) -> None:
-        """This method runs the game loop by communicating with the EventHandler to receive event information.
-        """
+        """This method runs the game loop by communicating with the EventHandler to receive event information."""
         while True:
             if self.game_running:
                 self.window.grid.update_grid()

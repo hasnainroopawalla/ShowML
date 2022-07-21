@@ -11,8 +11,7 @@ from showml.simulations.conways_game_of_life.grid import Grid
 
 
 class GameWindow:
-    """The GameWindow class responsible for observing events taking place in the window as well as initializing and managing the Grid.
-    """
+    """The GameWindow class responsible for observing events taking place in the window as well as initializing and managing the Grid."""
 
     def __init__(self, grid: Grid) -> None:
         """Constructor for the GameWindow class.
@@ -55,8 +54,7 @@ class GameWindow:
         self.clock.tick(60)
 
     def _display_buttons_and_text(self) -> None:
-        """This private method displays the buttons and the text objects in the window.
-        """
+        """This private method displays the buttons and the text objects in the window."""
         self.SCREEN.fill(Color.BLACK)
         for button in self.buttons:
             # Button
@@ -75,8 +73,7 @@ class GameWindow:
             )
 
     def _display_grid(self) -> None:
-        """This private method displays the entire grid in the window.
-        """
+        """This private method displays the entire grid in the window."""
         for row in range(self.grid.num_rows):
             for column in range(self.grid.num_columns):
                 if self.grid.grid[row][column] == 1:

@@ -4,8 +4,7 @@ import numpy as np
 
 
 class Optimizer(ABC):
-    """The Base Optimizer Class.
-    """
+    """The Base Optimizer Class."""
 
     def __init__(self, learning_rate: float):
         """Constructor for the Base Optimzer class.

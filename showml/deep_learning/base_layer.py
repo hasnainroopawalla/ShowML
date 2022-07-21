@@ -5,8 +5,7 @@ import numpy as np
 
 
 class Layer(ABC):
-    """A layer class.
-    """
+    """A layer class."""
 
     def __init__(
         self, input_shape: Tuple[int] = (0,), has_weights: bool = True

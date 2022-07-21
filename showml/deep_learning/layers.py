@@ -5,8 +5,7 @@ from showml.optimizers.base_optimizer import Optimizer
 
 
 class Dense(Layer):
-    """A Dense Layer.
-    """
+    """A Dense Layer."""
 
     def __init__(self, num_nodes: int, input_shape: Tuple[int] = (0,)):
         """Constructor for the Dense Layer.
@@ -27,7 +26,7 @@ class Dense(Layer):
         self.bias = np.zeros((1, self.num_nodes))
 
     def get_params_count(self) -> int:
-        return np.prod(self.weights.shape) + np.prod(self.bias.shape)
+        return int(np.prod(self.weights.shape) + np.prod(self.bias.shape))
 
     def get_output_shape(self) -> Tuple[int]:
         return (self.num_nodes,)

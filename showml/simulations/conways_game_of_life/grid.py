@@ -2,8 +2,7 @@ import numpy as np
 
 
 class Grid:
-    """A 2D Grid class to display the cells.
-    """
+    """A 2D Grid class to display the cells."""
 
     def __init__(self, num_rows: int, num_columns: int) -> None:
         """[summary]
@@ -60,8 +59,7 @@ class Grid:
         self.grid = new_grid
 
     def reset_grid(self) -> None:
-        """This method resets the grid i.e., kills all the cells.
-        """
+        """This method resets the grid i.e., kills all the cells."""
         self.grid = np.zeros((self.num_rows, self.num_columns))
 
     def toggle_cell_value(self, row: int, column: int) -> None:
