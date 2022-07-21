@@ -8,7 +8,7 @@
 [![Deploy](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml/badge.svg)](https://github.com/hasnainroopawalla/ShowML/actions/workflows/deploy.yml)
 [![PyPi version](https://img.shields.io/pypi/v/showml.svg)](https://pypi.python.org/pypi/showml/)
 [![Python versions](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)](https://img.shields.io/pypi/pyversions/showml.svg?style=plastic)
-![Status](https://img.shields.io/badge/status-stable-green.svg)
+![Downloads](https://img.shields.io/pypi/dm/showml.svg)
 
 
 A Python package of Machine Learning Algorithms implemented from scratch.
@@ -23,6 +23,7 @@ The aim of this package is to present the working behind fundamental Machine Lea
 - [Getting Started](#getting_started)
 - [Contents](#contents)
 - [Contributing](#contributing)
+- [License](#license)
 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -104,3 +105,7 @@ _ShowML_ currently includes the following content, however, this repository will
    $ pytest
    ```
 5. Open a Pull Request and I'll review it.
+
+
+## 📄 License <a name = "license"></a>
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/hasnainroopawalla/ShowML/blob/bbaacc81779437ea2ef09d7869b1f8a824f80353/LICENSE) file for details.
