@@ -3,8 +3,7 @@ from dataclasses import dataclass
 
 
 class Action(Enum):
-    """This class defines the different Actions in the game.
-    """
+    """This class defines the different Actions in the game."""
 
     START = auto()
     STOP = auto()
@@ -15,8 +14,7 @@ class Action(Enum):
 
 @dataclass
 class Event:
-    """This class defines an Event (and also the row, column if a cell is toggled)
-    """
+    """This class defines an Event (and also the row, column if a cell is toggled)"""
 
     action: Action
     row: int = 0

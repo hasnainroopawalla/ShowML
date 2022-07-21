@@ -10,12 +10,10 @@ import copy
 
 
 class Sequential:
-    """A Sequential model (deep neural network) with various types of layers and activation functions.
-    """
+    """A Sequential model (deep neural network) with various types of layers and activation functions."""
 
     def __init__(self) -> None:
-        """Constructor for the Sequential model class.
-        """
+        """Constructor for the Sequential model class."""
         self.layers: List[Layer] = []
 
     def compile(
@@ -39,8 +37,7 @@ class Sequential:
         self.initialize_layers()
 
     def initialize_layers(self) -> None:
-        """Initializes all the layers with the specified optimizer and parameters.
-        """
+        """Initializes all the layers with the specified optimizer and parameters."""
         for layer_idx, layer in enumerate(self.layers):
             if layer_idx > 0:
                 # If this layer is NOT the first layer of the network, then input shape = output shape of previous layer
@@ -132,8 +129,7 @@ class Sequential:
         return self.forward_pass(X)
 
     def summary(self) -> None:
-        """Summarizes the model by displaying all layers, their parameters and total number of trainable parameters.
-        """
+        """Summarizes the model by displaying all layers, their parameters and total number of trainable parameters."""
         total_params = 0
         print(AsciiTable([[self.__class__.__name__]]).table)
         summary_data = [["Layer", "Params", "Output Shape"]]

@@ -4,8 +4,7 @@ from showml.simulations.conways_game_of_life.event import Action, Event
 
 
 class EventHandler:
-    """The EventHandler class responsible for observing events taking place in the window as well as initializing and managing the Grid.
-    """
+    """The EventHandler class responsible for observing events taking place in the window as well as initializing and managing the Grid."""
 
     def __init__(self, window: GameWindow) -> None:
         """Constructor for the EventHandler class.

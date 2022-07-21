@@ -5,8 +5,7 @@ from showml.optimizers.base_optimizer import Optimizer
 
 
 class Dense(Layer):
-    """A Dense Layer.
-    """
+    """A Dense Layer."""
 
     def __init__(self, num_nodes: int, input_shape: Tuple[int] = (0,)):
         """Constructor for the Dense Layer.

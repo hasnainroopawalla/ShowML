@@ -11,8 +11,7 @@ from showml.deep_learning.activations import Sigmoid
 
 
 class Regression(ABC):
-    """Base Regression class.
-    """
+    """Base Regression class."""
 
     def compile(
         self, optimizer: Optimizer, loss: Loss, metrics: List[Callable] = []
@@ -62,8 +61,7 @@ class Regression(ABC):
         print(text_to_display)
 
     def plot_metrics(self) -> None:
-        """Display the plot after training for the specified metrics
-        """
+        """Display the plot after training for the specified metrics"""
         for metric in self.history:
             generic_metric_plot(metric, self.history[metric])
 
