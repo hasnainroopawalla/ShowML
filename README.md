@@ -86,9 +86,6 @@ _ShowML_ currently includes the following content, however, this repository will
 - Binary Cross Entropy (`showml.losses.BinaryCrossEntropy`)
 - Categorical Cross Entropy (`showml.losses.CrossEntropy`)
 
-### Simulations
-- [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (`showml.simulations.conways_game_of_life.GameOfLife`)
-
 
 ## ✏️ Contributing <a name = "contributing"></a>
 
